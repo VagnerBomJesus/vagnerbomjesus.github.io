@@ -34,7 +34,6 @@
   var translations = {
     en: {
       role: 'Software Engineering | Flutter Developer | Information Security Enthusiast',
-      bio: 'I create ideas and develop solutions in the form of software, with a particular focus on information security, data protection and the development of innovative applications.',
       experience: 'Experience',
       education: 'Education',
       projects: 'Projects',
@@ -42,16 +41,12 @@
       prev: '\u2190 Previous',
       next: 'Next \u2192',
       page: function (c, t) { return c + ' / ' + t; },
-      followers: 'followers',
-      repos: 'repos',
-      gists: 'gists',
       resourcesHeading: 'Projects & Resources',
       resourcesCount: function (n) { return n + ' items'; },
       footer: '\u00A9 2026 Vagner Bom Jesus \u00B7 All rights reserved.'
     },
     pt: {
       role: 'Engenharia de Software | Desenvolvedor Flutter | Entusiasta de Seguranca da Informacao',
-      bio: 'Eu crio ideias e desenvolvo solucoes na forma de software, com foco particular em seguranca da informacao, protecao de dados e desenvolvimento de aplicacoes inovadoras.',
       experience: 'Experiencia',
       education: 'Formacao academica',
       projects: 'Projetos',
@@ -59,9 +54,6 @@
       prev: '\u2190 Anterior',
       next: 'Proxima \u2192',
       page: function (c, t) { return c + ' / ' + t; },
-      followers: 'seguidores',
-      repos: 'repos',
-      gists: 'gists',
       resourcesHeading: 'Projetos e Recursos',
       resourcesCount: function (n) { return n + ' itens'; },
       footer: '\u00A9 2026 Vagner Bom Jesus \u00B7 Todos os direitos reservados.'
@@ -80,11 +72,7 @@
   var langSelect = document.getElementById('language-select');
   var btnExp = document.getElementById('btn-experience');
   var btnEdu = document.getElementById('btn-education');
-  var profileBio = document.getElementById('profile-bio');
   var profileRole = document.getElementById('profile-role');
-  var statFollowersLabel = document.getElementById('stat-followers-label');
-  var statReposLabel = document.getElementById('stat-repos-label');
-  var statGistsLabel = document.getElementById('stat-gists-label');
   var resourcesHeading = document.getElementById('resources-heading');
   var resourcesCount = document.getElementById('resources-count');
   var footerText = document.getElementById('footer-text');
@@ -120,12 +108,8 @@
     var data = resourcesData[lang];
 
     profileRole.textContent = t.role;
-    profileBio.textContent = t.bio;
     btnExp.textContent = t.experience;
     btnEdu.textContent = t.education;
-    statFollowersLabel.textContent = t.followers;
-    statReposLabel.textContent = t.repos;
-    statGistsLabel.textContent = t.gists;
     resourcesHeading.textContent = t.resourcesHeading;
     footerText.innerHTML = t.footer;
 
