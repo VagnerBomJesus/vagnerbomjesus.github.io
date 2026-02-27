@@ -1,544 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Personal portfolio of Vagner Bom Jesus showcasing projects and resources.">
+  <meta name="description" content="Personal portfolio of Vagner Bom Jesus - Software Engineering, Information Security, Flutter Developer.">
   <title>Vagner Bom Jesus | Portfolio</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="https://avatars.githubusercontent.com/u/48354097?v=4">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-
-  <style>
-    body {
-      background-color: #f3f6f9;
-      min-height: 100vh;
-      transition: background 0.2s, color 0.2s;
-    }
-
-    .main-container {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: flex-start;
-      gap: 40px;
-      max-width: 1080px;
-      margin: 60px auto 0 auto;
-      padding: 0 12px;
-    }
-
-    .profile-col {
-      flex: 1 1 330px;
-      min-width: 320px;
-      max-width: 390px;
-      order: 1;
-    }
-
-    .links-col {
-      flex: 1 1 360px;
-      min-width: 320px;
-      max-width: 450px;
-      order: 2;
-    }
-
-    .profile-card {
-      background: #fff;
-      border-radius: 24px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06), 0 1.5px 6px rgba(0, 0, 0, 0.04);
-      padding: 48px 36px 36px 36px;
-      text-align: center;
-      transition: background 0.2s, color 0.2s;
-    }
-
-    .avatar {
-      width: 128px;
-      height: 128px;
-      object-fit: cover;
-      border-radius: 50%;
-      margin-bottom: 24px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-      border: 4px solid #f3f6f9;
-      transition: border 0.2s;
-    }
-
-    .profile-name {
-      font-size: 1.7rem;
-      font-weight: 500;
-      color: #222;
-      margin-bottom: 8px;
-      transition: color 0.2s;
-    }
-
-    .profile-role {
-      font-size: 1.05rem;
-      color: #6080a7;
-      margin-bottom: 22px;
-      transition: color 0.2s;
-    }
-
-    .social-row {
-      margin-bottom: 28px;
-    }
-
-    .social-btn {
-      width: 44px;
-      height: 44px;
-      background: #fff;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 10px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
-      font-size: 1.5rem;
-      border: none;
-      transition: background 0.2s, color 0.2s;
-    }
-
-    .social-btn.linkedin {
-      color: #0A66C2;
-    }
-
-    .social-btn.github {
-      color: #1b1f23;
-    }
-
-    .social-btn:hover {
-      transform: translateY(-3px) scale(1.10);
-      background: #f3f6f9;
-    }
-
-    .btn-main {
-      min-width: 220px;
-      font-size: 1.08rem;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-      margin: 0 16px;
-      padding: 10px 0;
-      transition: background 0.2s, color 0.2s;
-    }
-
-    .resources-section {
-      margin: 0;
-      margin-bottom: 22px;
-
-    }
-
-    .resource-card {
-      background: #f8fafd;
-      border-radius: 12px;
-      border: 1px solid #e2e7ef;
-      margin-bottom: 18px;
-      padding: 18px 22px 12px 22px;
-      text-align: center;
-      transition: background 0.2s, border 0.2s;
-    }
-
-    .resource-title {
-      font-weight: 700;
-      font-size: 1.14rem;
-      margin-bottom: 2px;
-    }
-
-    .resource-desc {
-      font-size: 0.98rem;
-      color: #6c788b;
-      margin-bottom: 0;
-    }
-
-    .resource-link {
-      color: inherit;
-      text-decoration: none;
-      display: block;
-    }
-
-    .resource-link:hover .resource-card {
-      background: #f1f4fa;
-      border: 1.5px solid #b6cffb;
-      box-shadow: 0 2px 16px #d8e7fd77;
-    }
-    .section-title {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin: 18px 0 10px;
-    }
-
-
-    .pagination-custom {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0.5rem;
-      margin: 18px 0 0 0;
-    }
-
-    .page-btn-custom {
-      background: none;
-      border: none;
-      color: #2176ff;
-      padding: 4px 16px;
-      font-size: 1rem;
-      font-weight: 500;
-      border-radius: 5px;
-      transition: background 0.18s, color 0.18s;
-    }
-
-    .page-btn-custom:disabled {
-      color: #aaa;
-      cursor: not-allowed;
-    }
-
-    .page-info-custom {
-      background: #e9ecef;
-      border-radius: 6px;
-      padding: 5px 20px;
-      font-size: 1rem;
-      color: #212529;
-      min-width: 150px;
-      text-align: center;
-      font-weight: 500;
-    }
-
-    /* --- Mobile --- */
-    @media (max-width: 991px) {
-      .main-container {
-        flex-direction: column;
-        max-width: 99vw;
-        gap: 26px;
-        margin: 24px auto 0 auto;
-      }
-
-      .profile-col {
-        order: 1;
-      }
-
-      .links-col {
-        order: 2;
-      }
-
-      .links-col,
-      .profile-col {
-        max-width: 99vw;
-        min-width: 0;
-        flex: 1 1 99vw;
-      }
-    }
-
-    @media (max-width: 540px) {
-      .profile-card {
-        padding: 30px 7px;
-      }
-
-      .btn-main {
-        margin: 8px 0;
-        width: 100%;
-      }
-
-      .main-container {
-        padding: 0 2vw;
-      }
-    }
-
-    /* --- Dark Mode --- */
-    body.dark-mode {
-      background-color: #1b1e23 !important;
-      color: #f3f6f9 !important;
-    }
-
-    body.dark-mode .profile-card {
-      background: #22252c !important;
-      color: #f3f6f9 !important;
-    }
-
-    body.dark-mode .profile-name {
-      color: #fff !important;
-    }
-
-    body.dark-mode .profile-role {
-      color: #90a4c0 !important;
-    }
-
-    body.dark-mode .social-btn {
-      background: #242731 !important;
-      color: #e2e6ed !important;
-    }
-
-    body.dark-mode .btn-main {
-      background: #2e3241 !important;
-      color: #f3f6f9 !important;
-    }
-
-    body.dark-mode .social-btn.linkedin {
-      color: #6ea8ff !important;
-    }
-
-    body.dark-mode .social-btn.github {
-      color: #ddd !important;
-    }
-
-    body.dark-mode .avatar {
-      border: 4px solid #22252c !important;
-    }
-
-    body.dark-mode .btn-main:hover {
-      background: #404356 !important;
-      color: #fff !important;
-    }
-
-    body.dark-mode .resources-section {
-      background: none;
-    }
-
-    body.dark-mode .resource-card {
-      background: #21232a !important;
-      border: 1px solid #343747 !important;
-      color: #dde8ff;
-    }
-
-    body.dark-mode .resource-desc {
-      color: #a0aec8;
-    }
-    body.dark-mode .section-title {
-      color: #f3f6f9;
-    }
-
-
-    body.dark-mode .resource-link:hover .resource-card {
-      background: #191a22 !important;
-      border: 1.5px solid #648fff !important;
-      box-shadow: 0 2px 18px #32447433;
-    }
-
-    body.dark-mode .pagination-custom {
-      background: none;
-    }
-
-    body.dark-mode .page-info-custom {
-      background: #232634;
-      color: #f1f1f2;
-    }
-
-    body.dark-mode .page-btn-custom {
-      color: #7eb3ff;
-    }
-
-    body.dark-mode .page-btn-custom:disabled {
-      color: #484b59;
-    }
-  </style>
-
 </head>
-
 <body>
-  <div class="d-flex justify-content-end p-3 gap-2">
-    <select id="language-select" class="form-select form-select-sm" style="width:auto">
-      <option value="en">EN</option>
-      <option value="pt">PT</option>
-    </select>
-    <button id="toggle-theme" class="btn btn-outline-secondary" title="Toggle dark/light mode">
-      <i class="fa fa-moon"></i>
-    </button>
-  </div>
+
+  <header class="toolbar">
+    <span class="toolbar-brand">VBJ</span>
+    <div class="toolbar-controls">
+      <select id="language-select" class="lang-select" aria-label="Language">
+        <option value="en">EN</option>
+        <option value="pt">PT</option>
+      </select>
+      <button id="toggle-theme" class="theme-toggle" title="Toggle theme" aria-label="Toggle dark or light mode">&#9790;</button>
+    </div>
+  </header>
+
   <div class="main-container">
     <div class="profile-col">
       <div class="profile-card">
-        <img src="https://avatars.githubusercontent.com/u/48354097?v=4" alt="Vagner Bom Jesus" class="avatar">
-        <div class="profile-name">Vagner Bom Jesus</div>
-        <div class="profile-role">Software Engineering | Flutter Developer | Information Security Enthusiast</div>
-        <div class="social-row">
-          <a href="https://www.linkedin.com/in/vagnerbomjesus" target="_blank" class="social-btn linkedin"
-            aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://github.com/VagnerBomJesus" target="_blank" class="social-btn github" aria-label="GitHub"><i
-              class="fab fa-github"></i></a>
+        <div class="profile-header">
+          <div class="avatar-wrapper">
+            <img src="https://avatars.githubusercontent.com/u/48354097?v=4" alt="Vagner Bom Jesus" class="avatar">
+            <span class="status-dot" title="Available"></span>
+          </div>
+          <div class="profile-name">Vagner Bom Jesus</div>
+          <div class="profile-username">@VagnerBomJesus</div>
+          <p id="profile-role" class="profile-role">Software Engineering | Flutter Developer | Information Security Enthusiast</p>
         </div>
-        <div class="d-flex justify-content-center mt-4 gap-4 flex-wrap">
-          <a id="btn-experience" href="https://www.linkedin.com/in/vagnerbomjesus/details/experience/"
-              class="btn btn-light btn-main">Experiência</a>
-            <a id="btn-education" href="https://www.linkedin.com/in/vagnerbomjesus/details/education/"
-              class="btn btn-light btn-main">Formação acadêmica</a>
+
+        <p id="profile-bio" class="profile-bio">I create ideas and develop solutions in the form of software, with a particular focus on information security, data protection and the development of innovative applications.</p>
+
+
+        <div class="social-row">
+          <a href="https://www.linkedin.com/in/vagnerbomjesus" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="https://github.com/VagnerBomJesus" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://vagnerbomjesus.medium.com/" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Medium">
+            <i class="fab fa-medium"></i>
+          </a>
+          <a href="https://scholar.google.com/citations?user=K-IfdJoAAAAJ&hl=pt-PT&oi=ao" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Google Scholar">
+            <i class="fas fa-graduation-cap"></i>
+          </a>
+        </div>
+
+        <div class="profile-actions">
+          <a id="btn-experience" href="https://www.linkedin.com/in/vagnerbomjesus/details/experience/" target="_blank" rel="noopener noreferrer" class="btn-primary">Experience</a>
+          <a id="btn-education" href="https://www.linkedin.com/in/vagnerbomjesus/details/education/" target="_blank" rel="noopener noreferrer" class="btn-secondary">Education</a>
         </div>
       </div>
     </div>
-    <div class="links-col">
+
+    <div class="resources-col">
+      <div class="resources-header">
+        <span id="resources-heading" class="resources-heading">Projects & Resources</span>
+        <span id="resources-count" class="resources-count">6 items</span>
+      </div>
       <div class="resources-section" id="resources-section">
         <div class="pagination-custom" id="custom-pagination"></div>
       </div>
     </div>
   </div>
-  <script src="main.js" defer></script>
 
-  <script>
-    // Dark/light mode toggle
-    const btn = document.getElementById('toggle-theme');
-    function setTheme(dark) {
-      if (dark) {
-        document.body.classList.add('dark-mode');
-        btn.innerHTML = '<i class="fa fa-sun"></i>';
-        localStorage.setItem('theme', 'dark');
-      } else {
-        document.body.classList.remove('dark-mode');
-        btn.innerHTML = '<i class="fa fa-moon"></i>';
-        localStorage.setItem('theme', 'light');
-      }
-    }
-    btn.onclick = function () {
-      setTheme(!document.body.classList.contains('dark-mode'));
-    };
-    // Recursos com paginação personalizada
-    window.addEventListener('DOMContentLoaded', function () {
-      const saved = localStorage.getItem('theme');
-      if (
-        saved === 'dark' ||
-        (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)
-      ) {
-        setTheme(true);
-      } else {
-        setTheme(false);
-      }
-      const savedLang = localStorage.getItem('lang') || 'en';
-      // --- Recursos ---
-      const resourcesData = {
-        en: {
-          projects: [
-            { title: '📱 TBDB - The Biomimicry Database (Android)', desc: 'Official APK', link: 'https://apkpure.com/th/t-b-d-b/pt.tbdb.bjtech/' },
-            { title: '🌿 The Biomimicry Database', desc: 'Multimodal platform for biomimicry', link: 'https://thebiomimicrydb.vercel.app/' },
-            { title: '📝 Blog on Medium', desc: 'Technical and scientific articles', link: 'https://vagnerbomjesus.medium.com/' },
-            { title: '🤖 TBDB | VITA ChatBot', desc: 'Development documentation of a multimodal knowledge sharing platform ...', link: 'https://bdigital.ipg.pt/dspace/bitstream/10314/10107/1/CM%20-%20Vagner%20B%20Jesus.pdf' },
-            { title: '🔎 Google Scholar', desc: 'Academic publications', link: 'https://scholar.google.com/citations?user=K-IfdJoAAAAJ&hl=pt-PT&oi=ao' }
-          ],
-          useful: [
-            { title: '🌐 ENISA - European Union Agency for Cybersecurity', desc: 'Official ENISA website', link: 'https://www.enisa.europa.eu/' }
-          ]
-        },
-        pt: {
-          projects: [
-            { title: '📱 TBDB - The Biomimicry Database (Android)', desc: 'Aplicação oficial APK', link: 'https://apkpure.com/th/t-b-d-b/pt.tbdb.bjtech/' },
-            { title: '🌿 The Biomimicry Database', desc: 'Plataforma multimodal para biomimética', link: 'https://thebiomimicrydb.vercel.app/' },
-            { title: '📝 Blog no Medium', desc: 'Artigos técnicos e científicos', link: 'https://vagnerbomjesus.medium.com/' },
-            { title: '🤖 TBDB | ChatBot VITA', desc: 'Documentação do Desenvolvimento de uma Plataforma Multimodal para Partilha de Conhecimento ...', link: 'https://bdigital.ipg.pt/dspace/bitstream/10314/10107/1/CM%20-%20Vagner%20B%20Jesus.pdf' },
-            { title: '🔎 Google Scholar', desc: 'Publicações académicas', link: 'https://scholar.google.com/citations?user=K-IfdJoAAAAJ&hl=pt-PT&oi=ao' }
-          ],
-          useful: [
-            { title: '🌐 ENISA - Agência da União Europeia para a Cibersegurança', desc: 'Website oficial da ENISA', link: 'https://www.enisa.europa.eu/' }
-          ]
-        }
-      };
-      const translations = {
-        en: {
-          experience: 'Experience',
-          education: 'Education',
-          projects: 'Projects',
-          useful: 'Useful Links',
-          prev: 'Previous',
-          next: 'Next',
-          page: (c, t) => `Page ${c} of ${t}`
-        },
-        pt: {
-          experience: 'Experiência',
-          education: 'Formação académica',
-          projects: 'Projetos',
-          useful: 'Links úteis',
-          prev: 'Anterior',
-          next: 'Próxima',
-          page: (c, t) => `Página ${c} de ${t}`
-        }
-      };
-      const langSelect = document.getElementById('language-select');
-      const btnExp = document.getElementById('btn-experience');
-      const btnEdu = document.getElementById('btn-education');
+  <footer class="site-footer">
+    <span id="footer-text">&copy; 2026 Vagner Bom Jesus &middot; All rights reserved.</span>
+  </footer>
 
-      let currentLanguage = 'en';
-      let resources = [];
-      const perPage = 5;
-      let currentPage = 1;
-      let totalPages = 1;
-
-      function setLanguage(lang) {
-        currentLanguage = lang;
-        langSelect.value = lang;
-        localStorage.setItem('lang', lang);
-        const data = resourcesData[lang];
-        resources = [
-          ...data.projects.map(r => ({ ...r, category: 'projects' })),
-          ...data.useful.map(r => ({ ...r, category: 'useful' }))
-        ];
-        totalPages = Math.ceil(resources.length / perPage);
-        btnExp.textContent = translations[lang].experience;
-        btnEdu.textContent = translations[lang].education;
-        renderResources(1);
-        currentPage = 1;
-        renderCustomPagination();
-      }
-      langSelect.addEventListener('change', () => setLanguage(langSelect.value));
-      setLanguage(savedLang);
-      function renderResources(page) {
-        const section = document.getElementById('resources-section');
-        section.querySelectorAll('.resource-link').forEach(e => e.remove());
-        section.querySelectorAll('.section-title').forEach(e => e.remove());
-        const start = (page - 1) * perPage;
-        const end = Math.min(start + perPage, resources.length);
-        let currentCat = null;
-        for (let i = start; i < end; i++) {
-          const r = resources[i];
-          if (r.category !== currentCat) {
-            currentCat = r.category;
-            const h = document.createElement('h2');
-            h.className = 'section-title';
-            h.textContent = translations[currentLanguage][currentCat];
-            section.insertBefore(h, section.querySelector('.pagination-custom'));
-          }
-          const a = document.createElement('a');
-          a.href = r.link;
-          a.target = '_blank';
-          a.className = 'resource-link';
-          a.innerHTML = `<div class="resource-card">
-            <div class="resource-title">${r.title}</div>
-            <div class="resource-desc">${r.desc}</div>
-          </div>`;
-          section.insertBefore(a, section.querySelector('.pagination-custom'));
-        }
-      }
-      function renderCustomPagination() {
-        const pag = document.getElementById('custom-pagination');
-        pag.innerHTML = '';
-        // Botão Anterior / Previous
-        const prev = document.createElement('button');
-        prev.className = 'page-btn-custom';
-        prev.textContent = translations[currentLanguage].prev;
-        prev.disabled = currentPage === 1;
-        prev.onclick = function () {
-          if (currentPage > 1) {
-            currentPage--;
-            renderResources(currentPage);
-            renderCustomPagination();
-          }
-        };
-        pag.appendChild(prev);
-        // Info página
-        const info = document.createElement('span');
-        info.className = 'page-info-custom';
-        info.textContent = translations[currentLanguage].page(currentPage, totalPages);
-        pag.appendChild(info);
-        // Botão Próxima
-        const next = document.createElement('button');
-        next.className = 'page-btn-custom';
-        next.textContent = translations[currentLanguage].next;
-        next.disabled = currentPage === totalPages;
-        next.onclick = function () {
-          if (currentPage < totalPages) {
-            currentPage++;
-            renderResources(currentPage);
-            renderCustomPagination();
-          }
-        };
-        pag.appendChild(next);
-      }
-      renderResources(currentPage);
-      renderCustomPagination();
-    });
-  </script>
+  <script src="main.js"></script>
 </body>
-
 </html>
