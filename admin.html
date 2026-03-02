@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://avatars.githubusercontent.com; connect-src 'self';">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin Panel | Portfolio</title>
+  <link rel="icon" type="image/x-icon" href="https://avatars.githubusercontent.com/u/48354097?v=4">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <!-- Login Screen -->
+  <div id="login-screen" class="login-screen">
+    <div class="login-card">
+      <div class="login-header">
+        <span class="login-brand">VBJ</span>
+        <span class="login-title">Admin Panel</span>
+      </div>
+      <form id="login-form" class="login-form">
+        <label for="login-password" class="login-label">Password</label>
+        <input type="password" id="login-password" class="login-input" placeholder="Enter admin password" autocomplete="current-password" required>
+        <div id="login-error" class="login-error" hidden>Incorrect password</div>
+        <button type="submit" class="btn-primary login-btn">Login</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Admin Panel -->
+  <div id="admin-panel" class="admin-panel" hidden>
+
+    <header class="toolbar">
+      <span class="toolbar-brand">VBJ <span class="admin-badge">Admin</span></span>
+      <div class="toolbar-controls">
+        <select id="admin-lang" class="lang-select" aria-label="Language">
+          <option value="en">EN</option>
+          <option value="pt">PT</option>
+        </select>
+        <button id="admin-theme" class="theme-toggle" title="Toggle theme" aria-label="Toggle theme">&#9790;</button>
+        <button id="btn-logout" class="btn-secondary btn-sm">Logout</button>
+      </div>
+    </header>
+
+    <div class="admin-container">
+
+      <!-- Action Bar -->
+      <div class="action-bar">
+        <div class="action-bar-left">
+          <h1 class="admin-heading">Projects & Resources</h1>
+          <span id="admin-count" class="resources-count">0 items</span>
+        </div>
+        <div class="action-bar-right">
+          <button id="btn-add" class="btn-primary btn-sm">+ Add Item</button>
+          <button id="btn-import" class="btn-secondary btn-sm">Import JSON</button>
+          <button id="btn-export" class="btn-secondary btn-sm">Export JSON</button>
+          <button id="btn-apply" class="btn-primary btn-sm">Apply to Site</button>
+          <button id="btn-clear-local" class="btn-danger btn-sm">Clear Local</button>
+        </div>
+      </div>
+
+      <!-- Category Tabs -->
+      <div class="tab-bar">
+        <button class="tab-btn active" data-category="projects">Projects</button>
+        <button class="tab-btn" data-category="useful">Useful Links</button>
+      </div>
+
+      <!-- Items Table -->
+      <div class="items-table-wrapper">
+        <table class="items-table" id="items-table">
+          <thead>
+            <tr>
+              <th class="col-order">#</th>
+              <th class="col-title">Title</th>
+              <th class="col-desc">Description</th>
+              <th class="col-link">Link</th>
+              <th class="col-actions">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="items-tbody"></tbody>
+        </table>
+        <div id="empty-state" class="empty-state" hidden>
+          <p>No items yet. Click "+ Add Item" to create one.</p>
+        </div>
+      </div>
+
+      <!-- Preview Section -->
+      <div class="preview-section">
+        <div class="preview-header">
+          <h2 class="preview-title">Preview</h2>
+          <span class="preview-hint">Shows how items will appear on the site</span>
+        </div>
+        <div id="preview-area" class="preview-area"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Add/Edit Modal -->
+  <div id="item-modal" class="modal-overlay" hidden>
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="modal-title" class="modal-heading">Add Item</h2>
+        <button id="modal-close" class="modal-close">&times;</button>
+      </div>
+      <form id="item-form" class="modal-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="field-title-en">Title (EN)</label>
+            <input type="text" id="field-title-en" required>
+          </div>
+          <div class="form-group">
+            <label for="field-title-pt">Title (PT)</label>
+            <input type="text" id="field-title-pt" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="field-desc-en">Description (EN)</label>
+            <input type="text" id="field-desc-en" required>
+          </div>
+          <div class="form-group">
+            <label for="field-desc-pt">Description (PT)</label>
+            <input type="text" id="field-desc-pt" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group full-width">
+            <label for="field-link">Link (URL)</label>
+            <input type="url" id="field-link" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group full-width">
+            <label for="field-category">Category</label>
+            <select id="field-category" required>
+              <option value="projects">Projects</option>
+              <option value="useful">Useful Links</option>
+            </select>
+          </div>
+        </div>
+        <input type="hidden" id="field-edit-index" value="-1">
+        <input type="hidden" id="field-edit-cat" value="">
+        <div class="modal-actions">
+          <button type="button" id="modal-cancel" class="btn-secondary">Cancel</button>
+          <button type="submit" class="btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Confirm Delete Modal -->
+  <div id="delete-modal" class="modal-overlay" hidden>
+    <div class="modal modal-sm">
+      <div class="modal-header">
+        <h2 class="modal-heading">Confirm Delete</h2>
+        <button id="delete-modal-close" class="modal-close">&times;</button>
+      </div>
+      <p class="modal-body-text">Are you sure you want to delete "<span id="delete-item-name"></span>"?</p>
+      <div class="modal-actions">
+        <button id="delete-cancel" class="btn-secondary">Cancel</button>
+        <button id="delete-confirm" class="btn-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden file input for import -->
+  <input type="file" id="file-import" accept=".json" hidden>
+
+  <script src="admin.js"></script>
+</body>
+</html>

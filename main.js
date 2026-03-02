@@ -3,33 +3,50 @@
 (function () {
   'use strict';
 
-  /* --- Data --- */
-  var resourcesData = {
-    en: {
-      projects: [
-        { title: 'TBDB - The Biomimicry Database (Android)', desc: 'Official APK for the biomimicry platform', link: 'https://apkpure.com/th/t-b-d-b/pt.tbdb.bjtech/' },
-        { title: 'The Biomimicry Database', desc: 'Multimodal platform for biomimicry research', link: 'https://thebiomimicrydb.vercel.app/' },
-        { title: 'Blog on Medium', desc: 'Technical and scientific articles', link: 'https://vagnerbomjesus.medium.com/' },
-        { title: 'TBDB | VITA ChatBot', desc: 'Development documentation of a multimodal knowledge sharing platform', link: 'https://bdigital.ipg.pt/dspace/bitstream/10314/10107/1/CM%20-%20Vagner%20B%20Jesus.pdf' },
-        { title: 'Google Scholar', desc: 'Academic publications and citations', link: 'https://scholar.google.com/citations?user=K-IfdJoAAAAJ&hl=pt-PT&oi=ao' }
-      ],
-      useful: [
-        { title: 'ENISA - EU Agency for Cybersecurity', desc: 'European Union Agency for Cybersecurity', link: 'https://www.enisa.europa.eu/' }
-      ]
-    },
-    pt: {
-      projects: [
-        { title: 'TBDB - The Biomimicry Database (Android)', desc: 'APK oficial da plataforma de biomimetica', link: 'https://apkpure.com/th/t-b-d-b/pt.tbdb.bjtech/' },
-        { title: 'The Biomimicry Database', desc: 'Plataforma multimodal para investigacao em biomimetica', link: 'https://thebiomimicrydb.vercel.app/' },
-        { title: 'Blog no Medium', desc: 'Artigos tecnicos e cientificos', link: 'https://vagnerbomjesus.medium.com/' },
-        { title: 'TBDB | ChatBot VITA', desc: 'Documentacao do desenvolvimento de uma plataforma multimodal para partilha de conhecimento', link: 'https://bdigital.ipg.pt/dspace/bitstream/10314/10107/1/CM%20-%20Vagner%20B%20Jesus.pdf' },
-        { title: 'Google Scholar', desc: 'Publicacoes academicas e citacoes', link: 'https://scholar.google.com/citations?user=K-IfdJoAAAAJ&hl=pt-PT&oi=ao' }
-      ],
-      useful: [
-        { title: 'ENISA - Agencia da UE para a Ciberseguranca', desc: 'Agencia da Uniao Europeia para a Ciberseguranca', link: 'https://www.enisa.europa.eu/' }
-      ]
+  /* --- Security Utilities --- */
+  function isValidURL(str) {
+    try {
+      var url = new URL(str);
+      return url.protocol === 'http:' || url.protocol === 'https:';
+    } catch (e) {
+      return false;
     }
-  };
+  }
+
+  function sanitizeItem(item) {
+    if (!item || typeof item !== 'object') return null;
+    if (typeof item.title !== 'string' || typeof item.desc !== 'string' || typeof item.link !== 'string') return null;
+    if (!isValidURL(item.link)) return null;
+    return {
+      title: item.title.substring(0, 200),
+      desc: item.desc.substring(0, 500),
+      link: item.link.substring(0, 2000)
+    };
+  }
+
+  function sanitizeItems(items) {
+    if (!Array.isArray(items)) return [];
+    var result = [];
+    for (var i = 0; i < items.length; i++) {
+      var clean = sanitizeItem(items[i]);
+      if (clean) result.push(clean);
+    }
+    return result;
+  }
+
+  function sanitizeData(obj) {
+    if (!obj || typeof obj !== 'object') return null;
+    if (!obj.en || !obj.pt) return null;
+    if (!Array.isArray(obj.en.projects) || !Array.isArray(obj.en.useful)) return null;
+    if (!Array.isArray(obj.pt.projects) || !Array.isArray(obj.pt.useful)) return null;
+    return {
+      en: { projects: sanitizeItems(obj.en.projects), useful: sanitizeItems(obj.en.useful) },
+      pt: { projects: sanitizeItems(obj.pt.projects), useful: sanitizeItems(obj.pt.useful) }
+    };
+  }
+
+  /* --- Data --- */
+  var resourcesData = null;
 
   var translations = {
     en: {
@@ -100,6 +117,8 @@
 
   /* --- Language --- */
   function setLanguage(lang) {
+    if (!resourcesData) return;
+
     currentLanguage = lang;
     langSelect.value = lang;
     localStorage.setItem('lang', lang);
@@ -111,7 +130,7 @@
     btnExp.textContent = t.experience;
     btnEdu.textContent = t.education;
     resourcesHeading.textContent = t.resourcesHeading;
-    footerText.innerHTML = t.footer;
+    footerText.textContent = t.footer;
 
     resources = [];
     data.projects.forEach(function (r) {
@@ -158,7 +177,12 @@
       }
 
       var a = document.createElement('a');
-      a.href = r.link;
+      // Safe href - only http/https
+      if (isValidURL(r.link)) {
+        a.href = r.link;
+      } else {
+        a.href = '#';
+      }
       a.target = '_blank';
       a.rel = 'noopener noreferrer';
       a.className = 'resource-link';
@@ -184,7 +208,10 @@
   /* --- Pagination --- */
   function renderPagination() {
     var pag = document.getElementById('custom-pagination');
-    pag.innerHTML = '';
+    // Clear safely
+    while (pag.firstChild) {
+      pag.removeChild(pag.firstChild);
+    }
     var t = translations[currentLanguage];
 
     var prev = document.createElement('button');
@@ -219,7 +246,51 @@
     pag.appendChild(next);
   }
 
+  /* --- Load Data (with sanitization) --- */
+  function loadData() {
+    var stored = localStorage.getItem('portfolioData');
+    if (stored) {
+      try {
+        var parsed = JSON.parse(stored);
+        var clean = sanitizeData(parsed);
+        if (clean) {
+          resourcesData = clean;
+          initApp();
+          return;
+        }
+        localStorage.removeItem('portfolioData');
+      } catch (e) {
+        localStorage.removeItem('portfolioData');
+      }
+    }
+
+    fetch('data.json')
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        var clean = sanitizeData(data);
+        resourcesData = clean || { en: { projects: [], useful: [] }, pt: { projects: [], useful: [] } };
+        initApp();
+      })
+      .catch(function () {
+        resourcesData = { en: { projects: [], useful: [] }, pt: { projects: [], useful: [] } };
+        initApp();
+      });
+  }
+
   /* --- Init --- */
+  function initApp() {
+    var savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      setTheme(true);
+    } else {
+      setTheme(false);
+    }
+
+    var savedLang = localStorage.getItem('lang') || 'en';
+    setLanguage(savedLang);
+  }
+
+  // Theme can be set immediately (no data dependency)
   var savedTheme = localStorage.getItem('theme');
   if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
     setTheme(true);
@@ -227,6 +298,5 @@
     setTheme(false);
   }
 
-  var savedLang = localStorage.getItem('lang') || 'en';
-  setLanguage(savedLang);
+  loadData();
 })();
