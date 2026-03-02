@@ -123,6 +123,7 @@
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-y: scroll;
 }
 
 body {
@@ -245,6 +246,8 @@ a:hover {
   min-width: 0;
   position: sticky;
   top: 76px;
+  max-height: calc(100vh - 96px);
+  overflow-y: auto;
 }
 
 .profile-card {
@@ -583,6 +586,8 @@ a:hover {
     width: 100%;
     max-width: 100%;
     position: static;
+    max-height: none;
+    overflow-y: visible;
   }
 
   .resources-col {
