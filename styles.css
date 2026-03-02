@@ -671,3 +671,30 @@ a:hover {
     padding: 16px;
   }
 }
+
+/* === Ad Containers === */
+.ad-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
+  overflow: hidden;
+}
+
+.ad-profile {
+  margin-top: 12px;
+}
+
+.ad-footer {
+  margin: 20px auto;
+  padding: 0 24px;
+}
+
+.ad-container ins {
+  background: transparent;
+}
+
+@media (max-width: 480px) {
+  .ad-container {
+    padding: 0 10px;
+  }
+}
