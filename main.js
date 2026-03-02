@@ -80,7 +80,7 @@
   /* --- State --- */
   var currentLanguage = 'en';
   var resources = [];
-  var perPage = 5;
+  var perPage = 4;
   var currentPage = 1;
   var totalPages = 1;
 

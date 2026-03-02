@@ -248,7 +248,7 @@ a:hover {
 .profile-col {
   flex: 0 0 300px;
   min-width: 0;
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 .profile-card {
@@ -413,7 +413,7 @@ a:hover {
 .resources-col {
   flex: 1;
   min-width: 0;
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 .resources-section {
