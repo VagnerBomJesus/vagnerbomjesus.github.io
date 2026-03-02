@@ -376,7 +376,7 @@
       }
     }
 
-    fetch('data.json')
+    fetch('../data.json')
       .then(function (res) { return res.json(); })
       .then(function (json) {
         var clean = sanitizeData(json);
