@@ -286,6 +286,14 @@ a:hover {
   color: var(--accent);
 }
 
+.theme-toggle:active {
+  transform: rotate(180deg) scale(0.85);
+}
+
+.theme-toggle {
+  transition: border-color 0.15s ease, background-color 0.25s ease, color 0.15s ease, transform 0.3s ease;
+}
+
 /* === Main Layout === */
 .main-container {
   position: relative;
