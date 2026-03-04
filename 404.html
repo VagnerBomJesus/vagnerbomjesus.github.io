@@ -3,80 +3,129 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>404 - Page Not Found</title>
+  <title>404 - Page Not Found | Vagner Bom Jesus</title>
   <link rel="icon" type="image/x-icon" href="https://avatars.githubusercontent.com/u/48354097?v=4">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <style>
-    .error-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      flex: 1;
+    .error-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 40px 32px;
       text-align: center;
-      padding: 40px 20px;
+      max-width: 420px;
+      width: 100%;
+      animation: fade-in-up 0.5s ease-out both;
+      transition: background-color 0.25s ease, border-color 0.25s ease;
+    }
+    .error-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: 3px solid var(--avatar-border);
+      margin-bottom: 20px;
+      transition: border-color 0.25s ease;
     }
     .error-code {
-      font-size: 4rem;
+      font-size: 3.5rem;
       font-weight: 700;
       color: var(--accent);
       font-family: var(--font-mono);
       line-height: 1;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
+      letter-spacing: 4px;
     }
     .error-title {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       font-weight: 600;
       color: var(--text-primary);
       margin-bottom: 8px;
     }
     .error-desc {
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
       margin-bottom: 24px;
+      line-height: 1.5;
     }
-    .error-link {
-      display: inline-block;
-      background: var(--btn-primary-bg);
-      color: var(--btn-primary-color);
-      border-radius: var(--radius);
-      padding: 10px 24px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      font-family: var(--font-family);
-      text-decoration: none;
-      transition: background-color 0.15s ease;
+    .error-actions {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
     }
-    .error-link:hover {
-      background: var(--btn-primary-hover);
-      color: var(--btn-primary-color);
+    .error-social {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-color);
     }
   </style>
 </head>
 <body>
+
   <header class="toolbar" role="banner">
     <a href="/" class="toolbar-brand" style="text-decoration:none;color:var(--accent);">VBJ</a>
+    <nav class="toolbar-controls" aria-label="Site controls">
+      <button id="toggle-theme" class="theme-toggle" title="Toggle theme" aria-label="Toggle dark or light mode">&#9790;</button>
+    </nav>
   </header>
 
-  <div class="error-container">
-    <div class="error-code">404</div>
-    <div class="error-title">Page Not Found</div>
-    <p class="error-desc">The page you are looking for does not exist or has been moved.</p>
-    <a href="/" class="error-link">Back to Portfolio</a>
-  </div>
+  <main class="main-container" style="justify-content:center;align-items:center;">
+    <div class="error-card">
+      <img src="https://avatars.githubusercontent.com/u/48354097?v=4" alt="Vagner Bom Jesus" class="error-avatar">
+      <div class="error-code">404</div>
+      <div class="error-title">Page Not Found</div>
+      <p class="error-desc">The page you are looking for does not exist or has been moved.</p>
+      <div class="error-actions">
+        <a href="/" class="btn-primary">Back to Portfolio</a>
+        <a href="https://github.com/VagnerBomJesus" target="_blank" rel="noopener noreferrer" class="btn-secondary">GitHub</a>
+      </div>
+      <div class="error-social">
+        <a href="https://www.linkedin.com/in/vagnerbomjesus" target="_blank" rel="noopener noreferrer" class="social-btn" title="LinkedIn" aria-label="LinkedIn">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="https://github.com/VagnerBomJesus" target="_blank" rel="noopener noreferrer" class="social-btn" title="GitHub" aria-label="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://vagnerbomjesus.medium.com/" target="_blank" rel="noopener noreferrer" class="social-btn" title="Medium" aria-label="Medium">
+          <i class="fab fa-medium"></i>
+        </a>
+        <a href="https://scholar.google.com/citations?user=K-IfdJoAAAAJ&hl=pt-PT&oi=ao" target="_blank" rel="noopener noreferrer" class="social-btn" title="Google Scholar" aria-label="Google Scholar">
+          <i class="fas fa-graduation-cap"></i>
+        </a>
+      </div>
+    </div>
+  </main>
 
   <footer class="site-footer">
-    <span>&copy; 2026 Vagner Bom Jesus</span>
+    <span>&copy; 2026 Vagner Bom Jesus &middot; All rights reserved.</span>
   </footer>
 
   <script>
     var saved = localStorage.getItem('theme');
-    if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.setAttribute('data-theme', 'dark');
+    var themeBtn = document.getElementById('toggle-theme');
+    function setTheme(dark) {
+      if (dark) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        themeBtn.textContent = '\u2600';
+        localStorage.setItem('theme', 'dark');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+        themeBtn.textContent = '\u263E';
+        localStorage.setItem('theme', 'light');
+      }
     }
+    if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      setTheme(true);
+    }
+    themeBtn.addEventListener('click', function () {
+      setTheme(document.documentElement.getAttribute('data-theme') !== 'dark');
+    });
   </script>
 </body>
 </html>
