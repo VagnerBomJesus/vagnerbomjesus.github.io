@@ -511,6 +511,22 @@
     }, { passive: true });
   }
 
+  /* --- Back to top (mobile) --- */
+  var backToTopBtn = document.getElementById('back-to-top');
+  var mainContainer = document.querySelector('.main-container');
+  if (backToTopBtn && mainContainer) {
+    mainContainer.addEventListener('scroll', function () {
+      if (mainContainer.scrollTop > 200) {
+        backToTopBtn.classList.add('visible');
+      } else {
+        backToTopBtn.classList.remove('visible');
+      }
+    });
+    backToTopBtn.addEventListener('click', function () {
+      mainContainer.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
   /* --- Keyboard navigation --- */
   document.addEventListener('keydown', function (e) {
     // Skip if user is typing in search
