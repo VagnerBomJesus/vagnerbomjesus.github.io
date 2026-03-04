@@ -62,7 +62,14 @@
       page: function (c, t) { return c + ' / ' + t; },
       resourcesHeading: 'Projects & Resources',
       resourcesCount: function (n) { return n + ' items'; },
-      footer: '\u00A9 2026 Vagner Bom Jesus \u00B7 All rights reserved.'
+      footer: '\u00A9 2026 Vagner Bom Jesus \u00B7 All rights reserved.',
+      footerNews: [
+        'Software Engineering',
+        'Flutter & Dart Development',
+        'Information Security',
+        'Biomimicry Research',
+        'Academic Publications'
+      ]
     },
     pt: {
       role: 'Engenharia de Software | Desenvolvedor Flutter | Entusiasta de Seguranca da Informacao',
@@ -75,7 +82,14 @@
       page: function (c, t) { return c + ' / ' + t; },
       resourcesHeading: 'Projetos e Recursos',
       resourcesCount: function (n) { return n + ' itens'; },
-      footer: '\u00A9 2026 Vagner Bom Jesus \u00B7 Todos os direitos reservados.'
+      footer: '\u00A9 2026 Vagner Bom Jesus \u00B7 Todos os direitos reservados.',
+      footerNews: [
+        'Engenharia de Software',
+        'Desenvolvimento Flutter & Dart',
+        'Seguranca da Informacao',
+        'Investigacao em Biomimetica',
+        'Publicacoes Academicas'
+      ]
     }
   };
 
@@ -187,7 +201,18 @@
     btnExp.textContent = t.experience;
     btnEdu.textContent = t.education;
     resourcesHeading.textContent = t.resourcesHeading;
-    footerText.textContent = t.footer;
+    // Build marquee footer content
+    var marquee = document.getElementById('footer-marquee');
+    if (marquee) {
+      var sep = ' \u00B7 ';
+      var items = [t.footer].concat(t.footerNews);
+      marquee.innerHTML = '';
+      for (var mi = 0; mi < 2; mi++) {
+        var span = document.createElement('span');
+        span.textContent = items.join(sep) + sep;
+        marquee.appendChild(span);
+      }
+    }
 
     // Translate tab labels
     tabProjects.textContent = t.projects;

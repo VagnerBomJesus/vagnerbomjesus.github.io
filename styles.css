@@ -721,14 +721,45 @@ a:hover {
 /* === Footer === */
 .site-footer {
   flex-shrink: 0;
-  text-align: center;
-  padding: 12px 32px;
+  padding: 0;
   font-size: 0.75rem;
   color: var(--text-muted);
   border-top: 1px solid var(--border-color);
   background: var(--bg-footer);
   letter-spacing: 0.3px;
+  overflow: hidden;
   transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.footer-marquee {
+  width: 100%;
+  overflow: hidden;
+  padding: 10px 0;
+}
+
+.footer-marquee-content {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee-scroll 20s linear infinite;
+  padding-left: 100%;
+}
+
+.footer-marquee-content span {
+  display: inline-block;
+  padding-right: 60px;
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.footer-marquee:hover .footer-marquee-content {
+  animation-play-state: paused;
 }
 
 .footer-link {
