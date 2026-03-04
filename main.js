@@ -313,6 +313,9 @@
 
   loadData();
 
+  /* --- Check for hover capability (skip animations on touch devices) --- */
+  var hasHover = window.matchMedia('(hover: hover)').matches;
+
   /* --- Profile elements flee from cursor --- */
   var glitchChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*!?';
   var returnTimer = null;
@@ -366,7 +369,7 @@
     });
   }
 
-  if (profileCard) {
+  if (profileCard && hasHover) {
     profileCard.addEventListener('mousemove', function (e) {
       var cardRect = profileCard.getBoundingClientRect();
       var cursorX = e.clientX;
@@ -431,6 +434,7 @@
   }
 
   document.addEventListener('mousemove', function (e) {
+    if (!hasHover) return;
     var now = Date.now();
     if (now - lastRipple < 80) return;
     if (e.target.closest('.profile-card')) return;
