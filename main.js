@@ -270,7 +270,7 @@
     var section = document.getElementById('resources-section');
     var pagination = document.getElementById('custom-pagination');
 
-    var old = section.querySelectorAll('.resource-link, .section-title');
+    var old = section.querySelectorAll('.resource-link, .section-title, .empty-state');
     for (var i = 0; i < old.length; i++) {
       old[i].remove();
     }
@@ -278,6 +278,14 @@
     var items = getActiveItems();
     var start = (page - 1) * perPage;
     var end = Math.min(start + perPage, items.length);
+
+    if (items.length === 0) {
+      var empty = document.createElement('div');
+      empty.className = 'empty-state';
+      empty.textContent = currentLanguage === 'pt' ? 'Nenhum resultado encontrado.' : 'No results found.';
+      section.insertBefore(empty, pagination);
+      return;
+    }
 
     for (var j = start; j < end; j++) {
       var r = items[j];
