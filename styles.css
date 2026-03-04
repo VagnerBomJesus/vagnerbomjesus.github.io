@@ -913,6 +913,39 @@ a:hover {
   animation: fade-in-up 0.4s ease-out 0.3s both;
 }
 
+/* === Skeleton Loading === */
+.skeleton-card {
+  background: var(--bg-resource);
+  border: 1px solid var(--border-color);
+  border-left: 3px solid var(--resource-border-left);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  margin-bottom: 6px;
+}
+
+.skeleton-line {
+  height: 12px;
+  border-radius: var(--radius);
+  background: linear-gradient(90deg, var(--bg-tag) 25%, var(--bg-pagination) 50%, var(--bg-tag) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+
+.skeleton-line.title {
+  width: 60%;
+  height: 14px;
+  margin-bottom: 8px;
+}
+
+.skeleton-line.desc {
+  width: 90%;
+}
+
+@keyframes skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
 /* === Ad Containers === */
 .ad-container {
   overflow: hidden;

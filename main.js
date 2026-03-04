@@ -347,17 +347,37 @@
     pag.appendChild(next);
   }
 
+  /* --- Skeleton Loading --- */
+  function showSkeleton() {
+    var section = document.getElementById('resources-section');
+    var pagination = document.getElementById('custom-pagination');
+    for (var i = 0; i < perPage; i++) {
+      var card = document.createElement('div');
+      card.className = 'skeleton-card';
+      card.innerHTML = '<div class="skeleton-line title"></div><div class="skeleton-line desc"></div>';
+      section.insertBefore(card, pagination);
+    }
+  }
+
+  function clearSkeleton() {
+    var skeletons = document.querySelectorAll('.skeleton-card');
+    for (var i = 0; i < skeletons.length; i++) skeletons[i].remove();
+  }
+
   /* --- Load Data (with sanitization) --- */
   function loadData() {
+    showSkeleton();
     fetch('data.json')
       .then(function (res) { return res.json(); })
       .then(function (data) {
         var clean = sanitizeData(data);
         resourcesData = clean || { en: { projects: [], useful: [] }, pt: { projects: [], useful: [] } };
+        clearSkeleton();
         initApp();
       })
       .catch(function () {
         resourcesData = { en: { projects: [], useful: [] }, pt: { projects: [], useful: [] } };
+        clearSkeleton();
         initApp();
       });
   }
