@@ -433,6 +433,11 @@
 
   loadData();
 
+  /* --- Service Worker registration --- */
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').catch(function () {});
+  }
+
   /* --- Swipe pagination on mobile --- */
   var touchStartX = 0;
   var touchEndX = 0;
