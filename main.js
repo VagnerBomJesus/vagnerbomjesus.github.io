@@ -99,6 +99,7 @@
   var footerText = document.getElementById('footer-text');
   var tabProjects = document.getElementById('tab-projects');
   var tabUseful = document.getElementById('tab-useful');
+  var searchInput = document.getElementById('resource-search');
 
   /* --- Theme --- */
   function setTheme(dark) {
@@ -122,8 +123,15 @@
   });
 
   /* --- Category / Tabs --- */
+  var searchQuery = '';
+
   function getActiveItems() {
-    return currentCategory === 'projects' ? projectItems : usefulItems;
+    var items = currentCategory === 'projects' ? projectItems : usefulItems;
+    if (!searchQuery) return items;
+    var q = searchQuery.toLowerCase();
+    return items.filter(function (r) {
+      return r.title.toLowerCase().indexOf(q) !== -1 || r.desc.toLowerCase().indexOf(q) !== -1;
+    });
   }
 
   function setCategory(cat) {
@@ -150,6 +158,17 @@
 
   tabUseful.addEventListener('click', function () {
     setCategory('useful');
+  });
+
+  searchInput.addEventListener('input', function () {
+    searchQuery = searchInput.value.trim();
+    currentPage = 1;
+    var items = getActiveItems();
+    var t = translations[currentLanguage];
+    resourcesCount.textContent = t.resourcesCount(items.length);
+    totalPages = Math.max(1, Math.ceil(items.length / perPage));
+    renderResources(currentPage);
+    renderPagination();
   });
 
   /* --- Language --- */
