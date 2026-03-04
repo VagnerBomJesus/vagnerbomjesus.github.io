@@ -1,0 +1,21 @@
+{
+  "name": "Vagner Bom Jesus - Portfolio",
+  "short_name": "VBJ Portfolio",
+  "description": "Software Engineer, Flutter Developer and Information Security Enthusiast",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f6f8",
+  "theme_color": "#1e3a5f",
+  "icons": [
+    {
+      "src": "https://avatars.githubusercontent.com/u/48354097?v=4&s=192",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://avatars.githubusercontent.com/u/48354097?v=4&s=512",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
