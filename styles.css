@@ -595,11 +595,31 @@ a:hover {
   border-left-color: var(--accent);
 }
 
+.resource-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+.resource-type-badge {
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: var(--tag-accent-color);
+  background: var(--tag-accent-bg);
+  border: 1px solid var(--tag-accent-border);
+  border-radius: var(--radius);
+  padding: 1px 6px;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
 .resource-title {
   font-size: 0.88rem;
   font-weight: 600;
   color: var(--text-primary);
-  margin-bottom: 2px;
+  margin-bottom: 0;
   line-height: 1.4;
 }
 

@@ -20,7 +20,8 @@
     return {
       title: item.title.substring(0, 200),
       desc: item.desc.substring(0, 500),
-      link: item.link.substring(0, 2000)
+      link: item.link.substring(0, 2000),
+      type: typeof item.type === 'string' ? item.type.substring(0, 20) : ''
     };
   }
 
@@ -174,10 +175,10 @@
 
     // Store items by category
     projectItems = data.projects.map(function (r) {
-      return { title: r.title, desc: r.desc, link: r.link };
+      return { title: r.title, desc: r.desc, link: r.link, type: r.type || '' };
     });
     usefulItems = data.useful.map(function (r) {
-      return { title: r.title, desc: r.desc, link: r.link };
+      return { title: r.title, desc: r.desc, link: r.link, type: r.type || '' };
     });
 
     // Re-apply category (updates count, pagination, rendering)
@@ -237,7 +238,18 @@
       desc.className = 'resource-desc';
       desc.textContent = r.desc;
 
-      card.appendChild(title);
+      var titleRow = document.createElement('div');
+      titleRow.className = 'resource-title-row';
+      titleRow.appendChild(title);
+
+      if (r.type) {
+        var badge = document.createElement('span');
+        badge.className = 'resource-type-badge';
+        badge.textContent = r.type.toUpperCase();
+        titleRow.appendChild(badge);
+      }
+
+      card.appendChild(titleRow);
       card.appendChild(desc);
       a.appendChild(card);
       section.insertBefore(a, pagination);
