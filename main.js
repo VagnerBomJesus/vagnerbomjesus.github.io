@@ -359,6 +359,39 @@
 
   loadData();
 
+  /* --- Swipe pagination on mobile --- */
+  var touchStartX = 0;
+  var touchEndX = 0;
+  var resourcesSection = document.getElementById('resources-section');
+
+  if (resourcesSection) {
+    resourcesSection.addEventListener('touchstart', function (e) {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    resourcesSection.addEventListener('touchend', function (e) {
+      touchEndX = e.changedTouches[0].screenX;
+      var diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0 && currentPage < totalPages) {
+          // Swipe left → next
+          transitionResources(function () {
+            currentPage++;
+            renderResources(currentPage);
+            renderPagination();
+          });
+        } else if (diff < 0 && currentPage > 1) {
+          // Swipe right → prev
+          transitionResources(function () {
+            currentPage--;
+            renderResources(currentPage);
+            renderPagination();
+          });
+        }
+      }
+    }, { passive: true });
+  }
+
   /* --- Check for hover capability (skip animations on touch devices) --- */
   var hasHover = window.matchMedia('(hover: hover)').matches;
 
