@@ -448,8 +448,12 @@
   var speed = 0;
   var prevX = 0;
   var prevY = 0;
+  var activeRipples = 0;
+  var MAX_RIPPLES = 20;
 
   function createRipple(x, y, size, opacity, cls) {
+    if (activeRipples >= MAX_RIPPLES) return;
+    activeRipples++;
     var r = document.createElement('div');
     r.className = 'ripple ' + cls;
     r.style.left = x + 'px';
@@ -457,7 +461,7 @@
     r.style.setProperty('--ripple-size', size + 'px');
     r.style.setProperty('--ripple-opacity', opacity);
     document.body.appendChild(r);
-    r.addEventListener('animationend', function () { r.remove(); });
+    r.addEventListener('animationend', function () { r.remove(); activeRipples--; });
   }
 
   document.addEventListener('mousemove', function (e) {
