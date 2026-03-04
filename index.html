@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://pagead2.googlesyndication.com https://adservice.google.com https://www.googletagservices.com https://tpc.googlesyndication.com 'unsafe-inline' 'unsafe-eval'; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'unsafe-inline'; font-src https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' https://avatars.githubusercontent.com https://pagead2.googlesyndication.com https://tpc.googlesyndication.com https://www.google.com https://www.gstatic.com data:; connect-src 'self' https://pagead2.googlesyndication.com https://adservice.google.com https://tpc.googlesyndication.com https://www.google.com; frame-src https://pagead2.googlesyndication.com https://tpc.googlesyndication.com https://googleads.g.doubleclick.net https://www.google.com;">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://pagead2.googlesyndication.com https://adservice.google.com https://www.googletagservices.com https://tpc.googlesyndication.com https://contextual.media.net https://cdn.carbonads.com https://srv.carbonads.net https://cdn4.buysellads.net https://ad.a-ads.com https://*.propellerads.com https://*.adsterra.com https://assoc-amazon.com https://ir-na.amazon-adsystem.com https://ws-na.amazon-adsystem.com https://rcm-na.amazon-adsystem.com 'unsafe-inline' 'unsafe-eval'; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'unsafe-inline'; font-src https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src * data:; connect-src 'self' https://pagead2.googlesyndication.com https://adservice.google.com https://tpc.googlesyndication.com https://www.google.com https://contextual.media.net https://*.carbonads.com https://*.propellerads.com https://*.adsterra.com https://*.amazon-adsystem.com; frame-src https://pagead2.googlesyndication.com https://tpc.googlesyndication.com https://googleads.g.doubleclick.net https://www.google.com https://contextual.media.net https://*.propellerads.com https://*.adsterra.com https://rcm-na.amazon-adsystem.com;">
   <meta name="description" content="Personal portfolio of Vagner Bom Jesus - Software Engineering, Information Security, Flutter Developer.">
   <meta name="google-adsense-account" content="ca-pub-2308250412069180">
   <title>Vagner Bom Jesus | Portfolio</title>
@@ -72,15 +72,79 @@
       <div class="resources-section" id="resources-section">
         <div class="pagination-custom" id="custom-pagination"></div>
       </div>
-      <!-- Ad: Below resources -->
-      <div class="ad-container ad-resources">
-        <ins class="adsbygoogle"
-          style="display:block"
-          data-ad-client="ca-pub-2308250412069180"
-          data-ad-slot="auto"
-          data-ad-format="auto"
-          data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      <!-- Ad Slots: Multiple platforms with fallback -->
+      <div class="ad-container ad-resources" id="ad-slot">
+
+        <!-- 1. Google AdSense -->
+        <div id="ad-adsense" class="ad-unit">
+          <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-2308250412069180"
+            data-ad-slot="auto"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <!-- 2. Carbon Ads (replace PLACEMENT_ID and SITE_ID after signup at carbonads.net) -->
+        <div id="ad-carbon" class="ad-unit" hidden>
+          <script>
+            // Uncomment after getting your Carbon Ads IDs:
+            // var s = document.createElement('script');
+            // s.id = '_carbonads_js';
+            // s.src = 'https://cdn.carbonads.com/carbon.js?serve=PLACEMENT_ID&placement=SITE_ID';
+            // document.getElementById('ad-carbon').appendChild(s);
+          </script>
+        </div>
+
+        <!-- 3. Media.net (replace CUSTOMER_ID and SIZE after signup at media.net) -->
+        <div id="ad-medianet" class="ad-unit" hidden>
+          <div id="medianet-ad-container">
+            <script>
+              // Uncomment after getting your Media.net IDs:
+              // window._mNHandle = window._mNHandle || {};
+              // window._mNHandle.queue = window._mNHandle.queue || [];
+              // medianet_width = '728'; medianet_height = '90';
+              // medianet_crid = 'YOUR_CRID'; medianet_versionId = '111299';
+              // (function(){ var s = document.createElement('script');
+              //   s.src = 'https://contextual.media.net/nmedianet.js?cid=YOUR_CUSTOMER_ID';
+              //   s.async = true; document.getElementById('ad-medianet').appendChild(s); })();
+            </script>
+          </div>
+        </div>
+
+        <!-- 4. Amazon Associates (replace TRACKING_ID after signup at affiliate-program.amazon.com) -->
+        <div id="ad-amazon" class="ad-unit" hidden>
+          <script>
+            // Uncomment after getting your Amazon Associates Tracking ID:
+            // amzn_assoc_ad_type = 'banner';
+            // amzn_assoc_marketplace = 'amazon';
+            // amzn_assoc_region = 'US';
+            // amzn_assoc_placement = '';
+            // amzn_assoc_tracking_id = 'YOUR_TRACKING_ID';
+            // amzn_assoc_banner_type = 'ez';
+            // amzn_assoc_width = '728'; amzn_assoc_height = '90';
+            // var s = document.createElement('script');
+            // s.src = 'https://ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&Operation=GetScript&ID=OneJS&WS=1';
+            // document.getElementById('ad-amazon').appendChild(s);
+          </script>
+        </div>
+
+        <!-- 5. PropellerAds / Adsterra (replace ZONE_ID after signup) -->
+        <div id="ad-propeller" class="ad-unit" hidden>
+          <script>
+            // PropellerAds - uncomment after getting your Zone ID:
+            // (function(d,z,s){s.src='https://'+d+'/400/'+z;
+            //   try{(document.body||document.documentElement).appendChild(s)}
+            //   catch(e){}})('propellerads.com','YOUR_ZONE_ID',document.createElement('script'));
+
+            // OR Adsterra - uncomment after getting your key:
+            // var s = document.createElement('script');
+            // s.src = 'https://www.adsterra.com/sdk/YOUR_KEY.js';
+            // document.getElementById('ad-propeller').appendChild(s);
+          </script>
+        </div>
+
       </div>
     </div>
   </div>
