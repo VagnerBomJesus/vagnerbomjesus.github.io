@@ -501,11 +501,21 @@ a:hover {
 
 .resources-section {
   margin: 0;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .resources-section.fading {
   opacity: 0;
+}
+
+.resources-section.slide-left {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.resources-section.slide-right {
+  opacity: 0;
+  transform: translateX(20px);
 }
 
 .resources-header {

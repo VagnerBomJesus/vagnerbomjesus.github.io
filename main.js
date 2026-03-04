@@ -148,7 +148,8 @@
     });
   }
 
-  function setCategory(cat) {
+  function setCategory(cat, skipTransition) {
+    var prevCat = currentCategory;
     currentCategory = cat;
     currentPage = 1;
 
@@ -162,8 +163,27 @@
     resourcesCount.textContent = t.resourcesCount(items.length);
 
     totalPages = Math.max(1, Math.ceil(items.length / perPage));
-    renderResources(currentPage);
-    renderPagination();
+
+    if (skipTransition || prevCat === cat) {
+      renderResources(currentPage);
+      renderPagination();
+      return;
+    }
+
+    // Slide transition based on tab direction
+    var section = document.getElementById('resources-section');
+    var slideOut = cat === 'useful' ? 'slide-left' : 'slide-right';
+    var slideIn = cat === 'useful' ? 'slide-right' : 'slide-left';
+    section.classList.add(slideOut);
+    setTimeout(function () {
+      renderResources(currentPage);
+      renderPagination();
+      section.classList.remove(slideOut);
+      section.classList.add(slideIn);
+      // Force reflow
+      void section.offsetWidth;
+      section.classList.remove(slideIn);
+    }, 200);
   }
 
   tabProjects.addEventListener('click', function () {
@@ -228,7 +248,7 @@
     });
 
     // Re-apply category (updates count, pagination, rendering)
-    setCategory(currentCategory);
+    setCategory(currentCategory, true);
   }
 
   langSelect.addEventListener('change', function () {
