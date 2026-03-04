@@ -688,45 +688,6 @@ a:hover {
   margin-top: 16px;
 }
 
-.ad-unit {
-  min-height: 0;
-}
-
-.ad-unit[hidden] {
-  display: none !important;
-}
-
 .ad-container ins {
   background: transparent;
-}
-
-/* Carbon Ads styling */
-#carbonads {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: var(--bg-resource);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius);
-  padding: 10px 14px;
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  transition: background-color 0.25s ease, border-color 0.25s ease;
-}
-
-#carbonads .carbon-img img {
-  display: block;
-  border-radius: var(--radius);
-}
-
-#carbonads .carbon-text {
-  color: var(--text-secondary);
-  line-height: 1.4;
-}
-
-#carbonads .carbon-poweredby {
-  font-size: 0.65rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
