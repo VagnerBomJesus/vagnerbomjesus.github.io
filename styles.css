@@ -178,6 +178,25 @@ body {
   }
 }
 
+/* Focus visible for keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+.social-btn:focus-visible,
+.tab-btn:focus-visible,
+.page-btn-custom:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.resource-link:focus-visible .resource-card {
+  border-color: var(--accent);
+  border-left-color: var(--accent);
+}
+
 a {
   color: var(--text-link);
   text-decoration: none;
