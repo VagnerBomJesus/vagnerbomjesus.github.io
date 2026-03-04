@@ -1,7 +1,7 @@
 {
   "en": {
     "projects": [
-      { "title": "TBDB - The Biomimicry Database (Android)", "desc": "Official APK for the biomimicry platform", "link": "https://apkpure.com/th/t-b-d-b/pt.tbdb.bjtech/", "type": "apk" },
+      { "title": "TBDB - The Biomimicry Database (Android)", "desc": "Official APK for the biomimicry platform", "link": "https://apkpure.com/th/t-b-d-b/pt.tbdb.bjtech/", "type": "apk", "featured": true },
       { "title": "The Biomimicry Database", "desc": "Multimodal platform for biomimicry research", "link": "https://thebiomimicrydb.vercel.app/", "type": "website" },
       { "title": "Blog on Medium", "desc": "Technical and scientific articles", "link": "https://vagnerbomjesus.medium.com/", "type": "article" },
       { "title": "TBDB | VITA ChatBot", "desc": "Development documentation of a multimodal knowledge sharing platform", "link": "https://bdigital.ipg.pt/dspace/bitstream/10314/10107/1/CM%20-%20Vagner%20B%20Jesus.pdf", "type": "pdf" },
@@ -13,7 +13,7 @@
   },
   "pt": {
     "projects": [
-      { "title": "TBDB - The Biomimicry Database (Android)", "desc": "APK oficial da plataforma de biomimetica", "link": "https://apkpure.com/th/t-b-d-b/pt.tbdb.bjtech/", "type": "apk" },
+      { "title": "TBDB - The Biomimicry Database (Android)", "desc": "APK oficial da plataforma de biomimetica", "link": "https://apkpure.com/th/t-b-d-b/pt.tbdb.bjtech/", "type": "apk", "featured": true },
       { "title": "The Biomimicry Database", "desc": "Plataforma multimodal para investigacao em biomimetica", "link": "https://thebiomimicrydb.vercel.app/", "type": "website" },
       { "title": "Blog no Medium", "desc": "Artigos tecnicos e cientificos", "link": "https://vagnerbomjesus.medium.com/", "type": "article" },
       { "title": "TBDB | ChatBot VITA", "desc": "Documentacao do desenvolvimento de uma plataforma multimodal para partilha de conhecimento", "link": "https://bdigital.ipg.pt/dspace/bitstream/10314/10107/1/CM%20-%20Vagner%20B%20Jesus.pdf", "type": "pdf" },

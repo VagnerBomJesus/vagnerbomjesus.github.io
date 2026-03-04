@@ -588,6 +588,11 @@ a:hover {
   transition: all 0.15s ease;
 }
 
+.resource-featured {
+  border-left-color: var(--accent);
+  background: var(--accent-light);
+}
+
 .resource-link:hover .resource-card {
   background: var(--resource-hover-bg);
   border-left-color: var(--resource-border-left-hover);

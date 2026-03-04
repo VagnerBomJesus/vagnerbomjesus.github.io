@@ -21,7 +21,8 @@
       title: item.title.substring(0, 200),
       desc: item.desc.substring(0, 500),
       link: item.link.substring(0, 2000),
-      type: typeof item.type === 'string' ? item.type.substring(0, 20) : ''
+      type: typeof item.type === 'string' ? item.type.substring(0, 20) : '',
+      featured: item.featured === true
     };
   }
 
@@ -175,10 +176,10 @@
 
     // Store items by category
     projectItems = data.projects.map(function (r) {
-      return { title: r.title, desc: r.desc, link: r.link, type: r.type || '' };
+      return { title: r.title, desc: r.desc, link: r.link, type: r.type || '', featured: r.featured || false };
     });
     usefulItems = data.useful.map(function (r) {
-      return { title: r.title, desc: r.desc, link: r.link, type: r.type || '' };
+      return { title: r.title, desc: r.desc, link: r.link, type: r.type || '', featured: r.featured || false };
     });
 
     // Re-apply category (updates count, pagination, rendering)
@@ -228,7 +229,7 @@
       a.className = 'resource-link';
 
       var card = document.createElement('div');
-      card.className = 'resource-card';
+      card.className = 'resource-card' + (r.featured ? ' resource-featured' : '');
 
       var title = document.createElement('div');
       title.className = 'resource-title';
