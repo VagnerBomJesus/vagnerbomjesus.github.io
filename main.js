@@ -201,15 +201,16 @@
     btnExp.textContent = t.experience;
     btnEdu.textContent = t.education;
     resourcesHeading.textContent = t.resourcesHeading;
-    // Build marquee footer content
+    // Build marquee footer content (duplicated for seamless loop)
     var marquee = document.getElementById('footer-marquee');
     if (marquee) {
       var sep = ' \u00B7 ';
       var items = [t.footer].concat(t.footerNews);
+      var text = items.join(sep) + sep;
       marquee.innerHTML = '';
-      for (var mi = 0; mi < 2; mi++) {
+      for (var mi = 0; mi < 4; mi++) {
         var span = document.createElement('span');
-        span.textContent = items.join(sep) + sep;
+        span.textContent = text;
         marquee.appendChild(span);
       }
     }

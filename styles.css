@@ -735,18 +735,19 @@ a:hover {
   width: 100%;
   overflow: hidden;
   padding: 10px 0;
+  display: flex;
 }
 
 .footer-marquee-content {
-  display: inline-block;
+  display: flex;
   white-space: nowrap;
-  animation: marquee-scroll 20s linear infinite;
-  padding-left: 100%;
+  animation: marquee-scroll 25s linear infinite;
+  flex-shrink: 0;
 }
 
 .footer-marquee-content span {
-  display: inline-block;
-  padding-right: 60px;
+  flex-shrink: 0;
+  padding-right: 50px;
 }
 
 @keyframes marquee-scroll {
@@ -754,7 +755,7 @@ a:hover {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-50%);
   }
 }
 
