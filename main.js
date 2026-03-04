@@ -441,11 +441,6 @@
       el.style.transform = 'translate(0, 0)';
     });
 
-    // Scramble text on return
-    fleeElements.forEach(function (el) {
-      if (el.classList.contains('avatar-wrapper')) return;
-      scrambleText(el);
-    });
   }
 
   if (profileCard && hasHover) {
