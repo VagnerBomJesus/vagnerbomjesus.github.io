@@ -79,7 +79,9 @@
 
   /* --- State --- */
   var currentLanguage = 'en';
-  var resources = [];
+  var currentCategory = 'projects';
+  var projectItems = [];
+  var usefulItems = [];
   var perPage = 4;
   var currentPage = 1;
   var totalPages = 1;
@@ -93,6 +95,8 @@
   var resourcesHeading = document.getElementById('resources-heading');
   var resourcesCount = document.getElementById('resources-count');
   var footerText = document.getElementById('footer-text');
+  var tabProjects = document.getElementById('tab-projects');
+  var tabUseful = document.getElementById('tab-useful');
 
   /* --- Theme --- */
   function setTheme(dark) {
@@ -115,6 +119,37 @@
     setTheme(!isDark());
   });
 
+  /* --- Category / Tabs --- */
+  function getActiveItems() {
+    return currentCategory === 'projects' ? projectItems : usefulItems;
+  }
+
+  function setCategory(cat) {
+    currentCategory = cat;
+    currentPage = 1;
+
+    // Update tab active state
+    tabProjects.classList.toggle('active', cat === 'projects');
+    tabUseful.classList.toggle('active', cat === 'useful');
+
+    // Update count
+    var t = translations[currentLanguage];
+    var items = getActiveItems();
+    resourcesCount.textContent = t.resourcesCount(items.length);
+
+    totalPages = Math.max(1, Math.ceil(items.length / perPage));
+    renderResources(currentPage);
+    renderPagination();
+  }
+
+  tabProjects.addEventListener('click', function () {
+    setCategory('projects');
+  });
+
+  tabUseful.addEventListener('click', function () {
+    setCategory('useful');
+  });
+
   /* --- Language --- */
   function setLanguage(lang) {
     if (!resourcesData) return;
@@ -132,19 +167,20 @@
     resourcesHeading.textContent = t.resourcesHeading;
     footerText.textContent = t.footer;
 
-    resources = [];
-    data.projects.forEach(function (r) {
-      resources.push({ title: r.title, desc: r.desc, link: r.link, category: 'projects' });
+    // Translate tab labels
+    tabProjects.textContent = t.projects;
+    tabUseful.textContent = t.useful;
+
+    // Store items by category
+    projectItems = data.projects.map(function (r) {
+      return { title: r.title, desc: r.desc, link: r.link };
     });
-    data.useful.forEach(function (r) {
-      resources.push({ title: r.title, desc: r.desc, link: r.link, category: 'useful' });
+    usefulItems = data.useful.map(function (r) {
+      return { title: r.title, desc: r.desc, link: r.link };
     });
 
-    resourcesCount.textContent = t.resourcesCount(resources.length);
-    totalPages = Math.ceil(resources.length / perPage);
-    currentPage = 1;
-    renderResources(currentPage);
-    renderPagination();
+    // Re-apply category (updates count, pagination, rendering)
+    setCategory(currentCategory);
   }
 
   langSelect.addEventListener('change', function () {
@@ -161,20 +197,12 @@
       old[i].remove();
     }
 
+    var items = getActiveItems();
     var start = (page - 1) * perPage;
-    var end = Math.min(start + perPage, resources.length);
-    var currentCat = null;
-    var t = translations[currentLanguage];
+    var end = Math.min(start + perPage, items.length);
 
     for (var j = start; j < end; j++) {
-      var r = resources[j];
-      if (r.category !== currentCat) {
-        currentCat = r.category;
-        var h = document.createElement('h2');
-        h.className = 'section-title';
-        h.textContent = t[currentCat];
-        section.insertBefore(h, pagination);
-      }
+      var r = items[j];
 
       var a = document.createElement('a');
       // Safe href - only http/https

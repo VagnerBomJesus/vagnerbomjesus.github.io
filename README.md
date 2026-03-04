@@ -1,90 +1,94 @@
-# Portfolio Vagner Bom Jesus
+# Vagner Bom Jesus — Portfolio
 
-Este projeto é um portfolio pessoal responsivo do Vagner Bom Jesus.
-Apresenta informações de perfil, redes sociais, links para aplicações, publicações, artigos, recursos de formação e inclui um sistema de paginação para mostrar muitos recursos de forma elegante.
-Agora suporta Português e Inglês. No canto superior direito do `index.html` existe um seletor de idioma para alternar entre EN e PT.
+Personal portfolio website showcasing projects, publications, and curated resources.
 
-## Funcionalidades
+**Live:** [vagnerbomjesus.github.io](https://vagnerbomjesus.github.io)
 
-* **Design moderno e limpo** (HTML5 + CSS3 + Bootstrap 5)
-* **Modo claro e escuro** (toggle com persistência)
-* **Layout desktop em duas colunas** (perfil à esquerda, links/paginação à direita)
-* **Layout mobile em coluna única**
-* **Paginação customizada** para os recursos
-* **Totalmente responsivo**
-* **Links abrem em nova aba**
-* **Dados facilmente editáveis em JS**
+---
 
-## Estrutura do Projeto
+## Features
+
+| Feature | Description |
+|---------|-------------|
+| **Tabbed Navigation** | Projects and Useful Links separated by tabs |
+| **Dark / Light Mode** | Theme toggle with localStorage persistence |
+| **Bilingual (EN / PT)** | Language selector with full translation support |
+| **Responsive Layout** | Two-column desktop, single-column mobile |
+| **Paginated Resources** | Custom pagination per category |
+| **Admin Panel** | CRUD interface at `/admin` to manage content |
+| **Google AdSense** | Integrated ad placements |
+
+## Project Structure
 
 ```
-- index.html          # Ficheiro principal com todo o código
-- README.md           # Este ficheiro
+.
+├── index.html           # Main page
+├── main.js              # App logic (tabs, language, theme, pagination)
+├── styles.css           # Design system (light/dark themes, layout)
+├── data.json            # Projects & resources data (EN + PT)
+├── ads.txt              # AdSense verification
+├── admin/
+│   ├── index.html       # Admin panel UI
+│   ├── admin.js         # Admin CRUD logic
+│   └── admin.css        # Admin styles
+└── README.md
 ```
 
-## Como usar
+## Tech Stack
 
-1. **Faz download ou clona o repositório:**
+- **HTML5 / CSS3 / Vanilla JS** — No frameworks, no build step
+- **CSS Custom Properties** — Full theming via CSS variables
+- **Inter + Font Awesome** — Typography and icons via CDN
+- **GitHub Pages** — Hosting and deployment
+- **Google AdSense** — Monetisation
 
-   ```bash
-   git clone https://github.com/VagnerBomJesus/vagnerbomjesus.github.io.git
-   ```
-2. **Abre o ficheiro `index.html` num browser moderno.**
-3. **(Opcional) Personaliza os recursos no array `resources` do JavaScript.**
+## Quick Start
 
-## Instalação
+```bash
+git clone https://github.com/VagnerBomJesus/vagnerbomjesus.github.io.git
+cd vagnerbomjesus.github.io
+```
 
-Antes de correr os testes, instala as dependências do projeto:
+Open `index.html` in a browser, or serve locally:
+
+```bash
+python -m http.server 8000
+# → http://localhost:8000
+```
+
+## Content Management
+
+Resources are stored in `data.json` with the following structure:
+
+```json
+{
+  "en": {
+    "projects": [{ "title": "...", "desc": "...", "link": "..." }],
+    "useful":   [{ "title": "...", "desc": "...", "link": "..." }]
+  },
+  "pt": { ... }
+}
+```
+
+Edit directly or use the **Admin Panel** at `/admin` for a visual CRUD interface.
+
+## Customisation
+
+- **Theme colours:** Edit CSS variables in `:root` and `[data-theme="dark"]` in `styles.css`
+- **Profile info:** Update the profile card section in `index.html`
+- **Translations:** Modify the `translations` object in `main.js`
+
+## Testing
 
 ```bash
 npm install
-```
-
-Depois, executa os testes com:
-
-```bash
 npm test
 ```
 
-## Testes
+## License
 
-Este projeto utiliza **Jest** para verificar a paginacao.
-
-```bash
-npm test
-```
-
-
-## Personalização
-
-* **Adicionar recursos:**
-  Basta editar/adicionar objetos no array `resources` (título, descrição, link).
-* **Alterar perfil:**
-  Altera o HTML na coluna do perfil (avatar, nome, role, botões, etc).
-* **Alterar cores:**
-  Personaliza diretamente o CSS do ficheiro.
-
-## Modo escuro
-
-* O botão no canto superior direito alterna entre modo claro e escuro.
-* O estado é guardado no `localStorage`.
-
-## Créditos
-
-Desenvolvido por [Vagner Bom Jesus](https://www.linkedin.com/in/vagnerbomjesus)
+See [LICENSE](LICENSE) for details.
 
 ---
 
-### Demonstração
-
-Basta abrir o ficheiro `index.html` em qualquer browser. Não precisa de backend.
-
----
-
-## Exemplo de commit para o repositório
-
-```sh
-git add index.html README.md
-git commit -m "Portfolio responsivo do Vagner Bom Jesus com modo escuro e paginação de recursos"
-git push origin main
-```
+Developed by [Vagner Bom Jesus](https://www.linkedin.com/in/vagnerbomjesus)
