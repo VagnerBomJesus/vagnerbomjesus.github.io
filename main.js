@@ -188,6 +188,16 @@
     setLanguage(langSelect.value);
   });
 
+  /* --- Smooth page transition --- */
+  function transitionResources(callback) {
+    var section = document.getElementById('resources-section');
+    section.classList.add('fading');
+    setTimeout(function () {
+      callback();
+      section.classList.remove('fading');
+    }, 200);
+  }
+
   /* --- Resources rendering --- */
   function renderResources(page) {
     var section = document.getElementById('resources-section');
@@ -249,9 +259,11 @@
     prev.disabled = currentPage === 1;
     prev.addEventListener('click', function () {
       if (currentPage > 1) {
-        currentPage--;
-        renderResources(currentPage);
-        renderPagination();
+        transitionResources(function () {
+          currentPage--;
+          renderResources(currentPage);
+          renderPagination();
+        });
       }
     });
     pag.appendChild(prev);
@@ -267,9 +279,11 @@
     next.disabled = currentPage === totalPages;
     next.addEventListener('click', function () {
       if (currentPage < totalPages) {
-        currentPage++;
-        renderResources(currentPage);
-        renderPagination();
+        transitionResources(function () {
+          currentPage++;
+          renderResources(currentPage);
+          renderPagination();
+        });
       }
     });
     pag.appendChild(next);

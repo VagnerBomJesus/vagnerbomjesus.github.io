@@ -487,6 +487,11 @@ a:hover {
 
 .resources-section {
   margin: 0;
+  transition: opacity 0.2s ease;
+}
+
+.resources-section.fading {
+  opacity: 0;
 }
 
 .resources-header {
