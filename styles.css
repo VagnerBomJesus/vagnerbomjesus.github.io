@@ -670,6 +670,29 @@ a:hover {
   flex-shrink: 0;
 }
 
+.resource-card {
+  position: relative;
+}
+
+.resource-card::after {
+  content: '\f35d';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  opacity: 0;
+  transform: translate(-4px, 4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.resource-link:hover .resource-card::after {
+  opacity: 0.6;
+  transform: translate(0, 0);
+}
+
 .resource-title {
   font-size: 0.88rem;
   font-weight: 600;
