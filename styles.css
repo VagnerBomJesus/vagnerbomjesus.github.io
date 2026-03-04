@@ -342,9 +342,6 @@ a:hover {
   transition: text-shadow 0.3s ease;
 }
 
-.profile-name:hover {
-  text-shadow: 0 0 8px var(--accent);
-}
 
 .profile-username {
   font-size: 0.82rem;
@@ -355,9 +352,6 @@ a:hover {
   transition: text-shadow 0.3s ease;
 }
 
-.profile-username:hover {
-  text-shadow: 0 0 8px var(--accent);
-}
 
 .profile-role {
   font-size: 0.82rem;
@@ -370,9 +364,6 @@ a:hover {
   transition: text-shadow 0.3s ease;
 }
 
-.profile-role:hover {
-  text-shadow: 0 0 8px var(--accent);
-}
 
 .profile-bio {
   font-size: 0.85rem;

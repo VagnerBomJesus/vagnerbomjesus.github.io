@@ -328,16 +328,13 @@
 
   loadData();
 
-  /* --- Glitch / Scramble text on hover --- */
+  /* --- Profile elements flee from cursor --- */
   var glitchChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*!?';
+  var returnTimer = null;
 
   function scrambleText(el) {
-    if (el.dataset.scrambling === 'true') return;
-    el.dataset.scrambling = 'true';
-
     var original = el.dataset.original || el.textContent;
     el.dataset.original = original;
-
     var chars = original.split('');
     var iterations = 0;
     var maxIterations = chars.length * 2;
@@ -348,28 +345,88 @@
         if (iterations / 2 > i) return original[i];
         return glitchChars[Math.floor(Math.random() * glitchChars.length)];
       }).join('');
-
       iterations++;
       if (iterations >= maxIterations) {
         clearInterval(interval);
         el.textContent = original;
-        el.dataset.scrambling = 'false';
       }
     }, 30);
   }
 
-  var scrambleTargets = [
-    document.querySelector('.profile-name'),
-    document.querySelector('.profile-username'),
+  var profileCard = document.querySelector('.profile-card');
+  var fleeElements = profileCard ? [
+    profileCard.querySelector('.avatar-wrapper'),
+    profileCard.querySelector('.profile-name'),
+    profileCard.querySelector('.profile-username'),
     document.getElementById('profile-role')
-  ];
+  ].filter(function (el) { return el; }) : [];
 
-  scrambleTargets.forEach(function (el) {
-    if (!el) return;
-    el.addEventListener('mouseenter', function () {
+  // Setup elements for animation
+  fleeElements.forEach(function (el) {
+    el.style.position = 'relative';
+    el.style.transition = 'transform 0.25s ease-out';
+    el.style.willChange = 'transform';
+  });
+
+  function returnToPlace() {
+    fleeElements.forEach(function (el) {
+      el.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      el.style.transform = 'translate(0, 0)';
+    });
+
+    // Scramble text on return
+    fleeElements.forEach(function (el) {
+      if (el.classList.contains('avatar-wrapper')) return;
       scrambleText(el);
     });
-  });
+  }
+
+  if (profileCard) {
+    profileCard.addEventListener('mousemove', function (e) {
+      var cardRect = profileCard.getBoundingClientRect();
+      var cursorX = e.clientX;
+      var cursorY = e.clientY;
+
+      // Clear return timer while cursor is inside
+      if (returnTimer) {
+        clearTimeout(returnTimer);
+        returnTimer = null;
+      }
+
+      fleeElements.forEach(function (el) {
+        var elRect = el.getBoundingClientRect();
+        var elCenterX = elRect.left + elRect.width / 2;
+        var elCenterY = elRect.top + elRect.height / 2;
+
+        var dx = elCenterX - cursorX;
+        var dy = elCenterY - cursorY;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < 150) {
+          var force = (150 - dist) / 150;
+          var angle = Math.atan2(dy, dx);
+          var moveX = Math.cos(angle) * force * 50;
+          var moveY = Math.sin(angle) * force * 35;
+
+          // Clamp within card bounds
+          var maxX = (cardRect.width - elRect.width) / 2;
+          var maxY = 40;
+          moveX = Math.max(-maxX, Math.min(maxX, moveX));
+          moveY = Math.max(-maxY, Math.min(maxY, moveY));
+
+          el.style.transition = 'transform 0.15s ease-out';
+          el.style.transform = 'translate(' + moveX + 'px, ' + moveY + 'px)';
+        }
+      });
+    });
+
+    profileCard.addEventListener('mouseleave', function () {
+      returnTimer = setTimeout(function () {
+        returnToPlace();
+        returnTimer = null;
+      }, 1500);
+    });
+  }
 
   /* --- Ripple effect on cursor --- */
   var lastRipple = 0;
@@ -391,6 +448,7 @@
   document.addEventListener('mousemove', function (e) {
     var now = Date.now();
     if (now - lastRipple < 80) return;
+    if (e.target.closest('.profile-card')) return;
 
     var dx = e.clientX - prevX;
     var dy = e.clientY - prevY;
