@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Page Not Found</title>
+  <link rel="icon" type="image/x-icon" href="https://avatars.githubusercontent.com/u/48354097?v=4">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .error-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .error-code {
+      font-size: 4rem;
+      font-weight: 700;
+      color: var(--accent);
+      font-family: var(--font-mono);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .error-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+    .error-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+    .error-link {
+      display: inline-block;
+      background: var(--btn-primary-bg);
+      color: var(--btn-primary-color);
+      border-radius: var(--radius);
+      padding: 10px 24px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      font-family: var(--font-family);
+      text-decoration: none;
+      transition: background-color 0.15s ease;
+    }
+    .error-link:hover {
+      background: var(--btn-primary-hover);
+      color: var(--btn-primary-color);
+    }
+  </style>
+</head>
+<body>
+  <header class="toolbar" role="banner">
+    <a href="/" class="toolbar-brand" style="text-decoration:none;color:var(--accent);">VBJ</a>
+  </header>
+
+  <div class="error-container">
+    <div class="error-code">404</div>
+    <div class="error-title">Page Not Found</div>
+    <p class="error-desc">The page you are looking for does not exist or has been moved.</p>
+    <a href="/" class="error-link">Back to Portfolio</a>
+  </div>
+
+  <footer class="site-footer">
+    <span>&copy; 2026 Vagner Bom Jesus</span>
+  </footer>
+
+  <script>
+    var saved = localStorage.getItem('theme');
+    if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  </script>
+</body>
+</html>
