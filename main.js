@@ -402,12 +402,52 @@
         resourcesData = clean || { en: { projects: [], useful: [] }, pt: { projects: [], useful: [] } };
         clearSkeleton();
         initApp();
+        loadMediumPosts();
       })
       .catch(function () {
         resourcesData = { en: { projects: [], useful: [] }, pt: { projects: [], useful: [] } };
         clearSkeleton();
         initApp();
       });
+  }
+
+  /* --- Medium RSS Feed --- */
+  function loadMediumPosts() {
+    var rssUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https://vagnerbomjesus.medium.com/feed';
+    fetch(rssUrl)
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        if (data.status !== 'ok' || !data.items || !data.items.length) return;
+        var posts = data.items.slice(0, 3);
+        posts.forEach(function (post) {
+          var item = {
+            title: post.title.substring(0, 200),
+            desc: post.description ? post.description.replace(/<[^>]*>/g, '').substring(0, 120) + '...' : '',
+            link: post.link,
+            type: 'article',
+            featured: false
+          };
+          if (isValidURL(item.link)) {
+            // Add to both languages (Medium posts are in original language)
+            if (resourcesData && resourcesData.en) {
+              resourcesData.en.projects.push(item);
+            }
+            if (resourcesData && resourcesData.pt) {
+              resourcesData.pt.projects.push(item);
+            }
+          }
+        });
+        // Refresh current view
+        var lang = currentLanguage;
+        var data2 = resourcesData[lang];
+        projectItems = data2.projects.map(function (r) {
+          return { title: r.title, desc: r.desc, link: r.link, type: r.type || '', featured: r.featured || false };
+        });
+        if (currentCategory === 'projects') {
+          setCategory('projects', true);
+        }
+      })
+      .catch(function () { /* RSS feed optional */ });
   }
 
   /* --- Init --- */
