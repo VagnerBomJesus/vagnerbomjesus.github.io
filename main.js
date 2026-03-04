@@ -277,22 +277,6 @@
 
   /* --- Load Data (with sanitization) --- */
   function loadData() {
-    var stored = localStorage.getItem('portfolioData');
-    if (stored) {
-      try {
-        var parsed = JSON.parse(stored);
-        var clean = sanitizeData(parsed);
-        if (clean) {
-          resourcesData = clean;
-          initApp();
-          return;
-        }
-        localStorage.removeItem('portfolioData');
-      } catch (e) {
-        localStorage.removeItem('portfolioData');
-      }
-    }
-
     fetch('data.json')
       .then(function (res) { return res.json(); })
       .then(function (data) {
