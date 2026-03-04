@@ -157,6 +157,7 @@
     currentLanguage = lang;
     langSelect.value = lang;
     localStorage.setItem('lang', lang);
+    document.documentElement.lang = lang;
 
     var t = translations[lang];
     var data = resourcesData[lang];
