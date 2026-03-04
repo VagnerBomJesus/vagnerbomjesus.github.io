@@ -338,6 +338,12 @@ a:hover {
   color: var(--text-primary);
   margin-bottom: 2px;
   letter-spacing: -0.01em;
+  cursor: default;
+  transition: text-shadow 0.3s ease;
+}
+
+.profile-name:hover {
+  text-shadow: 0 0 8px var(--accent);
 }
 
 .profile-username {
@@ -345,6 +351,12 @@ a:hover {
   color: var(--text-muted);
   font-family: var(--font-mono);
   margin-bottom: 0;
+  cursor: default;
+  transition: text-shadow 0.3s ease;
+}
+
+.profile-username:hover {
+  text-shadow: 0 0 8px var(--accent);
 }
 
 .profile-role {
@@ -354,6 +366,12 @@ a:hover {
   margin: 12px 0 0;
   padding: 0 4px;
   line-height: 1.5;
+  cursor: default;
+  transition: text-shadow 0.3s ease;
+}
+
+.profile-role:hover {
+  text-shadow: 0 0 8px var(--accent);
 }
 
 .profile-bio {

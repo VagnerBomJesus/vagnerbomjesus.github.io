@@ -328,6 +328,49 @@
 
   loadData();
 
+  /* --- Glitch / Scramble text on hover --- */
+  var glitchChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*!?';
+
+  function scrambleText(el) {
+    if (el.dataset.scrambling === 'true') return;
+    el.dataset.scrambling = 'true';
+
+    var original = el.dataset.original || el.textContent;
+    el.dataset.original = original;
+
+    var chars = original.split('');
+    var iterations = 0;
+    var maxIterations = chars.length * 2;
+
+    var interval = setInterval(function () {
+      el.textContent = chars.map(function (char, i) {
+        if (char === ' ' || char === '|') return char;
+        if (iterations / 2 > i) return original[i];
+        return glitchChars[Math.floor(Math.random() * glitchChars.length)];
+      }).join('');
+
+      iterations++;
+      if (iterations >= maxIterations) {
+        clearInterval(interval);
+        el.textContent = original;
+        el.dataset.scrambling = 'false';
+      }
+    }, 30);
+  }
+
+  var scrambleTargets = [
+    document.querySelector('.profile-name'),
+    document.querySelector('.profile-username'),
+    document.getElementById('profile-role')
+  ];
+
+  scrambleTargets.forEach(function (el) {
+    if (!el) return;
+    el.addEventListener('mouseenter', function () {
+      scrambleText(el);
+    });
+  });
+
   /* --- Ripple effect on cursor --- */
   var lastRipple = 0;
   var speed = 0;
