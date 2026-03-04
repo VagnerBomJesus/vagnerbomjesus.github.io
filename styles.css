@@ -349,7 +349,16 @@ a:hover {
   object-fit: cover;
   border: 3px solid var(--avatar-border);
   display: block;
-  transition: border-color 0.25s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.avatar:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-light), 0 0 16px rgba(30, 58, 95, 0.15);
+}
+
+[data-theme="dark"] .avatar:hover {
+  box-shadow: 0 0 0 4px var(--accent-light), 0 0 16px rgba(123, 170, 247, 0.2);
 }
 
 .status-dot {
