@@ -466,6 +466,29 @@
     }, { passive: true });
   }
 
+  /* --- Keyboard navigation --- */
+  document.addEventListener('keydown', function (e) {
+    // Skip if user is typing in search
+    if (document.activeElement === searchInput) return;
+    if (e.key === 'ArrowRight' && currentPage < totalPages) {
+      transitionResources(function () {
+        currentPage++;
+        renderResources(currentPage);
+        renderPagination();
+      });
+    } else if (e.key === 'ArrowLeft' && currentPage > 1) {
+      transitionResources(function () {
+        currentPage--;
+        renderResources(currentPage);
+        renderPagination();
+      });
+    } else if (e.key === '1') {
+      setCategory('projects');
+    } else if (e.key === '2') {
+      setCategory('useful');
+    }
+  });
+
   /* --- Check for hover capability (skip animations on touch devices) --- */
   var hasHover = window.matchMedia('(hover: hover)').matches;
 
