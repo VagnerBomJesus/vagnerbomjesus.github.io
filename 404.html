@@ -11,58 +11,139 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <style>
-    .error-card {
+    /* 404 Layout - mirrors main page two-column style */
+    .error-col {
+      flex: 0 0 300px;
+      min-width: 0;
+      animation: fade-in-up 0.5s ease-out both;
+    }
+    .error-info-col {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      animation: fade-in-up 0.5s ease-out 0.15s both;
+    }
+
+    /* Profile card on 404 */
+    .error-profile {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-md);
-      padding: 40px 32px;
+      padding: 28px 24px 24px;
       text-align: center;
-      max-width: 420px;
-      width: 100%;
-      animation: fade-in-up 0.5s ease-out both;
       transition: background-color 0.25s ease, border-color 0.25s ease;
     }
     .error-avatar {
-      width: 72px;
-      height: 72px;
+      width: 96px;
+      height: 96px;
       border-radius: 50%;
       border: 3px solid var(--avatar-border);
-      margin-bottom: 20px;
+      margin-bottom: 14px;
       transition: border-color 0.25s ease;
     }
-    .error-code {
-      font-size: 3.5rem;
+    .error-name {
+      font-size: 1.25rem;
       font-weight: 700;
-      color: var(--accent);
-      font-family: var(--font-mono);
-      line-height: 1;
-      margin-bottom: 6px;
-      letter-spacing: 4px;
-    }
-    .error-title {
-      font-size: 1.1rem;
-      font-weight: 600;
       color: var(--text-primary);
-      margin-bottom: 8px;
+      margin-bottom: 2px;
+      letter-spacing: -0.01em;
     }
-    .error-desc {
-      font-size: 0.85rem;
+    .error-username {
+      font-size: 0.82rem;
       color: var(--text-muted);
-      margin-bottom: 24px;
-      line-height: 1.5;
-    }
-    .error-actions {
-      display: flex;
-      gap: 8px;
-      justify-content: center;
+      font-family: var(--font-mono);
+      margin-bottom: 16px;
     }
     .error-social {
       display: flex;
       justify-content: center;
       gap: 6px;
+    }
+
+    /* Error info panel */
+    .error-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 40px 32px;
+      transition: background-color 0.25s ease, border-color 0.25s ease;
+    }
+    .error-code {
+      font-size: 5rem;
+      font-weight: 700;
+      color: var(--accent);
+      font-family: var(--font-mono);
+      line-height: 1;
+      margin-bottom: 4px;
+      letter-spacing: 6px;
+    }
+    .error-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+    .error-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+    .error-path {
+      font-size: 0.78rem;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      background: var(--bg-tag);
+      padding: 6px 12px;
+      border-radius: var(--radius);
+      margin-bottom: 24px;
+      word-break: break-all;
+      display: inline-block;
+    }
+    .error-actions {
+      display: flex;
+      gap: 8px;
+    }
+    .error-actions a {
+      flex: 1;
+    }
+    .error-hint {
       margin-top: 20px;
-      padding-top: 20px;
+      padding-top: 16px;
       border-top: 1px solid var(--border-color);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .error-hint a {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* Glitch animation on 404 code */
+    .error-code {
+      position: relative;
+    }
+    @keyframes glitch-shift {
+      0%, 100% { transform: translate(0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(2px, -1px); }
+      60% { transform: translate(-1px, -2px); }
+      80% { transform: translate(1px, 1px); }
+    }
+    .error-code:hover {
+      animation: glitch-shift 0.3s ease-in-out;
+      text-shadow: 2px 0 var(--accent-hover), -2px 0 var(--accent);
+    }
+
+    /* Responsive */
+    @media (max-width: 820px) {
+      .error-col { flex: none; width: 100%; }
+      .error-info-col { width: 100%; }
+      .error-panel { padding: 28px 20px; }
+      .error-code { font-size: 3.5rem; }
     }
   </style>
 </head>
@@ -75,31 +156,44 @@
     </nav>
   </header>
 
-  <main class="main-container" style="justify-content:center;align-items:center;">
-    <div class="error-card">
-      <img src="https://avatars.githubusercontent.com/u/48354097?v=4" alt="Vagner Bom Jesus" class="error-avatar">
-      <div class="error-code">404</div>
-      <div class="error-title">Page Not Found</div>
-      <p class="error-desc">The page you are looking for does not exist or has been moved.</p>
-      <div class="error-actions">
-        <a href="/" class="btn-primary">Back to Portfolio</a>
-        <a href="https://github.com/VagnerBomJesus" target="_blank" rel="noopener noreferrer" class="btn-secondary">GitHub</a>
+  <main class="main-container">
+    <section class="error-col">
+      <div class="error-profile">
+        <img src="https://avatars.githubusercontent.com/u/48354097?v=4" alt="Vagner Bom Jesus" class="error-avatar">
+        <div class="error-name">Vagner Bom Jesus</div>
+        <div class="error-username">@VagnerBomJesus</div>
+        <div class="error-social">
+          <a href="https://www.linkedin.com/in/vagnerbomjesus" target="_blank" rel="noopener noreferrer" class="social-btn" title="LinkedIn" aria-label="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="https://github.com/VagnerBomJesus" target="_blank" rel="noopener noreferrer" class="social-btn" title="GitHub" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://vagnerbomjesus.medium.com/" target="_blank" rel="noopener noreferrer" class="social-btn" title="Medium" aria-label="Medium">
+            <i class="fab fa-medium"></i>
+          </a>
+          <a href="https://scholar.google.com/citations?user=K-IfdJoAAAAJ&hl=pt-PT&oi=ao" target="_blank" rel="noopener noreferrer" class="social-btn" title="Google Scholar" aria-label="Google Scholar">
+            <i class="fas fa-graduation-cap"></i>
+          </a>
+        </div>
       </div>
-      <div class="error-social">
-        <a href="https://www.linkedin.com/in/vagnerbomjesus" target="_blank" rel="noopener noreferrer" class="social-btn" title="LinkedIn" aria-label="LinkedIn">
-          <i class="fab fa-linkedin-in"></i>
-        </a>
-        <a href="https://github.com/VagnerBomJesus" target="_blank" rel="noopener noreferrer" class="social-btn" title="GitHub" aria-label="GitHub">
-          <i class="fab fa-github"></i>
-        </a>
-        <a href="https://vagnerbomjesus.medium.com/" target="_blank" rel="noopener noreferrer" class="social-btn" title="Medium" aria-label="Medium">
-          <i class="fab fa-medium"></i>
-        </a>
-        <a href="https://scholar.google.com/citations?user=K-IfdJoAAAAJ&hl=pt-PT&oi=ao" target="_blank" rel="noopener noreferrer" class="social-btn" title="Google Scholar" aria-label="Google Scholar">
-          <i class="fas fa-graduation-cap"></i>
-        </a>
+    </section>
+
+    <section class="error-info-col">
+      <div class="error-panel">
+        <div class="error-code">404</div>
+        <div class="error-title">Page Not Found</div>
+        <p class="error-desc">The page you are looking for does not exist or has been moved.</p>
+        <span class="error-path" id="error-path"></span>
+        <div class="error-actions">
+          <a href="/" class="btn-primary">Back to Portfolio</a>
+          <a href="https://www.linkedin.com/in/vagnerbomjesus" target="_blank" rel="noopener noreferrer" class="btn-secondary">Contact Me</a>
+        </div>
+        <div class="error-hint">
+          Looking for something? Check out my <a href="/">projects and resources</a> or find me on <a href="https://github.com/VagnerBomJesus" target="_blank" rel="noopener noreferrer">GitHub</a>.
+        </div>
       </div>
-    </div>
+    </section>
   </main>
 
   <footer class="site-footer">
@@ -107,6 +201,13 @@
   </footer>
 
   <script>
+    // Show requested path
+    var pathEl = document.getElementById('error-path');
+    if (pathEl && window.location.pathname !== '/') {
+      pathEl.textContent = window.location.pathname;
+    }
+
+    // Theme
     var saved = localStorage.getItem('theme');
     var themeBtn = document.getElementById('toggle-theme');
     function setTheme(dark) {
