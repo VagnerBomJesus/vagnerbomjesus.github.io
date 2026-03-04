@@ -327,4 +327,43 @@
   }
 
   loadData();
+
+  /* --- Ripple effect on cursor --- */
+  var lastRipple = 0;
+  var speed = 0;
+  var prevX = 0;
+  var prevY = 0;
+
+  function createRipple(x, y, size, opacity, cls) {
+    var r = document.createElement('div');
+    r.className = 'ripple ' + cls;
+    r.style.left = x + 'px';
+    r.style.top = y + 'px';
+    r.style.setProperty('--ripple-size', size + 'px');
+    r.style.setProperty('--ripple-opacity', opacity);
+    document.body.appendChild(r);
+    r.addEventListener('animationend', function () { r.remove(); });
+  }
+
+  document.addEventListener('mousemove', function (e) {
+    var now = Date.now();
+    if (now - lastRipple < 80) return;
+
+    var dx = e.clientX - prevX;
+    var dy = e.clientY - prevY;
+    speed = Math.sqrt(dx * dx + dy * dy);
+    prevX = e.clientX;
+    prevY = e.clientY;
+    lastRipple = now;
+
+    // Inner ripple - always
+    var innerSize = Math.min(60 + speed * 0.8, 150);
+    createRipple(e.clientX, e.clientY, innerSize, 0.35, 'ripple-inner');
+
+    // Outer ripple - on faster movement
+    if (speed > 15) {
+      var outerSize = Math.min(90 + speed, 200);
+      createRipple(e.clientX, e.clientY, outerSize, 0.15, 'ripple-outer');
+    }
+  });
 })();
