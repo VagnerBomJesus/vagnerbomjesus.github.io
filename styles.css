@@ -1006,6 +1006,24 @@ a:hover {
   font-style: italic;
 }
 
+/* === Error State === */
+.error-state {
+  text-align: center;
+  padding: 32px 16px;
+  color: var(--text-muted);
+}
+
+.error-state-icon {
+  font-size: 2rem;
+  margin-bottom: 8px;
+  opacity: 0.5;
+}
+
+.error-state-text {
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
 /* === Skeleton Loading === */
 .skeleton-card {
   background: var(--bg-resource);

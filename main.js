@@ -392,6 +392,18 @@
     for (var i = 0; i < skeletons.length; i++) skeletons[i].remove();
   }
 
+  /* --- Error State --- */
+  function showErrorState() {
+    var section = document.getElementById('resources-section');
+    var pagination = document.getElementById('custom-pagination');
+    var msg = document.createElement('div');
+    msg.className = 'error-state';
+    msg.innerHTML = '<div class="error-state-icon">&#9888;</div><div class="error-state-text">' +
+      (currentLanguage === 'pt' ? 'Erro ao carregar recursos. Tente recarregar a pagina.' : 'Failed to load resources. Try refreshing the page.') +
+      '</div>';
+    section.insertBefore(msg, pagination);
+  }
+
   /* --- Load Data (with sanitization) --- */
   function loadData() {
     showSkeleton();
@@ -407,6 +419,7 @@
       .catch(function () {
         resourcesData = { en: { projects: [], useful: [] }, pt: { projects: [], useful: [] } };
         clearSkeleton();
+        showErrorState();
         initApp();
       });
   }
