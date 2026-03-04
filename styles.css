@@ -1057,6 +1057,72 @@ a:hover {
   100% { background-position: -200% 0; }
 }
 
+/* === Print === */
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+    overflow: visible;
+    height: auto;
+  }
+
+  html, body {
+    height: auto;
+    overflow: visible;
+  }
+
+  .toolbar,
+  .back-to-top,
+  .ripple,
+  .ad-container,
+  .footer-marquee,
+  .resource-search,
+  .tab-bar,
+  .pagination-custom,
+  .theme-toggle,
+  .lang-select {
+    display: none !important;
+  }
+
+  .main-container {
+    flex-direction: column;
+    max-width: 100%;
+    overflow: visible;
+    height: auto;
+  }
+
+  .profile-col,
+  .resources-col {
+    flex: none;
+    width: 100%;
+    overflow: visible;
+    animation: none;
+  }
+
+  .profile-card,
+  .resource-card {
+    border: 1px solid #ccc;
+    box-shadow: none;
+    break-inside: avoid;
+  }
+
+  .resource-card::after {
+    display: none;
+  }
+
+  a {
+    color: #000;
+    text-decoration: underline;
+  }
+
+  .site-footer {
+    animation: none;
+    border-top: 1px solid #ccc;
+    padding: 10px 0;
+    text-align: center;
+  }
+}
+
 /* === Ad Containers === */
 .ad-container {
   overflow: hidden;
