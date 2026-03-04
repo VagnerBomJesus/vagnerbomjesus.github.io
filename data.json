@@ -8,7 +8,11 @@
       { "title": "Google Scholar", "desc": "Academic publications and citations", "link": "https://scholar.google.com/citations?user=K-IfdJoAAAAJ&hl=pt-PT&oi=ao", "type": "website" }
     ],
     "useful": [
-      { "title": "ENISA - EU Agency for Cybersecurity", "desc": "European Union Agency for Cybersecurity", "link": "https://www.enisa.europa.eu/", "type": "website" }
+      { "title": "ENISA - EU Agency for Cybersecurity", "desc": "European Union Agency for Cybersecurity", "link": "https://www.enisa.europa.eu/", "type": "website" },
+      { "title": "OWASP Foundation", "desc": "Open Web Application Security Project - security best practices", "link": "https://owasp.org/", "type": "website" },
+      { "title": "Flutter Documentation", "desc": "Official Flutter framework documentation and guides", "link": "https://docs.flutter.dev/", "type": "website" },
+      { "title": "Dart Packages", "desc": "Official package repository for the Dart ecosystem", "link": "https://pub.dev/", "type": "website" },
+      { "title": "AskNature - Biomimicry Institute", "desc": "Biological strategies database for biomimicry innovation", "link": "https://asknature.org/", "type": "website" }
     ]
   },
   "pt": {
@@ -20,7 +24,11 @@
       { "title": "Google Scholar", "desc": "Publicacoes academicas e citacoes", "link": "https://scholar.google.com/citations?user=K-IfdJoAAAAJ&hl=pt-PT&oi=ao", "type": "website" }
     ],
     "useful": [
-      { "title": "ENISA - Agencia da UE para a Ciberseguranca", "desc": "Agencia da Uniao Europeia para a Ciberseguranca", "link": "https://www.enisa.europa.eu/", "type": "website" }
+      { "title": "ENISA - Agencia da UE para a Ciberseguranca", "desc": "Agencia da Uniao Europeia para a Ciberseguranca", "link": "https://www.enisa.europa.eu/", "type": "website" },
+      { "title": "OWASP Foundation", "desc": "Projeto aberto de seguranca em aplicacoes web - boas praticas", "link": "https://owasp.org/", "type": "website" },
+      { "title": "Documentacao Flutter", "desc": "Documentacao oficial e guias do framework Flutter", "link": "https://docs.flutter.dev/", "type": "website" },
+      { "title": "Dart Packages", "desc": "Repositorio oficial de pacotes do ecossistema Dart", "link": "https://pub.dev/", "type": "website" },
+      { "title": "AskNature - Biomimicry Institute", "desc": "Base de dados de estrategias biologicas para inovacao em biomimetica", "link": "https://asknature.org/", "type": "website" }
     ]
   }
 }
