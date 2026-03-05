@@ -1065,6 +1065,93 @@ a:hover {
   }
 }
 
+/* === Command Palette === */
+.cmd-palette {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+}
+
+.cmd-palette.open {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 15vh;
+}
+
+.cmd-palette-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+}
+
+.cmd-palette-box {
+  position: relative;
+  width: 90%;
+  max-width: 480px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.2);
+}
+
+.cmd-input {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 0.9rem;
+  font-family: var(--font-family);
+  color: var(--text-primary);
+  background: var(--bg-card);
+  border: none;
+  border-bottom: 1px solid var(--border-color);
+  outline: none;
+}
+
+.cmd-input::placeholder {
+  color: var(--text-muted);
+}
+
+.cmd-results {
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.cmd-result-item {
+  padding: 10px 16px;
+  font-size: 0.82rem;
+  color: var(--text-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background-color 0.1s ease;
+}
+
+.cmd-result-item:hover,
+.cmd-result-item.active {
+  background: var(--accent-light);
+}
+
+.cmd-result-type {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--tag-accent-color);
+  background: var(--tag-accent-bg);
+  border-radius: var(--radius);
+  padding: 1px 6px;
+  flex-shrink: 0;
+}
+
+.cmd-result-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 /* === Matrix Rain === */
 .matrix-canvas {
   position: fixed;

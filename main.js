@@ -704,6 +704,80 @@
     }
   });
 
+  /* --- Command Palette (Ctrl+K) --- */
+  var cmdPalette = document.getElementById('command-palette');
+  var cmdInput = document.getElementById('cmd-input');
+  var cmdResults = document.getElementById('cmd-results');
+  var cmdActiveIndex = -1;
+
+  function openCmdPalette() {
+    cmdPalette.classList.add('open');
+    cmdInput.value = '';
+    cmdActiveIndex = -1;
+    renderCmdResults('');
+    setTimeout(function () { cmdInput.focus(); }, 50);
+  }
+
+  function closeCmdPalette() {
+    cmdPalette.classList.remove('open');
+  }
+
+  function getAllCmdItems() {
+    var items = [];
+    projectItems.forEach(function (r) { items.push({ label: r.title, type: 'project', link: r.link }); });
+    usefulItems.forEach(function (r) { items.push({ label: r.title, type: 'link', link: r.link }); });
+    items.push({ label: currentLanguage === 'pt' ? 'Mudar tema' : 'Toggle theme', type: 'action', action: function () { setTheme(!isDark()); } });
+    items.push({ label: currentLanguage === 'pt' ? 'Mudar idioma' : 'Switch language', type: 'action', action: function () { setLanguage(currentLanguage === 'en' ? 'pt' : 'en'); } });
+    return items;
+  }
+
+  function renderCmdResults(q) {
+    var items = getAllCmdItems();
+    if (q) {
+      var ql = q.toLowerCase();
+      items = items.filter(function (i) { return i.label.toLowerCase().indexOf(ql) !== -1; });
+    }
+    cmdResults.innerHTML = '';
+    cmdActiveIndex = -1;
+    items.slice(0, 8).forEach(function (item, idx) {
+      var div = document.createElement('div');
+      div.className = 'cmd-result-item';
+      div.innerHTML = '<span class="cmd-result-type">' + item.type.toUpperCase() + '</span><span class="cmd-result-label">' + item.label + '</span>';
+      div.addEventListener('click', function () {
+        closeCmdPalette();
+        if (item.action) { item.action(); }
+        else if (item.link) { window.open(item.link, '_blank'); }
+      });
+      cmdResults.appendChild(div);
+    });
+  }
+
+  if (cmdInput) {
+    cmdInput.addEventListener('input', function () {
+      renderCmdResults(cmdInput.value.trim());
+    });
+    cmdInput.addEventListener('keydown', function (e) {
+      var items = cmdResults.querySelectorAll('.cmd-result-item');
+      if (e.key === 'ArrowDown') { e.preventDefault(); cmdActiveIndex = Math.min(cmdActiveIndex + 1, items.length - 1); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); cmdActiveIndex = Math.max(cmdActiveIndex - 1, 0); }
+      else if (e.key === 'Enter' && cmdActiveIndex >= 0 && items[cmdActiveIndex]) { items[cmdActiveIndex].click(); return; }
+      else if (e.key === 'Escape') { closeCmdPalette(); return; }
+      for (var xi = 0; xi < items.length; xi++) items[xi].classList.toggle('active', xi === cmdActiveIndex);
+    });
+  }
+
+  if (cmdPalette) {
+    cmdPalette.querySelector('.cmd-palette-backdrop').addEventListener('click', closeCmdPalette);
+  }
+
+  document.addEventListener('keydown', function (e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault();
+      if (cmdPalette.classList.contains('open')) closeCmdPalette();
+      else openCmdPalette();
+    }
+  });
+
   /* --- Easter Egg: Konami Code --- */
   var konamiSequence = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
   var konamiIndex = 0;
