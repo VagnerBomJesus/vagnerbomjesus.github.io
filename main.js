@@ -605,6 +605,39 @@
     }
   });
 
+  /* --- Easter Egg: Konami Code --- */
+  var konamiSequence = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+  var konamiIndex = 0;
+  document.addEventListener('keydown', function (e) {
+    if (e.keyCode === konamiSequence[konamiIndex]) {
+      konamiIndex++;
+      if (konamiIndex === konamiSequence.length) {
+        konamiIndex = 0;
+        activateEasterEgg();
+      }
+    } else {
+      konamiIndex = 0;
+    }
+  });
+
+  function activateEasterEgg() {
+    var el = document.createElement('div');
+    el.className = 'easter-egg';
+    el.textContent = currentLanguage === 'pt' ? 'Encontraste o segredo! \u{1F680}' : 'You found the secret! \u{1F680}';
+    document.body.appendChild(el);
+    setTimeout(function () { el.classList.add('visible'); }, 10);
+    setTimeout(function () {
+      el.classList.remove('visible');
+      setTimeout(function () { el.remove(); }, 500);
+    }, 3000);
+    // Bonus: rainbow avatar
+    var avatar = document.querySelector('.avatar');
+    if (avatar) {
+      avatar.style.animation = 'rainbow-ring 1s linear 3';
+      setTimeout(function () { avatar.style.animation = ''; }, 3000);
+    }
+  }
+
   /* --- Check for hover capability (skip animations on touch devices) --- */
   var hasHover = window.matchMedia('(hover: hover)').matches;
 

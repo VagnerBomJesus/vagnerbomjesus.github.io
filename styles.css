@@ -968,6 +968,39 @@ a:hover {
   }
 }
 
+/* === Easter Egg === */
+.easter-egg {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  background: var(--accent);
+  color: var(--btn-primary-color);
+  padding: 16px 32px;
+  border-radius: var(--radius-md);
+  font-size: 1.1rem;
+  font-weight: 600;
+  z-index: 10000;
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
+}
+
+.easter-egg.visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+@keyframes rainbow-ring {
+  0% { border-color: #ff0000; }
+  17% { border-color: #ff8800; }
+  33% { border-color: #ffff00; }
+  50% { border-color: #00ff00; }
+  67% { border-color: #0088ff; }
+  83% { border-color: #8800ff; }
+  100% { border-color: #ff0000; }
+}
+
 /* === Back to Top === */
 .back-to-top {
   display: none;
