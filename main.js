@@ -1021,8 +1021,18 @@
     r.addEventListener('animationend', function () { r.remove(); activeRipples--; });
   }
 
+  var pendingRipple = null;
   document.addEventListener('mousemove', function (e) {
     if (!hasHover) return;
+    pendingRipple = e;
+  });
+
+  function processRipple() {
+    requestAnimationFrame(processRipple);
+    if (!pendingRipple) return;
+    var e = pendingRipple;
+    pendingRipple = null;
+
     var now = Date.now();
     if (now - lastRipple < 80) return;
     if (e.target.closest('.profile-card')) return;
@@ -1043,5 +1053,6 @@
       var outerSize = Math.min(90 + speed, 200);
       createRipple(e.clientX, e.clientY, outerSize, 0.15, 'ripple-outer');
     }
-  });
+  }
+  requestAnimationFrame(processRipple);
 })();
