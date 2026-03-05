@@ -46,7 +46,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"></noscript>
-  <link rel="stylesheet" href="styles.min.css?v=4">
+  <link rel="stylesheet" href="styles.min.css?v=5">
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-0HBZ8G0W26"></script>
   <script src="analytics.js"></script>
@@ -137,10 +137,25 @@
   <header class="toolbar" role="banner">
     <span class="toolbar-brand">VBJ</span>
     <nav class="toolbar-controls" aria-label="Site controls">
-      <select id="language-select" class="lang-select" aria-label="Language">
-        <option value="en">EN</option>
-        <option value="pt">PT</option>
-      </select>
+      <div id="lang-dropdown" class="lang-dropdown" aria-label="Language">
+          <button id="lang-trigger" class="lang-trigger" type="button">
+            <span class="lang-flag" id="lang-flag">🇬🇧</span>
+            <span class="lang-label" id="lang-label">EN</span>
+            <i class="fas fa-chevron-down lang-chevron"></i>
+          </button>
+          <div id="lang-menu" class="lang-menu">
+            <button class="lang-option active" data-lang="en">
+              <span class="lang-flag">🇬🇧</span>
+              <span class="lang-option-label">English</span>
+              <i class="fas fa-check lang-check"></i>
+            </button>
+            <button class="lang-option" data-lang="pt">
+              <span class="lang-flag">🇵🇹</span>
+              <span class="lang-option-label">Português</span>
+              <i class="fas fa-check lang-check"></i>
+            </button>
+          </div>
+        </div>
       <div id="toggle-theme" class="theme-toggle-slider" title="Toggle theme" role="button" tabindex="0" aria-label="Toggle dark or light mode">
           <div class="toggle-thumb">
             <i class="fas fa-moon toggle-icon"></i>
@@ -186,8 +201,22 @@
         </div>
 
         <div class="profile-actions">
-          <a id="btn-experience" href="https://www.linkedin.com/in/vagnerbomjesus/details/experience/" target="_blank" rel="noopener noreferrer" class="btn-primary">Experience</a>
-          <a id="btn-education" href="https://www.linkedin.com/in/vagnerbomjesus/details/education/" target="_blank" rel="noopener noreferrer" class="btn-secondary">Education</a>
+          <a id="btn-experience" href="https://www.linkedin.com/in/vagnerbomjesus/details/experience/" target="_blank" rel="noopener noreferrer" class="hover-btn hover-btn-primary">
+            <span class="hover-btn-text">Experience</span>
+            <div class="hover-btn-overlay">
+              <span>Experience</span>
+              <i class="fas fa-arrow-right"></i>
+            </div>
+            <div class="hover-btn-circle"></div>
+          </a>
+          <a id="btn-education" href="https://www.linkedin.com/in/vagnerbomjesus/details/education/" target="_blank" rel="noopener noreferrer" class="hover-btn hover-btn-secondary">
+            <span class="hover-btn-text">Education</span>
+            <div class="hover-btn-overlay">
+              <span>Education</span>
+              <i class="fas fa-arrow-right"></i>
+            </div>
+            <div class="hover-btn-circle"></div>
+          </a>
         </div>
       </div>
     </section>

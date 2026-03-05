@@ -105,7 +105,11 @@
 
   /* --- DOM refs --- */
   var themeBtn = document.getElementById('toggle-theme');
-  var langSelect = document.getElementById('language-select');
+  var langDropdown = document.getElementById('lang-dropdown');
+  var langTrigger = document.getElementById('lang-trigger');
+  var langMenu = document.getElementById('lang-menu');
+  var langFlagEl = document.getElementById('lang-flag');
+  var langLabelEl = document.getElementById('lang-label');
   var btnExp = document.getElementById('btn-experience');
   var btnEdu = document.getElementById('btn-education');
   var profileRole = document.getElementById('profile-role');
@@ -248,7 +252,20 @@
     if (!resourcesData) return;
 
     currentLanguage = lang;
-    langSelect.value = lang;
+    // Update language dropdown UI
+    var langFlags = { en: '🇬🇧', pt: '🇵🇹' };
+    var langLabels = { en: 'EN', pt: 'PT' };
+    if (langFlagEl) langFlagEl.textContent = langFlags[lang] || langFlags.en;
+    if (langLabelEl) langLabelEl.textContent = langLabels[lang] || langLabels.en;
+    // Update active state in dropdown
+    var langOptions = langMenu ? langMenu.querySelectorAll('.lang-option') : [];
+    for (var lo = 0; lo < langOptions.length; lo++) {
+      if (langOptions[lo].getAttribute('data-lang') === lang) {
+        langOptions[lo].classList.add('active');
+      } else {
+        langOptions[lo].classList.remove('active');
+      }
+    }
     localStorage.setItem('lang', lang);
     document.documentElement.lang = lang;
 
@@ -256,8 +273,15 @@
     var data = resourcesData[lang];
 
     typeText(profileRole, t.role, 25);
-    btnExp.textContent = t.experience;
-    btnEdu.textContent = t.education;
+    // Update hover-btn text (both visible text and overlay text)
+    var expText = btnExp.querySelector('.hover-btn-text');
+    var expOverlay = btnExp.querySelector('.hover-btn-overlay span');
+    var eduText = btnEdu.querySelector('.hover-btn-text');
+    var eduOverlay = btnEdu.querySelector('.hover-btn-overlay span');
+    if (expText) expText.textContent = t.experience;
+    if (expOverlay) expOverlay.textContent = t.experience;
+    if (eduText) eduText.textContent = t.education;
+    if (eduOverlay) eduOverlay.textContent = t.education;
     resourcesHeading.textContent = t.resourcesHeading;
     // Build marquee footer content (duplicated for seamless loop)
     var marquee = document.getElementById('footer-marquee');
@@ -312,9 +336,28 @@
     setCategory(currentCategory, true);
   }
 
-  langSelect.addEventListener('change', function () {
-    setLanguage(langSelect.value);
+  // Language dropdown toggle
+  langTrigger.addEventListener('click', function (e) {
+    e.stopPropagation();
+    langDropdown.classList.toggle('open');
   });
+
+  // Close on outside click
+  document.addEventListener('click', function (e) {
+    if (langDropdown && !langDropdown.contains(e.target)) {
+      langDropdown.classList.remove('open');
+    }
+  });
+
+  // Language option click
+  var langOptionBtns = langMenu.querySelectorAll('.lang-option');
+  for (var li = 0; li < langOptionBtns.length; li++) {
+    langOptionBtns[li].addEventListener('click', function () {
+      var lang = this.getAttribute('data-lang');
+      setLanguage(lang);
+      langDropdown.classList.remove('open');
+    });
+  }
 
   /* --- Smooth page transition --- */
   function transitionResources(callback) {
