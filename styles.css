@@ -982,6 +982,37 @@ a:hover {
   transition: border-color 0.15s ease, background-color 0.25s ease, color 0.25s ease;
 }
 
+.search-wrapper {
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.search-wrapper .resource-search {
+  margin-bottom: 0;
+  padding-right: 64px;
+}
+
+.search-kbd {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.6rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  background: var(--bg-tag);
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+  padding: 2px 6px;
+  pointer-events: none;
+  opacity: 0.7;
+  transition: opacity 0.15s ease;
+}
+
+.search-wrapper:focus-within .search-kbd {
+  opacity: 0;
+}
+
 .resource-search:focus {
   outline: none;
   border-color: var(--accent);
