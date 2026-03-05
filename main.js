@@ -835,6 +835,66 @@
     });
   }
 
+  /* --- Matrix Rain (activated by triple-click on brand) --- */
+  var matrixCanvas = null;
+  var matrixActive = false;
+
+  function startMatrix() {
+    if (matrixActive) { stopMatrix(); return; }
+    matrixActive = true;
+    matrixCanvas = document.createElement('canvas');
+    matrixCanvas.className = 'matrix-canvas';
+    document.body.appendChild(matrixCanvas);
+    var ctx = matrixCanvas.getContext('2d');
+    matrixCanvas.width = window.innerWidth;
+    matrixCanvas.height = window.innerHeight;
+
+    var cols = Math.floor(matrixCanvas.width / 14);
+    var drops = [];
+    for (var ci = 0; ci < cols; ci++) drops[ci] = Math.random() * -100;
+
+    var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()';
+    var accentColor = isDark() ? '#7baaf7' : '#1e3a5f';
+
+    function draw() {
+      if (!matrixActive) return;
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+      ctx.fillStyle = accentColor;
+      ctx.font = '12px monospace';
+      for (var mi = 0; mi < drops.length; mi++) {
+        var ch = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillText(ch, mi * 14, drops[mi] * 14);
+        if (drops[mi] * 14 > matrixCanvas.height && Math.random() > 0.975) {
+          drops[mi] = 0;
+        }
+        drops[mi]++;
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+  }
+
+  function stopMatrix() {
+    matrixActive = false;
+    if (matrixCanvas) { matrixCanvas.remove(); matrixCanvas = null; }
+  }
+
+  var brand = document.querySelector('.toolbar-brand');
+  if (brand) {
+    var clickCount = 0;
+    var clickTimer = null;
+    brand.addEventListener('click', function () {
+      clickCount++;
+      if (clickTimer) clearTimeout(clickTimer);
+      clickTimer = setTimeout(function () { clickCount = 0; }, 500);
+      if (clickCount >= 3) {
+        clickCount = 0;
+        startMatrix();
+      }
+    });
+  }
+
   /* --- Ripple effect on cursor --- */
   var lastRipple = 0;
   var speed = 0;

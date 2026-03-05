@@ -1065,6 +1065,22 @@ a:hover {
   }
 }
 
+/* === Matrix Rain === */
+.matrix-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.06;
+}
+
+[data-theme="dark"] .matrix-canvas {
+  opacity: 0.1;
+}
+
 /* === Cookie Banner === */
 .cookie-banner {
   position: fixed;
