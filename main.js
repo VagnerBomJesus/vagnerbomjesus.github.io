@@ -116,6 +116,27 @@
   var searchInput = document.getElementById('resource-search');
 
   /* --- Theme --- */
+  function updateFavicon(dark) {
+    var canvas = document.createElement('canvas');
+    canvas.width = 32;
+    canvas.height = 32;
+    var ctx = canvas.getContext('2d');
+    // Background circle
+    ctx.beginPath();
+    ctx.arc(16, 16, 16, 0, Math.PI * 2);
+    ctx.fillStyle = dark ? '#7baaf7' : '#1e3a5f';
+    ctx.fill();
+    // Text
+    ctx.fillStyle = dark ? '#0f1117' : '#ffffff';
+    ctx.font = 'bold 16px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('V', 16, 17);
+    // Apply
+    var link = document.querySelector('link[rel="icon"]');
+    if (link) link.href = canvas.toDataURL('image/png');
+  }
+
   function setTheme(dark) {
     if (dark) {
       document.documentElement.setAttribute('data-theme', 'dark');
@@ -126,6 +147,7 @@
       themeBtn.textContent = '\u263E';
       localStorage.setItem('theme', 'light');
     }
+    updateFavicon(dark);
   }
 
   function isDark() {
