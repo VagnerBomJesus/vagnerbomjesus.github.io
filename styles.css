@@ -283,31 +283,88 @@ a:hover {
   opacity: 0.7;
 }
 
-.theme-toggle {
-  background: var(--bg-secondary);
+/* Theme Toggle Slider */
+.theme-toggle-slider {
+  position: relative;
+  width: 56px;
+  height: 28px;
+  padding: 3px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  background: #ffffff;
   border: 1px solid var(--border-color);
-  border-radius: var(--radius);
-  width: 32px;
-  height: 32px;
+  display: flex;
+  align-items: center;
+}
+
+[data-theme="dark"] .theme-toggle-slider {
+  background: #09090b;
+  border-color: #27272a;
+}
+
+.toggle-thumb {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  font-size: 0.95rem;
-  line-height: 1;
-  color: var(--text-secondary);
-  transition: border-color 0.2s ease, background-color 0.4s ease, color 0.2s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  background: #e4e4e7;
+  transform: translateX(26px);
+  z-index: 1;
 }
 
-.theme-toggle:hover {
+[data-theme="dark"] .toggle-thumb {
+  background: #27272a;
+  transform: translateX(0);
+}
+
+.toggle-bg-icon {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 3px;
+  transition: opacity 0.3s ease;
+}
+
+[data-theme="dark"] .toggle-bg-icon {
+  left: auto;
+  right: 3px;
+}
+
+.toggle-thumb .toggle-icon {
+  font-size: 0.7rem;
+  color: #18181b;
+  transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .toggle-thumb .toggle-icon {
+  color: #ffffff;
+}
+
+.toggle-bg-icon .toggle-icon {
+  font-size: 0.7rem;
+  color: #a1a1aa;
+  transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .toggle-bg-icon .toggle-icon {
+  color: #71717a;
+}
+
+.theme-toggle-slider:hover {
   border-color: var(--accent);
-  color: var(--accent);
-  transform: scale(1.08);
 }
 
-.theme-toggle:active {
-  transform: scale(0.9) rotate(30deg);
-  opacity: 0.7;
+.theme-toggle-slider:active {
+  transform: scale(0.95);
 }
 
 /* === Theme Transition Overlay === */
@@ -1424,7 +1481,7 @@ a:hover {
   .resource-search,
   .tab-bar,
   .pagination-custom,
-  .theme-toggle,
+  .theme-toggle-slider,
   .lang-select {
     display: none !important;
   }

@@ -46,7 +46,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"></noscript>
-  <link rel="stylesheet" href="styles.min.css?v=3">
+  <link rel="stylesheet" href="styles.min.css?v=4">
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-0HBZ8G0W26"></script>
   <script src="analytics.js"></script>
@@ -141,7 +141,14 @@
         <option value="en">EN</option>
         <option value="pt">PT</option>
       </select>
-      <button id="toggle-theme" class="theme-toggle" title="Toggle theme" aria-label="Toggle dark or light mode">&#9790;</button>
+      <div id="toggle-theme" class="theme-toggle-slider" title="Toggle theme" role="button" tabindex="0" aria-label="Toggle dark or light mode">
+          <div class="toggle-thumb">
+            <i class="fas fa-moon toggle-icon"></i>
+          </div>
+          <div class="toggle-bg-icon">
+            <i class="fas fa-sun toggle-icon"></i>
+          </div>
+        </div>
     </nav>
   </header>
 

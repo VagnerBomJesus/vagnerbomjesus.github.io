@@ -165,7 +165,14 @@
   <header class="toolbar" role="banner">
     <a href="/" class="toolbar-brand" style="text-decoration:none;color:var(--accent);">VBJ</a>
     <nav class="toolbar-controls" aria-label="Site controls">
-      <button id="toggle-theme" class="theme-toggle" title="Toggle theme" aria-label="Toggle dark or light mode">&#9790;</button>
+      <div id="toggle-theme" class="theme-toggle-slider" title="Toggle theme" role="button" tabindex="0" aria-label="Toggle dark or light mode">
+          <div class="toggle-thumb">
+            <i class="fas fa-moon toggle-icon"></i>
+          </div>
+          <div class="toggle-bg-icon">
+            <i class="fas fa-sun toggle-icon"></i>
+          </div>
+        </div>
     </nav>
   </header>
 
@@ -227,13 +234,17 @@
     var saved = localStorage.getItem('theme');
     var themeBtn = document.getElementById('toggle-theme');
     function setTheme(dark) {
+      var thumbIcon = themeBtn.querySelector('.toggle-thumb .toggle-icon');
+      var bgIcon = themeBtn.querySelector('.toggle-bg-icon .toggle-icon');
       if (dark) {
         document.documentElement.setAttribute('data-theme', 'dark');
-        themeBtn.textContent = '\u2600';
+        if (thumbIcon) { thumbIcon.className = 'fas fa-moon toggle-icon'; }
+        if (bgIcon) { bgIcon.className = 'fas fa-sun toggle-icon'; }
         localStorage.setItem('theme', 'dark');
       } else {
         document.documentElement.removeAttribute('data-theme');
-        themeBtn.textContent = '\u263E';
+        if (thumbIcon) { thumbIcon.className = 'fas fa-sun toggle-icon'; }
+        if (bgIcon) { bgIcon.className = 'fas fa-moon toggle-icon'; }
         localStorage.setItem('theme', 'light');
       }
     }

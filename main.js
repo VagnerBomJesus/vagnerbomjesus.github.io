@@ -139,13 +139,17 @@
   }
 
   function setTheme(dark) {
+    var thumbIcon = themeBtn.querySelector('.toggle-thumb .toggle-icon');
+    var bgIcon = themeBtn.querySelector('.toggle-bg-icon .toggle-icon');
     if (dark) {
       document.documentElement.setAttribute('data-theme', 'dark');
-      themeBtn.textContent = '\u2600';
+      if (thumbIcon) { thumbIcon.className = 'fas fa-moon toggle-icon'; }
+      if (bgIcon) { bgIcon.className = 'fas fa-sun toggle-icon'; }
       localStorage.setItem('theme', 'dark');
     } else {
       document.documentElement.removeAttribute('data-theme');
-      themeBtn.textContent = '\u263E';
+      if (thumbIcon) { thumbIcon.className = 'fas fa-sun toggle-icon'; }
+      if (bgIcon) { bgIcon.className = 'fas fa-moon toggle-icon'; }
       localStorage.setItem('theme', 'light');
     }
     updateFavicon(dark);
