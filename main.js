@@ -132,8 +132,19 @@
     return document.documentElement.getAttribute('data-theme') === 'dark';
   }
 
+  // Theme transition overlay
+  var themeOverlay = document.createElement('div');
+  themeOverlay.className = 'theme-transition-overlay';
+  document.body.appendChild(themeOverlay);
+
   themeBtn.addEventListener('click', function () {
-    setTheme(!isDark());
+    themeOverlay.classList.add('active');
+    setTimeout(function () {
+      setTheme(!isDark());
+      setTimeout(function () {
+        themeOverlay.classList.remove('active');
+      }, 150);
+    }, 150);
   });
 
   /* --- Category / Tabs --- */
