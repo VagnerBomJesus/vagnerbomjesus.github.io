@@ -687,6 +687,17 @@
     }, { passive: true });
   }
 
+  /* --- Scroll progress bar --- */
+  var scrollProgress = document.getElementById('scroll-progress');
+  if (scrollProgress && mainContainer) {
+    mainContainer.addEventListener('scroll', function () {
+      var scrollTop = mainContainer.scrollTop;
+      var scrollHeight = mainContainer.scrollHeight - mainContainer.clientHeight;
+      var pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+      scrollProgress.style.width = pct + '%';
+    }, { passive: true });
+  }
+
   /* --- Subtle parallax on mobile scroll --- */
   var profileCol = document.querySelector('.profile-col');
   if (mainContainer && profileCol) {

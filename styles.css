@@ -208,6 +208,18 @@ a:hover {
   color: var(--accent-hover);
 }
 
+/* === Scroll Progress === */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  background: var(--accent);
+  z-index: 100;
+  transition: width 0.1s linear, background-color 0.25s ease;
+}
+
 /* === Toolbar / Header === */
 .toolbar {
   flex-shrink: 0;
