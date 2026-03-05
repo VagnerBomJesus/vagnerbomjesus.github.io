@@ -804,6 +804,24 @@ a:hover {
   border-color: #7c2d12;
 }
 
+.resource-new-badge {
+  font-size: 0.55rem;
+  font-weight: 700;
+  color: #fff;
+  background: #22c55e;
+  border-radius: var(--radius);
+  padding: 1px 5px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  animation: pulse-new 2s ease-in-out infinite;
+}
+
+@keyframes pulse-new {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
 .resource-card {
   position: relative;
 }

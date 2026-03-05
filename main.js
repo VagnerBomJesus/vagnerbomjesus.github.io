@@ -22,7 +22,8 @@
       desc: item.desc.substring(0, 500),
       link: item.link.substring(0, 2000),
       type: typeof item.type === 'string' ? item.type.substring(0, 20) : '',
-      featured: item.featured === true
+      featured: item.featured === true,
+      isNew: item.isNew === true
     };
   }
 
@@ -297,10 +298,10 @@
 
     // Store items by category
     projectItems = data.projects.map(function (r) {
-      return { title: r.title, desc: r.desc, link: r.link, type: r.type || '', featured: r.featured || false };
+      return { title: r.title, desc: r.desc, link: r.link, type: r.type || '', featured: r.featured || false, isNew: r.isNew || false };
     });
     usefulItems = data.useful.map(function (r) {
-      return { title: r.title, desc: r.desc, link: r.link, type: r.type || '', featured: r.featured || false };
+      return { title: r.title, desc: r.desc, link: r.link, type: r.type || '', featured: r.featured || false, isNew: r.isNew || false };
     });
 
     // Re-apply category (updates count, pagination, rendering)
@@ -371,6 +372,13 @@
       var titleRow = document.createElement('div');
       titleRow.className = 'resource-title-row';
       titleRow.appendChild(title);
+
+      if (r.isNew) {
+        var newBadge = document.createElement('span');
+        newBadge.className = 'resource-new-badge';
+        newBadge.textContent = 'NEW';
+        titleRow.appendChild(newBadge);
+      }
 
       if (r.type) {
         var badge = document.createElement('span');
