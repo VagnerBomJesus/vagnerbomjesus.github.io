@@ -668,6 +668,7 @@ a:hover {
   border-radius: var(--radius);
   font-size: 1.05rem;
   transition: all 0.15s ease;
+  position: relative;
 }
 
 .social-btn:hover {
@@ -675,6 +676,31 @@ a:hover {
   background: var(--social-hover-bg);
   border-color: var(--social-hover-color);
   text-decoration: none;
+}
+
+/* Animated Tooltip */
+.social-btn::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  font-size: 0.65rem;
+  font-weight: 500;
+  font-family: var(--font-family);
+  padding: 3px 8px;
+  border-radius: var(--radius);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.social-btn:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
 /* Action Buttons */
