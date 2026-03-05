@@ -1,4 +1,4 @@
-var CACHE_NAME = 'vbj-portfolio-v1';
+var CACHE_NAME = 'vbj-portfolio-v2';
 var ASSETS = [
   '/',
   '/index.html',
@@ -6,7 +6,9 @@ var ASSETS = [
   '/main.js',
   '/data.json',
   '/manifest.json',
-  '/404.html'
+  '/404.html',
+  '/ads-init.js',
+  '/analytics.js'
 ];
 
 self.addEventListener('install', function (e) {
