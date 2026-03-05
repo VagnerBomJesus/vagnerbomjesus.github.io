@@ -463,10 +463,18 @@
       .catch(function () { /* RSS feed optional */ });
   }
 
+  /* --- Auto theme by time of day --- */
+  function shouldBeDarkByTime() {
+    var hour = new Date().getHours();
+    return hour >= 19 || hour < 7;
+  }
+
   /* --- Init --- */
   function initApp() {
     var savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    if (savedTheme) {
+      setTheme(savedTheme === 'dark');
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches || shouldBeDarkByTime()) {
       setTheme(true);
     } else {
       setTheme(false);
@@ -478,7 +486,9 @@
 
   // Theme can be set immediately (no data dependency)
   var savedTheme = localStorage.getItem('theme');
-  if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+  if (savedTheme) {
+    setTheme(savedTheme === 'dark');
+  } else if (window.matchMedia('(prefers-color-scheme: dark)').matches || shouldBeDarkByTime()) {
     setTheme(true);
   } else {
     setTheme(false);
