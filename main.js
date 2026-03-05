@@ -586,17 +586,6 @@
     });
   }
 
-  /* --- Share: Copy Link --- */
-  var copyBtn = document.getElementById('share-copy');
-  if (copyBtn) {
-    copyBtn.addEventListener('click', function () {
-      navigator.clipboard.writeText('https://vagnerbomjesus.github.io').then(function () {
-        copyBtn.classList.add('copied');
-        setTimeout(function () { copyBtn.classList.remove('copied'); }, 1500);
-      }).catch(function () {});
-    });
-  }
-
   /* --- Visitor Counter --- */
   (function () {
     var badge = document.getElementById('visitor-badge');
