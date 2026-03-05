@@ -782,6 +782,20 @@
     });
   }
 
+  /* --- 3D tilt on resource cards --- */
+  document.addEventListener('mousemove', function (e) {
+    var card = e.target.closest('.resource-card');
+    if (!card) return;
+    var rect = card.getBoundingClientRect();
+    var x = (e.clientX - rect.left) / rect.width - 0.5;
+    var y = (e.clientY - rect.top) / rect.height - 0.5;
+    card.style.transform = 'perspective(600px) rotateY(' + (x * 6) + 'deg) rotateX(' + (-y * 6) + 'deg)';
+  });
+  document.addEventListener('mouseleave', function (e) {
+    var card = e.target.closest('.resource-card');
+    if (card) card.style.transform = '';
+  }, true);
+
   /* --- Ripple on hover buttons --- */
   document.querySelectorAll('.hover-btn').forEach(function (btn) {
     btn.addEventListener('click', function (e) {

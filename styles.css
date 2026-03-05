@@ -1055,7 +1055,9 @@ a:hover {
   border-left: 3px solid var(--resource-border-left);
   border-radius: var(--radius);
   padding: 12px 16px;
-  transition: all 0.15s ease;
+  transition: all 0.2s ease, transform 0.2s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
 .resource-featured {
