@@ -765,6 +765,48 @@ a:hover {
   flex-shrink: 0;
 }
 
+.resource-type-badge[data-type="apk"] {
+  color: #16a34a;
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+.resource-type-badge[data-type="pdf"] {
+  color: #dc2626;
+  background: #fef2f2;
+  border-color: #fecaca;
+}
+
+.resource-type-badge[data-type="article"] {
+  color: #ea580c;
+  background: #fff7ed;
+  border-color: #fed7aa;
+}
+
+.resource-type-badge[data-type="website"] {
+  color: var(--tag-accent-color);
+  background: var(--tag-accent-bg);
+  border-color: var(--tag-accent-border);
+}
+
+[data-theme="dark"] .resource-type-badge[data-type="apk"] {
+  color: #4ade80;
+  background: #052e16;
+  border-color: #166534;
+}
+
+[data-theme="dark"] .resource-type-badge[data-type="pdf"] {
+  color: #f87171;
+  background: #2a0a0a;
+  border-color: #7f1d1d;
+}
+
+[data-theme="dark"] .resource-type-badge[data-type="article"] {
+  color: #fb923c;
+  background: #2a1505;
+  border-color: #7c2d12;
+}
+
 .resource-card {
   position: relative;
 }

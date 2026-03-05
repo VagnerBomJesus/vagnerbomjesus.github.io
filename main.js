@@ -375,6 +375,7 @@
       if (r.type) {
         var badge = document.createElement('span');
         badge.className = 'resource-type-badge';
+        badge.setAttribute('data-type', r.type.toLowerCase());
         badge.textContent = r.type.toUpperCase();
         titleRow.appendChild(badge);
       }
