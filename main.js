@@ -496,6 +496,21 @@
 
   loadData();
 
+  /* --- Visitor Counter --- */
+  (function () {
+    var badge = document.getElementById('visitor-badge');
+    if (!badge) return;
+    fetch('https://api.countapi.xyz/hit/vagnerbomjesus.github.io/visits')
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data && data.value) {
+          badge.textContent = data.value.toLocaleString() + ' visitors';
+          badge.classList.add('loaded');
+        }
+      })
+      .catch(function () {});
+  })();
+
   /* --- Service Worker registration --- */
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js').catch(function () {});

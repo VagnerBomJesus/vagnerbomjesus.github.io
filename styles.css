@@ -416,6 +416,23 @@ a:hover {
   padding: 0 4px;
 }
 
+/* Visitor Badge */
+.visitor-badge {
+  display: none;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  margin-bottom: 12px;
+  padding: 3px 10px;
+  background: var(--bg-tag);
+  border-radius: var(--radius);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.visitor-badge.loaded {
+  display: inline-block;
+}
+
 /* Social Links */
 .social-row {
   display: flex;
