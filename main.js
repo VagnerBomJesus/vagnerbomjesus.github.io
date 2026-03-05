@@ -212,6 +212,10 @@
       return;
     }
 
+    // Scroll resources column to top on tab switch
+    var resCol = document.querySelector('.resources-col');
+    if (resCol) resCol.scrollTo({ top: 0, behavior: 'smooth' });
+
     // Slide transition based on tab direction
     var section = document.getElementById('resources-section');
     var slideOut = cat === 'useful' ? 'slide-left' : 'slide-right';
