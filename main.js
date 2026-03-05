@@ -644,9 +644,10 @@
           '<div class="github-stat"><span class="github-stat-value">' + (data.public_repos || 0) + '</span><span class="github-stat-label">Repos</span></div>' +
           '<div class="github-stat"><span class="github-stat-value">' + (data.followers || 0) + '</span><span class="github-stat-label">Followers</span></div>' +
           '<div class="github-stat"><span class="github-stat-value">' + (data.following || 0) + '</span><span class="github-stat-label">Following</span></div>';
+        statsEl.classList.remove('github-stats-skeleton');
         statsEl.classList.add('loaded');
       })
-      .catch(function () {});
+      .catch(function () { statsEl.classList.remove('github-stats-skeleton'); });
   })();
 
   /* --- Cookie Consent --- */

@@ -607,8 +607,37 @@ a:hover {
   padding: 8px 0;
 }
 
+.github-stats.github-stats-skeleton {
+  display: flex;
+}
+
 .github-stats.loaded {
   display: flex;
+}
+
+/* Skeleton pulse animation */
+.skeleton-pulse {
+  display: block;
+  background: var(--bg-tag);
+  border-radius: var(--radius);
+  animation: skeleton-shimmer 1.5s infinite ease-in-out;
+}
+
+@keyframes skeleton-shimmer {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+.stat-skel-val {
+  width: 28px;
+  height: 16px;
+  margin: 0 auto 4px;
+}
+
+.stat-skel-label {
+  width: 48px;
+  height: 10px;
+  margin: 0 auto;
 }
 
 .github-stat {
