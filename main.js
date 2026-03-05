@@ -235,6 +235,13 @@
       }
     }
 
+    // Update cookie banner text
+    if (cookieText) {
+      cookieText.textContent = lang === 'pt'
+        ? 'Este site usa cookies para analytics. Ao continuar, aceita o uso de cookies.'
+        : 'This site uses cookies for analytics. By continuing, you accept our use of cookies.';
+    }
+
     // Update meta tags for language
     var metaDesc = document.querySelector('meta[name="description"]');
     var ogTitle = document.querySelector('meta[property="og:title"]');
@@ -528,6 +535,22 @@
   }
 
   loadData();
+
+  /* --- Cookie Consent --- */
+  var cookieBanner = document.getElementById('cookie-banner');
+  var cookieAccept = document.getElementById('cookie-accept');
+  var cookieText = document.getElementById('cookie-text');
+
+  if (cookieBanner && !localStorage.getItem('cookie-consent')) {
+    setTimeout(function () { cookieBanner.classList.add('visible'); }, 1000);
+  }
+
+  if (cookieAccept) {
+    cookieAccept.addEventListener('click', function () {
+      localStorage.setItem('cookie-consent', '1');
+      cookieBanner.classList.remove('visible');
+    });
+  }
 
   /* --- Share: Copy Link --- */
   var copyBtn = document.getElementById('share-copy');
