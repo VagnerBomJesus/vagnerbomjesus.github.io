@@ -3,16 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://avatars.githubusercontent.com; connect-src 'self';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'unsafe-inline'; font-src https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' https://avatars.githubusercontent.com data:; connect-src 'self';">
   <meta name="robots" content="noindex, nofollow">
   <title>Admin Panel | Portfolio</title>
   <link rel="icon" type="image/x-icon" href="https://avatars.githubusercontent.com/u/48354097?v=4">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="admin.css">
-
 </head>
 <body>
 
@@ -42,12 +43,54 @@
           <option value="en">EN</option>
           <option value="pt">PT</option>
         </select>
-        <button id="admin-theme" class="theme-toggle" title="Toggle theme" aria-label="Toggle theme">&#9790;</button>
+        <div id="admin-theme" class="theme-toggle-slider" title="Toggle theme" role="button" tabindex="0" aria-label="Toggle dark or light mode">
+          <div class="toggle-thumb"><i class="fas fa-moon toggle-icon"></i></div>
+          <div class="toggle-bg-icon"><i class="fas fa-sun toggle-icon"></i></div>
+        </div>
         <button id="btn-logout" class="btn-secondary btn-sm">Logout</button>
       </div>
     </header>
 
     <div class="admin-container">
+
+      <!-- Breadcrumbs -->
+      <nav class="admin-breadcrumb" id="admin-breadcrumb">
+        <span class="breadcrumb-item active">Admin</span>
+        <span class="breadcrumb-sep">/</span>
+        <span class="breadcrumb-item" id="breadcrumb-cat">Projects</span>
+      </nav>
+
+      <!-- Dashboard Stats -->
+      <div class="dashboard-stats" id="dashboard-stats">
+        <div class="stat-card">
+          <div class="stat-card-icon"><i class="fas fa-project-diagram"></i></div>
+          <div class="stat-card-info">
+            <span class="stat-card-value" id="stat-projects">0</span>
+            <span class="stat-card-label">Projects</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon"><i class="fas fa-link"></i></div>
+          <div class="stat-card-info">
+            <span class="stat-card-value" id="stat-useful">0</span>
+            <span class="stat-card-label">Useful Links</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon"><i class="fas fa-globe"></i></div>
+          <div class="stat-card-info">
+            <span class="stat-card-value" id="stat-total">0</span>
+            <span class="stat-card-label">Total Items</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon"><i class="fas fa-clock"></i></div>
+          <div class="stat-card-info">
+            <span class="stat-card-value stat-card-value-sm" id="stat-updated">--</span>
+            <span class="stat-card-label">Last Update</span>
+          </div>
+        </div>
+      </div>
 
       <!-- Action Bar -->
       <div class="action-bar">
@@ -56,11 +99,14 @@
           <span id="admin-count" class="resources-count">0 items</span>
         </div>
         <div class="action-bar-right">
-          <button id="btn-add" class="btn-primary btn-sm">+ Add Item</button>
-          <button id="btn-import" class="btn-secondary btn-sm">Import JSON</button>
-          <button id="btn-export" class="btn-secondary btn-sm">Export JSON</button>
-          <button id="btn-apply" class="btn-primary btn-sm">Apply to Site</button>
-          <button id="btn-clear-local" class="btn-danger btn-sm">Clear Local</button>
+          <button id="btn-undo" class="btn-secondary btn-sm btn-icon-action" title="Undo (Ctrl+Z)" disabled><i class="fas fa-undo"></i></button>
+          <button id="btn-redo" class="btn-secondary btn-sm btn-icon-action" title="Redo (Ctrl+Y)" disabled><i class="fas fa-redo"></i></button>
+          <button id="btn-add" class="btn-primary btn-sm"><i class="fas fa-plus"></i> Add Item</button>
+          <button id="btn-import" class="btn-secondary btn-sm"><i class="fas fa-file-import"></i> Import</button>
+          <button id="btn-export" class="btn-secondary btn-sm"><i class="fas fa-file-export"></i> Export</button>
+          <button id="btn-export-pdf" class="btn-secondary btn-sm"><i class="fas fa-file-pdf"></i> PDF</button>
+          <button id="btn-apply" class="btn-primary btn-sm"><i class="fas fa-check"></i> Apply</button>
+          <button id="btn-clear-local" class="btn-danger btn-sm"><i class="fas fa-trash"></i> Clear</button>
         </div>
       </div>
 
@@ -70,11 +116,26 @@
         <button class="tab-btn" data-category="useful">Useful Links</button>
       </div>
 
+      <!-- Search & Bulk Actions -->
+      <div class="table-toolbar">
+        <div class="table-toolbar-left">
+          <label class="bulk-check-wrap"><input type="checkbox" id="bulk-select-all"> <span class="bulk-label">Select all</span></label>
+          <button id="btn-bulk-delete" class="btn-danger btn-sm" hidden><i class="fas fa-trash"></i> Delete Selected</button>
+        </div>
+        <div class="table-toolbar-right">
+          <div class="table-search-wrap">
+            <i class="fas fa-search table-search-icon"></i>
+            <input type="text" id="table-search" class="table-search" placeholder="Filter items...">
+          </div>
+        </div>
+      </div>
+
       <!-- Items Table -->
       <div class="items-table-wrapper">
         <table class="items-table" id="items-table">
           <thead>
             <tr>
+              <th class="col-check"><input type="checkbox" id="thead-check-all"></th>
               <th class="col-order">#</th>
               <th class="col-title">Title</th>
               <th class="col-desc">Description</th>
@@ -85,15 +146,28 @@
           <tbody id="items-tbody"></tbody>
         </table>
         <div id="empty-state" class="empty-state" hidden>
-          <p>No items yet. Click "+ Add Item" to create one.</p>
+          <div class="empty-state-icon"><i class="fas fa-inbox"></i></div>
+          <p class="empty-state-text">No items yet</p>
+          <p class="empty-state-hint">Click <strong>"+ Add Item"</strong> to create one or <strong>Import JSON</strong> to load existing data.</p>
+        </div>
+      </div>
+
+      <!-- Activity Log -->
+      <div class="activity-section" id="activity-section">
+        <div class="activity-header">
+          <h2 class="activity-title"><i class="fas fa-history"></i> Activity Log</h2>
+          <button id="btn-clear-log" class="btn-secondary btn-sm">Clear</button>
+        </div>
+        <div id="activity-log" class="activity-log">
+          <p class="activity-empty">No activity yet.</p>
         </div>
       </div>
 
       <!-- Preview Section -->
       <div class="preview-section">
         <div class="preview-header">
-          <h2 class="preview-title">Preview</h2>
-          <span class="preview-hint">Shows how items will appear on the site</span>
+          <h2 class="preview-title"><i class="fas fa-eye"></i> Live Preview</h2>
+          <span class="preview-hint">Updates in real-time as you make changes</span>
         </div>
         <div id="preview-area" class="preview-area"></div>
       </div>
@@ -112,31 +186,47 @@
         <div class="form-row">
           <div class="form-group">
             <label for="field-title-en">Title (EN)</label>
-            <input type="text" id="field-title-en" required>
+            <input type="text" id="field-title-en" maxlength="200" required>
+            <span class="char-counter"><span id="counter-title-en">0</span>/200</span>
           </div>
           <div class="form-group">
             <label for="field-title-pt">Title (PT)</label>
-            <input type="text" id="field-title-pt" required>
+            <input type="text" id="field-title-pt" maxlength="200" required>
+            <span class="char-counter"><span id="counter-title-pt">0</span>/200</span>
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
             <label for="field-desc-en">Description (EN)</label>
-            <input type="text" id="field-desc-en" required>
+            <textarea id="field-desc-en" maxlength="500" rows="3" required></textarea>
+            <span class="char-counter"><span id="counter-desc-en">0</span>/500</span>
           </div>
           <div class="form-group">
             <label for="field-desc-pt">Description (PT)</label>
-            <input type="text" id="field-desc-pt" required>
+            <textarea id="field-desc-pt" maxlength="500" rows="3" required></textarea>
+            <span class="char-counter"><span id="counter-desc-pt">0</span>/500</span>
           </div>
         </div>
         <div class="form-row">
           <div class="form-group full-width">
             <label for="field-link">Link (URL)</label>
-            <input type="url" id="field-link" required>
+            <input type="url" id="field-link" maxlength="2000" required>
+            <span class="field-error" id="link-error" hidden>Only http/https URLs are allowed</span>
           </div>
         </div>
         <div class="form-row">
-          <div class="form-group full-width">
+          <div class="form-group">
+            <label for="field-type">Type</label>
+            <select id="field-type">
+              <option value="">None</option>
+              <option value="web">Web</option>
+              <option value="apk">APK</option>
+              <option value="pdf">PDF</option>
+              <option value="article">Article</option>
+              <option value="tool">Tool</option>
+            </select>
+          </div>
+          <div class="form-group">
             <label for="field-category">Category</label>
             <select id="field-category" required>
               <option value="projects">Projects</option>
@@ -144,11 +234,22 @@
             </select>
           </div>
         </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="checkbox-label"><input type="checkbox" id="field-featured"> Featured item</label>
+          </div>
+          <div class="form-group">
+            <label class="checkbox-label"><input type="checkbox" id="field-isnew"> Mark as NEW</label>
+          </div>
+        </div>
         <input type="hidden" id="field-edit-index" value="-1">
         <input type="hidden" id="field-edit-cat" value="">
+        <div class="form-autosave" id="form-autosave" hidden>
+          <i class="fas fa-save"></i> Draft auto-saved
+        </div>
         <div class="modal-actions">
           <button type="button" id="modal-cancel" class="btn-secondary">Cancel</button>
-          <button type="submit" class="btn-primary">Save</button>
+          <button type="submit" class="btn-primary"><i class="fas fa-check"></i> Save</button>
         </div>
       </form>
     </div>
@@ -164,13 +265,21 @@
       <p class="modal-body-text">Are you sure you want to delete "<span id="delete-item-name"></span>"?</p>
       <div class="modal-actions">
         <button id="delete-cancel" class="btn-secondary">Cancel</button>
-        <button id="delete-confirm" class="btn-danger">Delete</button>
+        <button id="delete-confirm" class="btn-danger"><i class="fas fa-trash"></i> Delete</button>
       </div>
     </div>
   </div>
 
   <!-- Hidden file input for import -->
   <input type="file" id="file-import" accept=".json" hidden>
+
+  <!-- Keyboard Shortcuts Help -->
+  <div class="shortcuts-hint" id="shortcuts-hint">
+    <span class="shortcut-key">Ctrl+N</span> New
+    <span class="shortcut-key">Ctrl+S</span> Save
+    <span class="shortcut-key">Ctrl+Z</span> Undo
+    <span class="shortcut-key">Ctrl+Y</span> Redo
+  </div>
 
   <script src="admin.js"></script>
 </body>
