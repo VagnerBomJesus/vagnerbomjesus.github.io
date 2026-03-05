@@ -217,7 +217,7 @@
     var t = translations[lang];
     var data = resourcesData[lang];
 
-    profileRole.textContent = t.role;
+    typeText(profileRole, t.role, 25);
     btnExp.textContent = t.experience;
     btnEdu.textContent = t.education;
     resourcesHeading.textContent = t.resourcesHeading;
@@ -461,6 +461,23 @@
         }
       })
       .catch(function () { /* RSS feed optional */ });
+  }
+
+  /* --- Typing animation for role --- */
+  function typeText(el, text, speed) {
+    el.textContent = '';
+    var i = 0;
+    el.classList.add('typing-active');
+    function tick() {
+      if (i < text.length) {
+        el.textContent += text.charAt(i);
+        i++;
+        setTimeout(tick, speed || 30);
+      } else {
+        el.classList.remove('typing-active');
+      }
+    }
+    tick();
   }
 
   /* --- Auto theme by time of day --- */
