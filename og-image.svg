@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#0f1117"/>
+  <rect width="1200" height="6" fill="#7baaf7"/>
+  <circle cx="1060" cy="240" r="80" fill="#1a2640" stroke="#7baaf7" stroke-width="3"/>
+  <text x="1060" y="250" text-anchor="middle" fill="#7baaf7" font-family="sans-serif" font-weight="bold" font-size="60">V</text>
+  <text x="80" y="260" fill="#f0f2f5" font-family="sans-serif" font-weight="bold" font-size="48">Vagner Bom Jesus</text>
+  <text x="80" y="310" fill="#7baaf7" font-family="sans-serif" font-weight="500" font-size="24">Software Engineer | Flutter Developer | Cybersecurity</text>
+  <text x="80" y="400" fill="#6b7a90" font-family="sans-serif" font-size="18">Creator of The Biomimicry Database (TBDB)</text>
+  <text x="80" y="430" fill="#6b7a90" font-family="sans-serif" font-size="18">Academic Researcher | Published Author | Portugal</text>
+  <text x="80" y="560" fill="#6b7a90" font-family="monospace" font-size="18">vagnerbomjesus.github.io</text>
+  <text x="1100" y="560" fill="#7baaf7" font-family="monospace" font-weight="bold" font-size="24">VBJ</text>
+</svg>
