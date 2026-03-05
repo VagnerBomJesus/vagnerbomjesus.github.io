@@ -235,6 +235,22 @@
       }
     }
 
+    // Update meta tags for language
+    var metaDesc = document.querySelector('meta[name="description"]');
+    var ogTitle = document.querySelector('meta[property="og:title"]');
+    var ogDesc = document.querySelector('meta[property="og:description"]');
+    if (lang === 'pt') {
+      if (metaDesc) metaDesc.setAttribute('content', 'Vagner Bom Jesus - Engenheiro de Software, Desenvolvedor Flutter e Entusiasta de Seguranca da Informacao em Portugal. Criador da The Biomimicry Database (TBDB). Projetos, publicacoes e recursos.');
+      if (ogTitle) ogTitle.setAttribute('content', 'Vagner Bom Jesus - Engenheiro de Software, Desenvolvedor Flutter e Especialista em Ciberseguranca');
+      if (ogDesc) ogDesc.setAttribute('content', 'Portfolio de Vagner Bom Jesus: Engenheiro de Software e Desenvolvedor Flutter em Portugal. Criador da The Biomimicry Database. Publicacoes academicas, projetos e recursos.');
+      document.title = 'Vagner Bom Jesus - Engenheiro de Software, Desenvolvedor Flutter e Seguranca da Informacao | Portugal';
+    } else {
+      if (metaDesc) metaDesc.setAttribute('content', 'Vagner Bom Jesus - Software Engineer, Flutter Developer and Information Security Enthusiast based in Portugal. Creator of The Biomimicry Database (TBDB). Academic researcher, published author, and cybersecurity specialist. Explore projects, publications, and resources.');
+      if (ogTitle) ogTitle.setAttribute('content', 'Vagner Bom Jesus - Software Engineer, Flutter Developer & Cybersecurity Specialist');
+      if (ogDesc) ogDesc.setAttribute('content', 'Portfolio of Vagner Bom Jesus: Software Engineer and Flutter Developer based in Portugal. Creator of The Biomimicry Database. Academic publications, projects, and resources in software engineering, cybersecurity, and biomimicry research.');
+      document.title = 'Vagner Bom Jesus - Software Engineer, Flutter Developer & Information Security | Portugal';
+    }
+
     // Translate tab labels
     tabProjects.textContent = t.projects;
     tabUseful.textContent = t.useful;
