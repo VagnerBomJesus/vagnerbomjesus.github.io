@@ -14,14 +14,135 @@
   var MAX_DESC_LEN = 500;
   var MAX_LINK_LEN = 2000;
 
+  /* --- i18n Translations --- */
+  var i18n = {
+    en: {
+      dashboard: 'Dashboard',
+      projects: 'Projects',
+      usefulLinks: 'Useful Links',
+      activity: 'Activity',
+      settings: 'Settings',
+      administrator: 'Administrator',
+      viewAll: 'View All',
+      addProject: 'Add Project',
+      addLink: 'Add Link',
+      selectAll: 'Select all',
+      deleteSelected: 'Delete Selected',
+      filterProjects: 'Filter projects...',
+      filterLinks: 'Filter links...',
+      livePreview: 'Live Preview',
+      previewHint: 'Updates in real-time as you make changes',
+      activityLog: 'Activity Log',
+      clearLog: 'Clear Log',
+      noActivity: 'No activity yet.',
+      noProjects: 'No projects yet',
+      noUseful: 'No useful links yet',
+      noPreview: 'No items to preview',
+      addProjectHint: 'Click <strong>"+ Add Project"</strong> to create one or <strong>Import JSON</strong> to load existing data.',
+      addLinkHint: 'Click <strong>"+ Add Link"</strong> to create one or <strong>Import JSON</strong> to load existing data.',
+      language: 'Language',
+      langDesc: 'Choose the editing language for your content.',
+      theme: 'Theme',
+      themeDesc: 'Toggle between light and dark mode.',
+      toggleTheme: 'Toggle Theme',
+      exportData: 'Export Data',
+      exportDesc: 'Download all data as a JSON file.',
+      exportJson: 'Export JSON',
+      exportPdf: 'Export PDF',
+      importData: 'Import Data',
+      importDesc: 'Load data from a JSON file.',
+      importJson: 'Import JSON',
+      applyToSite: 'Apply to Site',
+      applyDesc: 'Save current data to localStorage so the portfolio site uses it.',
+      applyChanges: 'Apply Changes',
+      clearData: 'Clear Data',
+      clearDesc: 'Remove all locally saved data. The site will reload from the default JSON.',
+      clearLocal: 'Clear Local Data',
+      totalItems: 'Total Items',
+      lastUpdate: 'Last Update',
+      items: function (n) { return n + ' items'; },
+      logout: 'Logout',
+      password: 'Password',
+      login: 'Login',
+      addItem: 'Add Item',
+      editItem: 'Edit Item',
+      save: 'Save',
+      cancel: 'Cancel',
+      confirmDelete: 'Confirm Delete',
+      confirmDeleteMsg: function (name) { return 'Are you sure you want to delete "' + name + '"?'; },
+      delete: 'Delete'
+    },
+    pt: {
+      dashboard: 'Painel',
+      projects: 'Projetos',
+      usefulLinks: 'Links &Uacute;teis',
+      activity: 'Atividade',
+      settings: 'Defini&ccedil;&otilde;es',
+      administrator: 'Administrador',
+      viewAll: 'Ver Todos',
+      addProject: 'Adicionar Projeto',
+      addLink: 'Adicionar Link',
+      selectAll: 'Selecionar tudo',
+      deleteSelected: 'Eliminar Selecionados',
+      filterProjects: 'Filtrar projetos...',
+      filterLinks: 'Filtrar links...',
+      livePreview: 'Pr&eacute;-visualiza&ccedil;&atilde;o',
+      previewHint: 'Atualiza em tempo real conforme as altera&ccedil;&otilde;es',
+      activityLog: 'Registo de Atividade',
+      clearLog: 'Limpar Registo',
+      noActivity: 'Sem atividade ainda.',
+      noProjects: 'Sem projetos ainda',
+      noUseful: 'Sem links &uacute;teis ainda',
+      noPreview: 'Sem itens para pr&eacute;-visualizar',
+      addProjectHint: 'Clique em <strong>"+ Adicionar Projeto"</strong> para criar um ou <strong>Importar JSON</strong> para carregar dados.',
+      addLinkHint: 'Clique em <strong>"+ Adicionar Link"</strong> para criar um ou <strong>Importar JSON</strong> para carregar dados.',
+      language: 'Idioma',
+      langDesc: 'Escolha o idioma de edi&ccedil;&atilde;o do conte&uacute;do.',
+      theme: 'Tema',
+      themeDesc: 'Alternar entre modo claro e escuro.',
+      toggleTheme: 'Alternar Tema',
+      exportData: 'Exportar Dados',
+      exportDesc: 'Descarregar todos os dados como ficheiro JSON.',
+      exportJson: 'Exportar JSON',
+      exportPdf: 'Exportar PDF',
+      importData: 'Importar Dados',
+      importDesc: 'Carregar dados a partir de um ficheiro JSON.',
+      importJson: 'Importar JSON',
+      applyToSite: 'Aplicar ao Site',
+      applyDesc: 'Guardar dados no localStorage para o site usar.',
+      applyChanges: 'Aplicar Altera&ccedil;&otilde;es',
+      clearData: 'Limpar Dados',
+      clearDesc: 'Remover todos os dados locais. O site recarrega do JSON padr&atilde;o.',
+      clearLocal: 'Limpar Dados Locais',
+      totalItems: 'Total de Itens',
+      lastUpdate: '&Uacute;ltima Atualiza&ccedil;&atilde;o',
+      items: function (n) { return n + ' itens'; },
+      logout: 'Sair',
+      password: 'Palavra-passe',
+      login: 'Entrar',
+      addItem: 'Adicionar Item',
+      editItem: 'Editar Item',
+      save: 'Guardar',
+      cancel: 'Cancelar',
+      confirmDelete: 'Confirmar Elimina&ccedil;&atilde;o',
+      confirmDeleteMsg: function (name) { return 'Tem a certeza que quer eliminar "' + name + '"?'; },
+      delete: 'Eliminar'
+    }
+  };
+
+  function t(key) { return (i18n[currentLang] && i18n[currentLang][key]) || (i18n.en[key]) || key; }
+
   /* --- State --- */
   var data = null;
   var currentLang = 'en';
-  var currentCategory = 'projects';
+  var currentPage = 'dashboard';
+  var currentCategory = 'projects'; // synced with page
   var deleteTarget = null;
   var sessionFailCount = 0;
-  var tableFilter = '';
-  var selectedRows = {};
+  var tableFilterProjects = '';
+  var tableFilterUseful = '';
+  var selectedRowsProjects = {};
+  var selectedRowsUseful = {};
   var activityLog = [];
   var autosaveTimer = null;
 
@@ -37,12 +158,25 @@
   var loginError = document.getElementById('login-error');
   var adminPanel = document.getElementById('admin-panel');
 
-  var langSelect = document.getElementById('admin-lang');
-  var themeBtn = document.getElementById('admin-theme');
-  var btnLogout = document.getElementById('btn-logout');
-  var adminCount = document.getElementById('admin-count');
+  // Language dropdowns (flag-based, same as main page)
+  var adminLangDropdown = document.getElementById('admin-lang-dropdown');
+  var adminLangTrigger = document.getElementById('admin-lang-trigger');
+  var adminLangMenu = document.getElementById('admin-lang-menu');
+  var adminLangFlag = document.getElementById('admin-lang-flag');
+  var adminLangLabel = document.getElementById('admin-lang-label');
 
-  var btnAdd = document.getElementById('btn-add');
+  var settingsLangDropdown = document.getElementById('settings-lang-dropdown');
+  var settingsLangTrigger = document.getElementById('settings-lang-trigger');
+  var settingsLangMenu = document.getElementById('settings-lang-menu');
+  var settingsLangFlag = document.getElementById('settings-lang-flag');
+  var settingsLangLabel = document.getElementById('settings-lang-label');
+
+  var themeBtn = document.getElementById('admin-theme');
+  var settingsThemeBtn = document.getElementById('settings-theme-toggle');
+  var btnLogout = document.getElementById('btn-logout');
+
+  var btnAddProject = document.getElementById('btn-add-project');
+  var btnAddUseful = document.getElementById('btn-add-useful');
   var btnImport = document.getElementById('btn-import');
   var btnExport = document.getElementById('btn-export');
   var btnExportPdf = document.getElementById('btn-export-pdf');
@@ -50,16 +184,35 @@
   var btnClearLocal = document.getElementById('btn-clear-local');
   var btnUndo = document.getElementById('btn-undo');
   var btnRedo = document.getElementById('btn-redo');
+  var btnUndoUseful = document.getElementById('btn-undo-useful');
+  var btnRedoUseful = document.getElementById('btn-redo-useful');
   var fileImport = document.getElementById('file-import');
 
-  var tabBtns = document.querySelectorAll('.tab-btn');
-  var itemsTbody = document.getElementById('items-tbody');
-  var emptyState = document.getElementById('empty-state');
-  var itemsTable = document.getElementById('items-table');
-  var tableSearch = document.getElementById('table-search');
-  var bulkSelectAll = document.getElementById('bulk-select-all');
-  var theadCheckAll = document.getElementById('thead-check-all');
-  var btnBulkDelete = document.getElementById('btn-bulk-delete');
+  // Per-category table elements
+  var tables = {
+    projects: {
+      tbody: document.getElementById('items-tbody-projects'),
+      table: document.getElementById('items-table-projects'),
+      empty: document.getElementById('empty-state-projects'),
+      search: document.getElementById('table-search-projects'),
+      bulkAll: document.getElementById('bulk-select-all-projects'),
+      theadCheck: document.getElementById('thead-check-projects'),
+      bulkDelete: document.getElementById('btn-bulk-delete-projects'),
+      preview: document.getElementById('preview-area-projects'),
+      count: document.getElementById('count-projects')
+    },
+    useful: {
+      tbody: document.getElementById('items-tbody-useful'),
+      table: document.getElementById('items-table-useful'),
+      empty: document.getElementById('empty-state-useful'),
+      search: document.getElementById('table-search-useful'),
+      bulkAll: document.getElementById('bulk-select-all-useful'),
+      theadCheck: document.getElementById('thead-check-useful'),
+      bulkDelete: document.getElementById('btn-bulk-delete-useful'),
+      preview: document.getElementById('preview-area-useful'),
+      count: document.getElementById('count-useful')
+    }
+  };
 
   var itemModal = document.getElementById('item-modal');
   var modalTitle = document.getElementById('modal-title');
@@ -73,10 +226,119 @@
   var deleteConfirm = document.getElementById('delete-confirm');
   var deleteModalClose = document.getElementById('delete-modal-close');
 
-  var previewArea = document.getElementById('preview-area');
-  var breadcrumbCat = document.getElementById('breadcrumb-cat');
+  var breadcrumbPage = document.getElementById('breadcrumb-page');
   var activityLogEl = document.getElementById('activity-log');
   var btnClearLog = document.getElementById('btn-clear-log');
+
+  // Sidebar
+  var sidebar = document.getElementById('admin-sidebar');
+  var sidebarOverlay = document.getElementById('sidebar-overlay');
+  var btnHamburger = document.getElementById('btn-hamburger');
+  var btnCollapseSidebar = document.getElementById('btn-collapse-sidebar');
+  var sidebarItems = document.querySelectorAll('.sidebar-item');
+
+  // Dashboard previews
+  var dashPreviewProjects = document.getElementById('dashboard-preview-projects');
+  var dashPreviewUseful = document.getElementById('dashboard-preview-useful');
+
+  /* ================================================================
+     NAVIGATION
+     ================================================================ */
+
+  var pageLangKeys = {
+    dashboard: 'dashboard',
+    projects: 'projects',
+    useful: 'usefulLinks',
+    activity: 'activity',
+    settings: 'settings'
+  };
+
+  function navigateTo(pageId) {
+    currentPage = pageId;
+
+    // Sync currentCategory
+    if (pageId === 'projects') currentCategory = 'projects';
+    else if (pageId === 'useful') currentCategory = 'useful';
+
+    // Update pages
+    var pages = document.querySelectorAll('.page');
+    for (var i = 0; i < pages.length; i++) {
+      pages[i].classList.remove('active');
+    }
+    var target = document.getElementById('page-' + pageId);
+    if (target) target.classList.add('active');
+
+    // Update sidebar active
+    for (var j = 0; j < sidebarItems.length; j++) {
+      sidebarItems[j].classList.toggle('active', sidebarItems[j].getAttribute('data-page') === pageId);
+    }
+
+    // Update breadcrumb
+    breadcrumbPage.innerHTML = t(pageLangKeys[pageId] || pageId);
+
+    // Close mobile sidebar
+    closeSidebar();
+
+    // Render relevant content
+    if (data) {
+      applyTranslations();
+      if (pageId === 'dashboard') renderDashboard();
+      else if (pageId === 'projects') renderCategoryPage('projects');
+      else if (pageId === 'useful') renderCategoryPage('useful');
+      else if (pageId === 'activity') renderActivityLog();
+    }
+  }
+
+  // Sidebar click handlers
+  for (var si = 0; si < sidebarItems.length; si++) {
+    (function (item) {
+      item.addEventListener('click', function () {
+        navigateTo(item.getAttribute('data-page'));
+      });
+    })(sidebarItems[si]);
+  }
+
+  // "View All" buttons on dashboard
+  var gotoBtns = document.querySelectorAll('.btn-goto');
+  for (var gi = 0; gi < gotoBtns.length; gi++) {
+    (function (btn) {
+      btn.addEventListener('click', function () {
+        navigateTo(btn.getAttribute('data-goto'));
+      });
+    })(gotoBtns[gi]);
+  }
+
+  // Mobile sidebar toggle
+  function openSidebar() {
+    sidebar.classList.add('open');
+    sidebarOverlay.classList.add('active');
+  }
+
+  function closeSidebar() {
+    sidebar.classList.remove('open');
+    sidebarOverlay.classList.remove('active');
+  }
+
+  btnHamburger.addEventListener('click', function () {
+    if (sidebar.classList.contains('open')) closeSidebar();
+    else openSidebar();
+  });
+
+  sidebarOverlay.addEventListener('click', closeSidebar);
+
+  /* --- Sidebar Collapse (desktop) --- */
+  function toggleSidebarCollapse() {
+    sidebar.classList.toggle('collapsed');
+    var isCollapsed = sidebar.classList.contains('collapsed');
+    localStorage.setItem('sidebarCollapsed', isCollapsed ? '1' : '0');
+  }
+
+  btnCollapseSidebar.addEventListener('click', toggleSidebarCollapse);
+
+  // Restore collapsed state
+  if (localStorage.getItem('sidebarCollapsed') === '1') {
+    sidebar.classList.add('collapsed');
+  }
 
   /* ================================================================
      SECURITY UTILITIES
@@ -186,12 +448,18 @@
   }
 
   function updateUndoRedoBtns() {
-    btnUndo.disabled = !undoStack.length;
-    btnRedo.disabled = !redoStack.length;
+    var undoDisabled = !undoStack.length;
+    var redoDisabled = !redoStack.length;
+    btnUndo.disabled = undoDisabled;
+    btnRedo.disabled = redoDisabled;
+    btnUndoUseful.disabled = undoDisabled;
+    btnRedoUseful.disabled = redoDisabled;
   }
 
   btnUndo.addEventListener('click', undo);
   btnRedo.addEventListener('click', redo);
+  btnUndoUseful.addEventListener('click', undo);
+  btnRedoUseful.addEventListener('click', redo);
 
   /* --- Activity Log --- */
   function logActivity(action, detail, tag) {
@@ -213,7 +481,7 @@
       div.className = 'activity-entry';
       div.innerHTML = '<span class="activity-time">' + entry.time + '</span>' +
         '<span class="activity-tag-' + entry.tag + '">[' + entry.tag.toUpperCase() + ']</span> ' +
-        '<span class="activity-action">' + entry.detail + '</span>';
+        '<span class="activity-action">' + escapeHtml(entry.detail) + '</span>';
       activityLogEl.appendChild(div);
     });
   }
@@ -268,6 +536,7 @@
   }
 
   themeBtn.addEventListener('click', function () { setTheme(!isDark()); });
+  settingsThemeBtn.addEventListener('click', function () { setTheme(!isDark()); });
 
   var savedTheme = localStorage.getItem('theme');
   if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -403,83 +672,291 @@
       });
   }
 
-  /* --- Language --- */
-  langSelect.addEventListener('change', function () {
-    currentLang = langSelect.value;
+  /* --- Language (flag dropdown, synced with main page) --- */
+  var FLAG_EN_SVG = '<clipPath id="ae"><path d="M0,0 v30 h60 v-30 z"/></clipPath><clipPath id="af"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><g clip-path="url(#ae)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#af)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g>';
+  var FLAG_PT_SVG = '<rect width="600" height="400" fill="#DA291C"/><rect width="240" height="400" fill="#006600"/><circle cx="240" cy="200" r="70" fill="#FFCC00"/><circle cx="240" cy="200" r="55" fill="#DA291C"/><path d="M240,150 L240,250 M195,185 L285,185 M195,215 L285,215" stroke="#fff" stroke-width="4" fill="none"/>';
+
+  function updateLangDropdownUI(lang) {
+    var isEN = lang === 'en';
+    var label = isEN ? 'EN' : 'PT';
+
+    // Update trigger flag + label for both dropdowns
+    [{ flag: adminLangFlag, lbl: adminLangLabel, menu: adminLangMenu },
+     { flag: settingsLangFlag, lbl: settingsLangLabel, menu: settingsLangMenu }].forEach(function (d) {
+      if (d.flag) {
+        if (isEN) {
+          d.flag.setAttribute('viewBox', '0 0 60 30');
+          d.flag.setAttribute('height', '10');
+          d.flag.innerHTML = FLAG_EN_SVG;
+        } else {
+          d.flag.setAttribute('viewBox', '0 0 600 400');
+          d.flag.setAttribute('height', '13');
+          d.flag.innerHTML = FLAG_PT_SVG;
+        }
+      }
+      if (d.lbl) d.lbl.textContent = label;
+
+      // Update active state on options
+      if (d.menu) {
+        var opts = d.menu.querySelectorAll('.lang-option');
+        for (var i = 0; i < opts.length; i++) {
+          opts[i].classList.toggle('active', opts[i].getAttribute('data-lang') === lang);
+        }
+      }
+    });
+  }
+
+  function syncLang(lang) {
+    currentLang = lang;
+    localStorage.setItem('lang', lang);
+    updateLangDropdownUI(lang);
     renderAll();
+  }
+
+  // Toggle dropdown open/close
+  function setupLangDropdown(dropdown, trigger, menu) {
+    trigger.addEventListener('click', function (e) {
+      e.stopPropagation();
+      // Close the other dropdown
+      if (dropdown === adminLangDropdown) settingsLangDropdown.classList.remove('open');
+      else adminLangDropdown.classList.remove('open');
+      dropdown.classList.toggle('open');
+    });
+
+    var opts = menu.querySelectorAll('.lang-option');
+    for (var i = 0; i < opts.length; i++) {
+      opts[i].addEventListener('click', function () {
+        syncLang(this.getAttribute('data-lang'));
+        dropdown.classList.remove('open');
+      });
+    }
+  }
+
+  setupLangDropdown(adminLangDropdown, adminLangTrigger, adminLangMenu);
+  setupLangDropdown(settingsLangDropdown, settingsLangTrigger, settingsLangMenu);
+
+  // Close dropdowns on outside click
+  document.addEventListener('click', function (e) {
+    if (!adminLangDropdown.contains(e.target)) adminLangDropdown.classList.remove('open');
+    if (!settingsLangDropdown.contains(e.target)) settingsLangDropdown.classList.remove('open');
   });
 
-  /* --- Tabs --- */
-  tabBtns.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      tabBtns.forEach(function (b) { b.classList.remove('active'); });
-      btn.classList.add('active');
-      currentCategory = btn.getAttribute('data-category');
-      breadcrumbCat.textContent = currentCategory === 'projects' ? 'Projects' : 'Useful Links';
-      selectedRows = {};
-      updateBulkUI();
-      renderTable();
-      renderPreview();
-    });
-  });
+  // Restore saved language (synced with main page via localStorage)
+  var savedLang = localStorage.getItem('lang') || 'en';
+  currentLang = savedLang;
+  updateLangDropdownUI(savedLang);
 
   /* --- Search / Filter --- */
-  tableSearch.addEventListener('input', function () {
-    tableFilter = tableSearch.value.trim().toLowerCase();
-    renderTable();
+  tables.projects.search.addEventListener('input', function () {
+    tableFilterProjects = tables.projects.search.value.trim().toLowerCase();
+    renderTable('projects');
+  });
+
+  tables.useful.search.addEventListener('input', function () {
+    tableFilterUseful = tables.useful.search.value.trim().toLowerCase();
+    renderTable('useful');
   });
 
   /* --- Bulk Select --- */
-  function updateBulkUI() {
-    var count = Object.keys(selectedRows).filter(function (k) { return selectedRows[k]; }).length;
-    btnBulkDelete.hidden = count === 0;
-    bulkSelectAll.checked = false;
-    if (theadCheckAll) theadCheckAll.checked = false;
+  function getSelectedRows(cat) {
+    return cat === 'projects' ? selectedRowsProjects : selectedRowsUseful;
   }
 
-  bulkSelectAll.addEventListener('change', function () {
-    var items = data[currentLang][currentCategory] || [];
-    for (var i = 0; i < items.length; i++) selectedRows[i] = bulkSelectAll.checked;
-    if (theadCheckAll) theadCheckAll.checked = bulkSelectAll.checked;
-    renderTable();
-    updateBulkUI();
-  });
-
-  if (theadCheckAll) {
-    theadCheckAll.addEventListener('change', function () {
-      bulkSelectAll.checked = theadCheckAll.checked;
-      bulkSelectAll.dispatchEvent(new Event('change'));
-    });
+  function setSelectedRows(cat, val) {
+    if (cat === 'projects') selectedRowsProjects = val;
+    else selectedRowsUseful = val;
   }
 
-  btnBulkDelete.addEventListener('click', function () {
-    var indices = Object.keys(selectedRows).filter(function (k) { return selectedRows[k]; }).map(Number).sort(function (a, b) { return b - a; });
-    if (!indices.length) return;
-    saveUndoState();
-    indices.forEach(function (idx) {
-      data.en[currentCategory].splice(idx, 1);
-      data.pt[currentCategory].splice(idx, 1);
+  function updateBulkUI(cat) {
+    var sel = getSelectedRows(cat);
+    var t = tables[cat];
+    var count = Object.keys(sel).filter(function (k) { return sel[k]; }).length;
+    t.bulkDelete.hidden = count === 0;
+    t.bulkAll.checked = false;
+    if (t.theadCheck) t.theadCheck.checked = false;
+  }
+
+  ['projects', 'useful'].forEach(function (cat) {
+    var t = tables[cat];
+
+    t.bulkAll.addEventListener('change', function () {
+      var items = data ? (data[currentLang][cat] || []) : [];
+      var sel = {};
+      for (var i = 0; i < items.length; i++) sel[i] = t.bulkAll.checked;
+      setSelectedRows(cat, sel);
+      if (t.theadCheck) t.theadCheck.checked = t.bulkAll.checked;
+      renderTable(cat);
+      updateBulkUI(cat);
     });
-    selectedRows = {};
-    updateBulkUI();
-    renderAll();
-    logActivity('delete', 'Deleted ' + indices.length + ' items', 'delete');
-    showToast(indices.length + ' items deleted', 'success');
+
+    if (t.theadCheck) {
+      t.theadCheck.addEventListener('change', function () {
+        t.bulkAll.checked = t.theadCheck.checked;
+        t.bulkAll.dispatchEvent(new Event('change'));
+      });
+    }
+
+    t.bulkDelete.addEventListener('click', function () {
+      var sel = getSelectedRows(cat);
+      var indices = Object.keys(sel).filter(function (k) { return sel[k]; }).map(Number).sort(function (a, b) { return b - a; });
+      if (!indices.length) return;
+      saveUndoState();
+      indices.forEach(function (idx) {
+        data.en[cat].splice(idx, 1);
+        data.pt[cat].splice(idx, 1);
+      });
+      setSelectedRows(cat, {});
+      updateBulkUI(cat);
+      renderAll();
+      logActivity('delete', 'Deleted ' + indices.length + ' items from ' + cat, 'delete');
+      showToast(indices.length + ' items deleted', 'success');
+    });
   });
 
   /* --- Render All --- */
   function renderAll() {
     if (!data) return;
-    updateCount();
+    applyTranslations();
     updateDashboardStats();
-    renderTable();
-    renderPreview();
+    updateBadges();
+    updateCounts();
+
+    // Render based on current page
+    if (currentPage === 'dashboard') renderDashboard();
+    else if (currentPage === 'projects') renderCategoryPage('projects');
+    else if (currentPage === 'useful') renderCategoryPage('useful');
+    else if (currentPage === 'activity') renderActivityLog();
   }
 
-  function updateCount() {
-    var langData = data[currentLang];
-    var total = (langData.projects ? langData.projects.length : 0) + (langData.useful ? langData.useful.length : 0);
-    adminCount.textContent = total + ' items';
+  function applyTranslations() {
+    // Sidebar nav labels + tooltips
+    var sidebarMap = { dashboard: 'dashboard', projects: 'projects', useful: 'usefulLinks', activity: 'activity', settings: 'settings' };
+    for (var si = 0; si < sidebarItems.length; si++) {
+      var pg = sidebarItems[si].getAttribute('data-page');
+      var lbl = sidebarItems[si].querySelector('.sidebar-label');
+      if (lbl && sidebarMap[pg]) {
+        var translated = t(sidebarMap[pg]);
+        lbl.innerHTML = translated;
+        sidebarItems[si].setAttribute('data-tooltip', translated);
+      }
+    }
+
+    // Collapse button label
+    var collapseLabel = document.querySelector('.sidebar-collapse-label');
+    if (collapseLabel) collapseLabel.textContent = currentLang === 'pt' ? 'Minimizar' : 'Collapse';
+
+    // Sidebar shortcuts labels
+    var shortcutLabels = document.querySelectorAll('.sidebar-shortcut-label');
+    var shortcutKeys = currentLang === 'pt'
+      ? ['Novo', 'Guardar', 'Desfazer', 'Refazer']
+      : ['New', 'Save', 'Undo', 'Redo'];
+    for (var ski = 0; ski < shortcutLabels.length && ski < shortcutKeys.length; ski++) {
+      shortcutLabels[ski].textContent = shortcutKeys[ski];
+    }
+
+    // Sidebar profile role
+    var roleEl = document.querySelector('.sidebar-profile-role');
+    if (roleEl) roleEl.textContent = t('administrator');
+
+    // Breadcrumb page label
+    var pageLabelMap = { dashboard: 'dashboard', projects: 'projects', useful: 'usefulLinks', activity: 'activity', settings: 'settings' };
+    if (breadcrumbPage && pageLabelMap[currentPage]) breadcrumbPage.innerHTML = t(pageLabelMap[currentPage]);
+
+    // Page titles
+    var pageTitleDash = document.querySelector('#page-dashboard > .page-title');
+    if (pageTitleDash) pageTitleDash.innerHTML = t('dashboard');
+
+    // Projects page
+    var projHeading = document.querySelector('#page-projects .admin-heading');
+    if (projHeading) projHeading.innerHTML = t('projects');
+    if (btnAddProject) btnAddProject.innerHTML = '<i class="fas fa-plus"></i> ' + t('addProject');
+    var projSearchEl = tables.projects.search;
+    if (projSearchEl) projSearchEl.placeholder = t('filterProjects');
+    var projBulkLabel = document.querySelector('#page-projects .bulk-label');
+    if (projBulkLabel) projBulkLabel.textContent = t('selectAll');
+    var projEmptyText = document.querySelector('#empty-state-projects .empty-state-text');
+    if (projEmptyText) projEmptyText.textContent = t('noProjects');
+    var projEmptyHint = document.querySelector('#empty-state-projects .empty-state-hint');
+    if (projEmptyHint) projEmptyHint.innerHTML = t('addProjectHint');
+
+    // Useful page
+    var usefulHeading = document.querySelector('#page-useful .admin-heading');
+    if (usefulHeading) usefulHeading.innerHTML = t('usefulLinks');
+    if (btnAddUseful) btnAddUseful.innerHTML = '<i class="fas fa-plus"></i> ' + t('addLink');
+    var usefulSearchEl = tables.useful.search;
+    if (usefulSearchEl) usefulSearchEl.placeholder = t('filterLinks');
+    var usefulBulkLabel = document.querySelector('#page-useful .bulk-label');
+    if (usefulBulkLabel) usefulBulkLabel.textContent = t('selectAll');
+    var usefulEmptyText = document.querySelector('#empty-state-useful .empty-state-text');
+    if (usefulEmptyText) usefulEmptyText.textContent = t('noUseful');
+    var usefulEmptyHint = document.querySelector('#empty-state-useful .empty-state-hint');
+    if (usefulEmptyHint) usefulEmptyHint.innerHTML = t('addLinkHint');
+
+    // Preview headers
+    var previewTitles = document.querySelectorAll('.preview-title');
+    for (var pi = 0; pi < previewTitles.length; pi++) {
+      previewTitles[pi].innerHTML = '<i class="fas fa-eye"></i> ' + t('livePreview');
+    }
+    var previewHints = document.querySelectorAll('.preview-hint');
+    for (var phi = 0; phi < previewHints.length; phi++) {
+      previewHints[phi].innerHTML = t('previewHint');
+    }
+
+    // Activity
+    var actTitle = document.querySelector('#page-activity .page-title');
+    if (actTitle) actTitle.innerHTML = '<i class="fas fa-history"></i> ' + t('activityLog');
+    if (btnClearLog) btnClearLog.textContent = t('clearLog');
+
+    // Dashboard section titles
+    var dashProjTitle = document.querySelector('#page-dashboard .dashboard-section:first-of-type .dashboard-section-title');
+    if (dashProjTitle) dashProjTitle.innerHTML = '<i class="fas fa-project-diagram"></i> ' + t('projects');
+    var dashUsefulTitle = document.querySelector('#page-dashboard .dashboard-section:last-of-type .dashboard-section-title');
+    if (dashUsefulTitle) dashUsefulTitle.innerHTML = '<i class="fas fa-link"></i> ' + t('usefulLinks');
+    var viewAllBtns = document.querySelectorAll('.btn-goto');
+    for (var vi = 0; vi < viewAllBtns.length; vi++) {
+      viewAllBtns[vi].textContent = t('viewAll');
+    }
+
+    // Dashboard stat labels
+    var statLabels = document.querySelectorAll('.stat-card-label');
+    if (statLabels.length >= 4) {
+      statLabels[0].innerHTML = t('projects');
+      statLabels[1].innerHTML = t('usefulLinks');
+      statLabels[2].innerHTML = t('totalItems');
+      statLabels[3].innerHTML = t('lastUpdate');
+    }
+
+    // Settings page
+    var settingsTitle = document.querySelector('#page-settings > .page-title');
+    if (settingsTitle) settingsTitle.innerHTML = t('settings');
+
+    // Settings cards - update titles and descriptions
+    var settingsCards = document.querySelectorAll('#page-settings .settings-card');
+    var cardTranslations = [
+      { title: 'language', desc: 'langDesc', icon: 'fa-language' },
+      { title: 'theme', desc: 'themeDesc', icon: 'fa-palette' },
+      { title: 'exportData', desc: 'exportDesc', icon: 'fa-file-export' },
+      { title: 'importData', desc: 'importDesc', icon: 'fa-file-import' },
+      { title: 'applyToSite', desc: 'applyDesc', icon: 'fa-check-circle' },
+      { title: 'clearData', desc: 'clearDesc', icon: 'fa-trash-alt' }
+    ];
+    for (var ci = 0; ci < settingsCards.length && ci < cardTranslations.length; ci++) {
+      var cardTitle = settingsCards[ci].querySelector('.settings-card-title');
+      var cardDesc = settingsCards[ci].querySelector('.settings-card-desc');
+      if (cardTitle) cardTitle.innerHTML = '<i class="fas ' + cardTranslations[ci].icon + '"></i> ' + t(cardTranslations[ci].title);
+      if (cardDesc) cardDesc.innerHTML = t(cardTranslations[ci].desc);
+    }
+
+    // Settings buttons
+    if (settingsThemeBtn) settingsThemeBtn.innerHTML = '<i class="fas fa-adjust"></i> ' + t('toggleTheme');
+    if (btnExport) btnExport.innerHTML = '<i class="fas fa-file-export"></i> ' + t('exportJson');
+    if (btnExportPdf) btnExportPdf.innerHTML = '<i class="fas fa-file-pdf"></i> ' + t('exportPdf');
+    if (btnImport) btnImport.innerHTML = '<i class="fas fa-file-import"></i> ' + t('importJson');
+    if (btnApply) btnApply.innerHTML = '<i class="fas fa-check"></i> ' + t('applyChanges');
+    if (btnClearLocal) btnClearLocal.innerHTML = '<i class="fas fa-trash"></i> ' + t('clearLocal');
+
+    // Logout button
+    if (btnLogout) btnLogout.textContent = t('logout');
   }
 
   function updateDashboardStats() {
@@ -494,29 +971,57 @@
     document.getElementById('stat-updated').textContent = stored || '--';
   }
 
-  /* --- Render Table --- */
-  function renderTable() {
-    if (!data) return;
-    var items = data[currentLang][currentCategory] || [];
+  function updateBadges() {
+    var langData = data[currentLang];
+    document.getElementById('badge-projects').textContent = langData.projects ? langData.projects.length : 0;
+    document.getElementById('badge-useful').textContent = langData.useful ? langData.useful.length : 0;
+  }
 
-    while (itemsTbody.firstChild) itemsTbody.removeChild(itemsTbody.firstChild);
+  function updateCounts() {
+    var langData = data[currentLang];
+    tables.projects.count.textContent = (langData.projects ? langData.projects.length : 0) + ' items';
+    tables.useful.count.textContent = (langData.useful ? langData.useful.length : 0) + ' items';
+  }
+
+  /* --- Render Dashboard --- */
+  function renderDashboard() {
+    if (!data) return;
+    renderPreviewInto(dashPreviewProjects, 'projects', 5);
+    renderPreviewInto(dashPreviewUseful, 'useful', 5);
+  }
+
+  /* --- Render Category Page --- */
+  function renderCategoryPage(cat) {
+    renderTable(cat);
+    renderPreviewInto(tables[cat].preview, cat);
+  }
+
+  /* --- Render Table --- */
+  function renderTable(cat) {
+    if (!data) return;
+    var t = tables[cat];
+    var items = data[currentLang][cat] || [];
+    var filter = cat === 'projects' ? tableFilterProjects : tableFilterUseful;
+    var selectedRows = getSelectedRows(cat);
+
+    while (t.tbody.firstChild) t.tbody.removeChild(t.tbody.firstChild);
 
     var filtered = items.map(function (item, idx) { return { item: item, idx: idx }; });
-    if (tableFilter) {
+    if (filter) {
       filtered = filtered.filter(function (o) {
-        return o.item.title.toLowerCase().indexOf(tableFilter) !== -1 ||
-               o.item.desc.toLowerCase().indexOf(tableFilter) !== -1;
+        return o.item.title.toLowerCase().indexOf(filter) !== -1 ||
+               o.item.desc.toLowerCase().indexOf(filter) !== -1;
       });
     }
 
     if (filtered.length === 0) {
-      emptyState.hidden = false;
-      itemsTable.hidden = true;
+      t.empty.hidden = false;
+      t.table.hidden = true;
       return;
     }
 
-    emptyState.hidden = true;
-    itemsTable.hidden = false;
+    t.empty.hidden = true;
+    t.table.hidden = false;
 
     filtered.forEach(function (o) {
       var item = o.item;
@@ -530,6 +1035,7 @@
       tr.addEventListener('dragstart', function (e) {
         tr.classList.add('dragging');
         e.dataTransfer.setData('text/plain', idx);
+        e.dataTransfer.setData('text/category', cat);
       });
       tr.addEventListener('dragend', function () { tr.classList.remove('dragging'); });
       tr.addEventListener('dragover', function (e) { e.preventDefault(); tr.classList.add('drag-over'); });
@@ -542,7 +1048,7 @@
         if (fromIdx !== toIdx) {
           saveUndoState();
           ['en', 'pt'].forEach(function (lang) {
-            var arr = data[lang][currentCategory];
+            var arr = data[lang][cat];
             var moved = arr.splice(fromIdx, 1)[0];
             arr.splice(toIdx, 0, moved);
           });
@@ -560,7 +1066,7 @@
       cb.addEventListener('change', function () {
         selectedRows[idx] = cb.checked;
         tr.classList.toggle('selected', cb.checked);
-        updateBulkUI();
+        updateBulkUI(cat);
       });
       tdCheck.appendChild(cb);
       tr.appendChild(tdCheck);
@@ -574,14 +1080,14 @@
       var tdTitle = document.createElement('td');
       tdTitle.className = 'col-title';
       tdTitle.textContent = item.title;
-      tdTitle.addEventListener('dblclick', function () { startInlineEdit(tdTitle, currentLang, currentCategory, idx, 'title'); });
+      tdTitle.addEventListener('dblclick', function () { startInlineEdit(tdTitle, currentLang, cat, idx, 'title'); });
       tr.appendChild(tdTitle);
 
       // Desc (inline editable)
       var tdDesc = document.createElement('td');
       tdDesc.className = 'col-desc';
       tdDesc.textContent = item.desc;
-      tdDesc.addEventListener('dblclick', function () { startInlineEdit(tdDesc, currentLang, currentCategory, idx, 'desc'); });
+      tdDesc.addEventListener('dblclick', function () { startInlineEdit(tdDesc, currentLang, cat, idx, 'desc'); });
       tr.appendChild(tdDesc);
 
       var tdLink = document.createElement('td');
@@ -601,32 +1107,32 @@
 
       // Duplicate
       var btnDup = createIconBtn('fa-copy', 'Duplicate');
-      btnDup.addEventListener('click', (function (i) {
-        return function () { duplicateItem(i); };
-      })(idx));
+      btnDup.addEventListener('click', (function (i, c) {
+        return function () { duplicateItem(i, c); };
+      })(idx, cat));
       actionsDiv.appendChild(btnDup);
 
       var btnUp = createIconBtn('fa-chevron-up', 'Move up', 'btn-icon-up');
       btnUp.disabled = idx === 0;
-      btnUp.addEventListener('click', (function (i) { return function () { moveItem(i, -1); }; })(idx));
+      btnUp.addEventListener('click', (function (i, c) { return function () { moveItem(i, -1, c); }; })(idx, cat));
       actionsDiv.appendChild(btnUp);
 
       var btnDown = createIconBtn('fa-chevron-down', 'Move down', 'btn-icon-down');
       btnDown.disabled = idx === items.length - 1;
-      btnDown.addEventListener('click', (function (i) { return function () { moveItem(i, 1); }; })(idx));
+      btnDown.addEventListener('click', (function (i, c) { return function () { moveItem(i, 1, c); }; })(idx, cat));
       actionsDiv.appendChild(btnDown);
 
       var btnEdit = createIconBtn('fa-pen', 'Edit');
-      btnEdit.addEventListener('click', (function (i) { return function () { openEditModal(i); }; })(idx));
+      btnEdit.addEventListener('click', (function (i, c) { return function () { openEditModal(i, c); }; })(idx, cat));
       actionsDiv.appendChild(btnEdit);
 
       var btnDel = createIconBtn('fa-trash', 'Delete', 'btn-icon-danger');
-      btnDel.addEventListener('click', (function (i) { return function () { openDeleteModal(i); }; })(idx));
+      btnDel.addEventListener('click', (function (i, c) { return function () { openDeleteModal(i, c); }; })(idx, cat));
       actionsDiv.appendChild(btnDel);
 
       tdActions.appendChild(actionsDiv);
       tr.appendChild(tdActions);
-      itemsTbody.appendChild(tr);
+      t.tbody.appendChild(tr);
     });
   }
 
@@ -670,10 +1176,10 @@
   }
 
   /* --- Duplicate Item --- */
-  function duplicateItem(index) {
+  function duplicateItem(index, cat) {
     saveUndoState();
     ['en', 'pt'].forEach(function (lang) {
-      var arr = data[lang][currentCategory];
+      var arr = data[lang][cat];
       var copy = JSON.parse(JSON.stringify(arr[index]));
       copy.title = copy.title + ' (copy)';
       arr.splice(index + 1, 0, copy);
@@ -684,14 +1190,14 @@
   }
 
   /* --- Move Item --- */
-  function moveItem(index, direction) {
-    var items = data[currentLang][currentCategory];
+  function moveItem(index, direction, cat) {
+    var items = data[currentLang][cat];
     var newIndex = index + direction;
     if (newIndex < 0 || newIndex >= items.length) return;
 
     saveUndoState();
     ['en', 'pt'].forEach(function (lang) {
-      var arr = data[lang][currentCategory];
+      var arr = data[lang][cat];
       var temp = arr[index];
       arr[index] = arr[newIndex];
       arr[newIndex] = temp;
@@ -701,17 +1207,19 @@
     renderAll();
   }
 
-  /* --- Preview --- */
-  function renderPreview() {
-    if (!data) return;
-    while (previewArea.firstChild) previewArea.removeChild(previewArea.firstChild);
+  /* --- Preview Rendering --- */
+  function renderPreviewInto(container, cat, limit) {
+    if (!data || !container) return;
+    while (container.firstChild) container.removeChild(container.firstChild);
 
-    var items = data[currentLang][currentCategory] || [];
+    var items = data[currentLang][cat] || [];
+    if (limit) items = items.slice(0, limit);
+
     if (items.length === 0) {
       var emptyP = document.createElement('p');
       emptyP.style.cssText = 'color: var(--text-muted); font-size: 0.85rem;';
       emptyP.textContent = 'No items to preview';
-      previewArea.appendChild(emptyP);
+      container.appendChild(emptyP);
       return;
     }
 
@@ -755,15 +1263,16 @@
       card.appendChild(titleRow);
       card.appendChild(desc);
       aEl.appendChild(card);
-      previewArea.appendChild(aEl);
+      container.appendChild(aEl);
     });
   }
 
   /* --- Add / Edit Modal --- */
-  btnAdd.addEventListener('click', openAddModal);
+  btnAddProject.addEventListener('click', function () { openAddModal('projects'); });
+  btnAddUseful.addEventListener('click', function () { openAddModal('useful'); });
 
-  function openAddModal() {
-    modalTitle.textContent = 'Add Item';
+  function openAddModal(cat) {
+    modalTitle.textContent = cat === 'projects' ? 'Add Project' : 'Add Link';
     var draft = loadDraft();
     document.getElementById('field-title-en').value = draft ? draft.titleEn : '';
     document.getElementById('field-title-pt').value = draft ? draft.titlePt : '';
@@ -771,7 +1280,7 @@
     document.getElementById('field-desc-pt').value = draft ? draft.descPt : '';
     document.getElementById('field-link').value = draft ? draft.link : '';
     document.getElementById('field-type').value = draft ? draft.type : '';
-    document.getElementById('field-category').value = currentCategory;
+    document.getElementById('field-category').value = cat;
     document.getElementById('field-featured').checked = draft ? draft.featured : false;
     document.getElementById('field-isnew').checked = draft ? draft.isNew : false;
     document.getElementById('field-edit-index').value = '-1';
@@ -781,10 +1290,10 @@
     itemModal.hidden = false;
   }
 
-  function openEditModal(index) {
+  function openEditModal(index, cat) {
     modalTitle.textContent = 'Edit Item';
-    var enItem = data.en[currentCategory][index] || {};
-    var ptItem = data.pt[currentCategory][index] || {};
+    var enItem = data.en[cat][index] || {};
+    var ptItem = data.pt[cat][index] || {};
 
     document.getElementById('field-title-en').value = enItem.title || '';
     document.getElementById('field-title-pt').value = ptItem.title || '';
@@ -792,11 +1301,11 @@
     document.getElementById('field-desc-pt').value = ptItem.desc || '';
     document.getElementById('field-link').value = enItem.link || '';
     document.getElementById('field-type').value = enItem.type || '';
-    document.getElementById('field-category').value = currentCategory;
+    document.getElementById('field-category').value = cat;
     document.getElementById('field-featured').checked = enItem.featured || false;
     document.getElementById('field-isnew').checked = enItem.isNew || false;
     document.getElementById('field-edit-index').value = index;
-    document.getElementById('field-edit-cat').value = currentCategory;
+    document.getElementById('field-edit-cat').value = cat;
     clearFieldErrors();
     updateAllCounters();
     itemModal.hidden = false;
@@ -942,18 +1451,19 @@
         data.pt[editCat].splice(editIndex, 1);
         data.en[category].push(enItem);
         data.pt[category].push(ptItem);
-        currentCategory = category;
-        tabBtns.forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-category') === category); });
       }
       logActivity('edit', 'Edited "' + titleEn + '"', 'edit');
       showToast('Item updated', 'success');
     } else {
       data.en[category].push(enItem);
       data.pt[category].push(ptItem);
-      currentCategory = category;
-      tabBtns.forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-category') === category); });
       logActivity('add', 'Added "' + titleEn + '"', 'add');
       showToast('Item added', 'success');
+    }
+
+    // Navigate to the category page if not already there
+    if (currentPage !== category) {
+      navigateTo(category);
     }
 
     closeItemModal();
@@ -961,9 +1471,9 @@
   });
 
   /* --- Delete Modal --- */
-  function openDeleteModal(index) {
-    deleteTarget = { category: currentCategory, index: index };
-    var item = data[currentLang][currentCategory][index];
+  function openDeleteModal(index, cat) {
+    deleteTarget = { category: cat, index: index };
+    var item = data[currentLang][cat][index];
     deleteItemName.textContent = item.title;
     deleteModal.hidden = false;
   }
@@ -1005,26 +1515,32 @@
   /* --- Export PDF --- */
   btnExportPdf.addEventListener('click', function () {
     if (!data) return;
-    var items = data[currentLang][currentCategory] || [];
-    var title = currentCategory === 'projects' ? 'Projects' : 'Useful Links';
-
+    // Export both categories
+    var cats = ['projects', 'useful'];
     var win = window.open('', '_blank');
-    var html = '<!DOCTYPE html><html><head><title>' + title + ' - VBJ Portfolio</title>' +
+    var html = '<!DOCTYPE html><html><head><title>Portfolio Data - VBJ</title>' +
       '<style>body{font-family:Arial,sans-serif;padding:40px;color:#111;}' +
       'h1{font-size:1.5rem;border-bottom:2px solid #1e3a5f;padding-bottom:8px;color:#1e3a5f;}' +
-      'table{width:100%;border-collapse:collapse;margin-top:16px;}' +
+      'h2{font-size:1.1rem;color:#1e3a5f;margin-top:24px;}' +
+      'table{width:100%;border-collapse:collapse;margin-top:8px;}' +
       'th{background:#1e3a5f;color:#fff;padding:8px 12px;text-align:left;font-size:0.8rem;}' +
       'td{padding:8px 12px;border-bottom:1px solid #e5e7eb;font-size:0.85rem;}' +
       'tr:nth-child(even){background:#f9fafb;}' +
       '.footer{margin-top:24px;font-size:0.7rem;color:#999;text-align:center;}</style></head><body>' +
-      '<h1>' + title + ' (' + currentLang.toUpperCase() + ')</h1>' +
-      '<table><tr><th>#</th><th>Title</th><th>Description</th><th>Link</th></tr>';
+      '<h1>Portfolio Data (' + currentLang.toUpperCase() + ')</h1>';
 
-    items.forEach(function (item, i) {
-      html += '<tr><td>' + (i + 1) + '</td><td>' + escapeHtml(item.title) + '</td><td>' + escapeHtml(item.desc) + '</td><td>' + escapeHtml(item.link) + '</td></tr>';
+    cats.forEach(function (cat) {
+      var items = data[currentLang][cat] || [];
+      var title = cat === 'projects' ? 'Projects' : 'Useful Links';
+      html += '<h2>' + title + ' (' + items.length + ')</h2>';
+      html += '<table><tr><th>#</th><th>Title</th><th>Description</th><th>Link</th></tr>';
+      items.forEach(function (item, i) {
+        html += '<tr><td>' + (i + 1) + '</td><td>' + escapeHtml(item.title) + '</td><td>' + escapeHtml(item.desc) + '</td><td>' + escapeHtml(item.link) + '</td></tr>';
+      });
+      html += '</table>';
     });
 
-    html += '</table><div class="footer">Generated from VBJ Admin Panel &middot; ' + new Date().toLocaleDateString() + '</div>' +
+    html += '<div class="footer">Generated from VBJ Admin Panel &middot; ' + new Date().toLocaleDateString() + '</div>' +
       '<script>window.print();<\/script></body></html>';
 
     win.document.write(html);
@@ -1083,10 +1599,11 @@
 
   /* --- Keyboard Shortcuts --- */
   document.addEventListener('keydown', function (e) {
-    // Escape closes modals
+    // Escape closes modals / sidebar
     if (e.key === 'Escape') {
       if (!itemModal.hidden) closeItemModal();
       if (!deleteModal.hidden) closeDeleteModal();
+      closeSidebar();
     }
 
     // Skip shortcuts if typing in an input
@@ -1101,7 +1618,8 @@
 
     if ((e.ctrlKey || e.metaKey) && e.key === 'n') {
       e.preventDefault();
-      openAddModal();
+      if (currentPage === 'useful') openAddModal('useful');
+      else openAddModal('projects');
     }
     if ((e.ctrlKey || e.metaKey) && e.key === 'z') {
       e.preventDefault();
@@ -1112,9 +1630,14 @@
       redo();
     }
     if (e.key === 'Delete') {
-      var sel = Object.keys(selectedRows).filter(function (k) { return selectedRows[k]; });
-      if (sel.length) btnBulkDelete.click();
+      var cat = currentPage === 'useful' ? 'useful' : 'projects';
+      var sel = getSelectedRows(cat);
+      var selected = Object.keys(sel).filter(function (k) { return sel[k]; });
+      if (selected.length && tables[cat].bulkDelete) tables[cat].bulkDelete.click();
     }
   });
+
+  // Start on dashboard
+  navigateTo('dashboard');
 
 })();

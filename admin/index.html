@@ -36,13 +36,39 @@
   <!-- Admin Panel -->
   <div id="admin-panel" class="admin-panel" hidden>
 
+    <!-- Top Toolbar -->
     <header class="toolbar">
-      <span class="toolbar-brand">VBJ <span class="admin-badge">Admin</span></span>
+      <div class="toolbar-left">
+        <button id="btn-hamburger" class="btn-hamburger" aria-label="Toggle menu">
+          <i class="fas fa-bars"></i>
+        </button>
+        <span class="toolbar-brand">VBJ <span class="admin-badge">Admin</span></span>
+      </div>
+      <nav class="admin-breadcrumb" id="admin-breadcrumb">
+        <span class="breadcrumb-item">Admin</span>
+        <span class="breadcrumb-sep">/</span>
+        <span class="breadcrumb-item active" id="breadcrumb-page">Dashboard</span>
+      </nav>
       <div class="toolbar-controls">
-        <select id="admin-lang" class="lang-select" aria-label="Language">
-          <option value="en">EN</option>
-          <option value="pt">PT</option>
-        </select>
+        <div id="admin-lang-dropdown" class="lang-dropdown" aria-label="Language">
+          <button id="admin-lang-trigger" class="lang-trigger" type="button">
+            <svg id="admin-lang-flag" class="lang-flag-svg" viewBox="0 0 60 30" width="20" height="10"><clipPath id="as"><path d="M0,0 v30 h60 v-30 z"/></clipPath><clipPath id="at"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><g clip-path="url(#as)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#at)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g></svg>
+            <span class="lang-label" id="admin-lang-label">EN</span>
+            <i class="fas fa-chevron-down lang-chevron"></i>
+          </button>
+          <div id="admin-lang-menu" class="lang-menu">
+            <button class="lang-option active" data-lang="en" type="button">
+              <svg class="lang-flag-svg" viewBox="0 0 60 30" width="20" height="10"><clipPath id="as2"><path d="M0,0 v30 h60 v-30 z"/></clipPath><clipPath id="at2"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><g clip-path="url(#as2)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#at2)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g></svg>
+              <span class="lang-option-label">English</span>
+              <i class="fas fa-check lang-check"></i>
+            </button>
+            <button class="lang-option" data-lang="pt" type="button">
+              <svg class="lang-flag-svg" viewBox="0 0 600 400" width="20" height="13"><rect width="600" height="400" fill="#DA291C"/><rect width="240" height="400" fill="#006600"/><circle cx="240" cy="200" r="70" fill="#FFCC00"/><circle cx="240" cy="200" r="55" fill="#DA291C"/><path d="M240,150 L240,250 M195,185 L285,185 M195,215 L285,215" stroke="#fff" stroke-width="4" fill="none"/></svg>
+              <span class="lang-option-label">Portugu&ecirc;s</span>
+              <i class="fas fa-check lang-check"></i>
+            </button>
+          </div>
+        </div>
         <div id="admin-theme" class="theme-toggle-slider" title="Toggle theme" role="button" tabindex="0" aria-label="Toggle dark or light mode">
           <div class="toggle-thumb"><i class="fas fa-moon toggle-icon"></i></div>
           <div class="toggle-bg-icon"><i class="fas fa-sun toggle-icon"></i></div>
@@ -51,127 +77,318 @@
       </div>
     </header>
 
-    <div class="admin-container">
+    <!-- Body: Sidebar + Main -->
+    <div class="admin-body">
 
-      <!-- Breadcrumbs -->
-      <nav class="admin-breadcrumb" id="admin-breadcrumb">
-        <span class="breadcrumb-item active">Admin</span>
-        <span class="breadcrumb-sep">/</span>
-        <span class="breadcrumb-item" id="breadcrumb-cat">Projects</span>
-      </nav>
+      <!-- Sidebar Overlay (mobile) -->
+      <div id="sidebar-overlay" class="sidebar-overlay"></div>
 
-      <!-- Dashboard Stats -->
-      <div class="dashboard-stats" id="dashboard-stats">
-        <div class="stat-card">
-          <div class="stat-card-icon"><i class="fas fa-project-diagram"></i></div>
-          <div class="stat-card-info">
-            <span class="stat-card-value" id="stat-projects">0</span>
-            <span class="stat-card-label">Projects</span>
+      <!-- Sidebar -->
+      <aside id="admin-sidebar" class="admin-sidebar">
+        <div class="sidebar-profile">
+          <img src="https://avatars.githubusercontent.com/u/48354097?v=4" alt="Vagner Bom Jesus" class="sidebar-avatar" width="40" height="40">
+          <div class="sidebar-profile-info">
+            <span class="sidebar-profile-name">Vagner Bom Jesus</span>
+            <span class="sidebar-profile-role">Administrator</span>
           </div>
         </div>
-        <div class="stat-card">
-          <div class="stat-card-icon"><i class="fas fa-link"></i></div>
-          <div class="stat-card-info">
-            <span class="stat-card-value" id="stat-useful">0</span>
-            <span class="stat-card-label">Useful Links</span>
+        <nav class="sidebar-nav">
+          <button class="sidebar-item active" data-page="dashboard" data-tooltip="Dashboard">
+            <i class="fas fa-chart-pie sidebar-icon"></i>
+            <span class="sidebar-label">Dashboard</span>
+          </button>
+          <button class="sidebar-item" data-page="projects" data-tooltip="Projects">
+            <i class="fas fa-project-diagram sidebar-icon"></i>
+            <span class="sidebar-label">Projects</span>
+            <span class="sidebar-badge" id="badge-projects">0</span>
+          </button>
+          <button class="sidebar-item" data-page="useful" data-tooltip="Useful Links">
+            <i class="fas fa-link sidebar-icon"></i>
+            <span class="sidebar-label">Useful Links</span>
+            <span class="sidebar-badge" id="badge-useful">0</span>
+          </button>
+          <button class="sidebar-item" data-page="activity" data-tooltip="Activity">
+            <i class="fas fa-history sidebar-icon"></i>
+            <span class="sidebar-label">Activity</span>
+          </button>
+          <button class="sidebar-item" data-page="settings" data-tooltip="Settings">
+            <i class="fas fa-cog sidebar-icon"></i>
+            <span class="sidebar-label">Settings</span>
+          </button>
+        </nav>
+        <div class="sidebar-footer">
+          <div class="sidebar-shortcuts">
+            <div class="sidebar-shortcut"><span class="shortcut-key">Ctrl+N</span> <span class="sidebar-shortcut-label">New</span></div>
+            <div class="sidebar-shortcut"><span class="shortcut-key">Ctrl+S</span> <span class="sidebar-shortcut-label">Save</span></div>
+            <div class="sidebar-shortcut"><span class="shortcut-key">Ctrl+Z</span> <span class="sidebar-shortcut-label">Undo</span></div>
+            <div class="sidebar-shortcut"><span class="shortcut-key">Ctrl+Y</span> <span class="sidebar-shortcut-label">Redo</span></div>
+          </div>
+          <button id="btn-collapse-sidebar" class="sidebar-collapse-btn" title="Collapse sidebar">
+            <i class="fas fa-angles-left sidebar-collapse-icon"></i>
+            <span class="sidebar-collapse-label">Collapse</span>
+          </button>
+          <span class="sidebar-version">v1.0</span>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <div class="admin-main">
+
+        <!-- PAGE: Dashboard -->
+        <div id="page-dashboard" class="page active">
+          <h1 class="page-title">Dashboard</h1>
+
+          <!-- Stats Cards -->
+          <div class="dashboard-stats" id="dashboard-stats">
+            <div class="stat-card">
+              <div class="stat-card-icon"><i class="fas fa-project-diagram"></i></div>
+              <div class="stat-card-info">
+                <span class="stat-card-value" id="stat-projects">0</span>
+                <span class="stat-card-label">Projects</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-icon"><i class="fas fa-link"></i></div>
+              <div class="stat-card-info">
+                <span class="stat-card-value" id="stat-useful">0</span>
+                <span class="stat-card-label">Useful Links</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-icon"><i class="fas fa-globe"></i></div>
+              <div class="stat-card-info">
+                <span class="stat-card-value" id="stat-total">0</span>
+                <span class="stat-card-label">Total Items</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-icon"><i class="fas fa-clock"></i></div>
+              <div class="stat-card-info">
+                <span class="stat-card-value stat-card-value-sm" id="stat-updated">--</span>
+                <span class="stat-card-label">Last Update</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dashboard Preview: Projects -->
+          <div class="dashboard-section">
+            <div class="dashboard-section-header">
+              <h2 class="dashboard-section-title"><i class="fas fa-project-diagram"></i> Projects</h2>
+              <button class="btn-secondary btn-sm btn-goto" data-goto="projects">View All</button>
+            </div>
+            <div id="dashboard-preview-projects" class="preview-area"></div>
+          </div>
+
+          <!-- Dashboard Preview: Useful Links -->
+          <div class="dashboard-section">
+            <div class="dashboard-section-header">
+              <h2 class="dashboard-section-title"><i class="fas fa-link"></i> Useful Links</h2>
+              <button class="btn-secondary btn-sm btn-goto" data-goto="useful">View All</button>
+            </div>
+            <div id="dashboard-preview-useful" class="preview-area"></div>
           </div>
         </div>
-        <div class="stat-card">
-          <div class="stat-card-icon"><i class="fas fa-globe"></i></div>
-          <div class="stat-card-info">
-            <span class="stat-card-value" id="stat-total">0</span>
-            <span class="stat-card-label">Total Items</span>
+
+        <!-- PAGE: Projects -->
+        <div id="page-projects" class="page">
+          <div class="action-bar">
+            <div class="action-bar-left">
+              <h1 class="admin-heading">Projects</h1>
+              <span id="count-projects" class="resources-count">0 items</span>
+            </div>
+            <div class="action-bar-right">
+              <button id="btn-undo" class="btn-secondary btn-sm btn-icon-action" title="Undo (Ctrl+Z)" disabled><i class="fas fa-undo"></i></button>
+              <button id="btn-redo" class="btn-secondary btn-sm btn-icon-action" title="Redo (Ctrl+Y)" disabled><i class="fas fa-redo"></i></button>
+              <button id="btn-add-project" class="btn-primary btn-sm"><i class="fas fa-plus"></i> Add Project</button>
+            </div>
+          </div>
+
+          <div class="table-toolbar">
+            <div class="table-toolbar-left">
+              <label class="bulk-check-wrap"><input type="checkbox" id="bulk-select-all-projects"> <span class="bulk-label">Select all</span></label>
+              <button id="btn-bulk-delete-projects" class="btn-danger btn-sm" hidden><i class="fas fa-trash"></i> Delete Selected</button>
+            </div>
+            <div class="table-toolbar-right">
+              <div class="table-search-wrap">
+                <i class="fas fa-search table-search-icon"></i>
+                <input type="text" id="table-search-projects" class="table-search" placeholder="Filter projects...">
+              </div>
+            </div>
+          </div>
+
+          <div class="items-table-wrapper">
+            <table class="items-table" id="items-table-projects">
+              <thead>
+                <tr>
+                  <th class="col-check"><input type="checkbox" id="thead-check-projects"></th>
+                  <th class="col-order">#</th>
+                  <th class="col-title">Title</th>
+                  <th class="col-desc">Description</th>
+                  <th class="col-link">Link</th>
+                  <th class="col-actions">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="items-tbody-projects"></tbody>
+            </table>
+            <div id="empty-state-projects" class="empty-state" hidden>
+              <div class="empty-state-icon"><i class="fas fa-inbox"></i></div>
+              <p class="empty-state-text">No projects yet</p>
+              <p class="empty-state-hint">Click <strong>"+ Add Project"</strong> to create one or <strong>Import JSON</strong> to load existing data.</p>
+            </div>
+          </div>
+
+          <!-- Preview Section -->
+          <div class="preview-section">
+            <div class="preview-header">
+              <h2 class="preview-title"><i class="fas fa-eye"></i> Live Preview</h2>
+              <span class="preview-hint">Updates in real-time as you make changes</span>
+            </div>
+            <div id="preview-area-projects" class="preview-area"></div>
           </div>
         </div>
-        <div class="stat-card">
-          <div class="stat-card-icon"><i class="fas fa-clock"></i></div>
-          <div class="stat-card-info">
-            <span class="stat-card-value stat-card-value-sm" id="stat-updated">--</span>
-            <span class="stat-card-label">Last Update</span>
+
+        <!-- PAGE: Useful Links -->
+        <div id="page-useful" class="page">
+          <div class="action-bar">
+            <div class="action-bar-left">
+              <h1 class="admin-heading">Useful Links</h1>
+              <span id="count-useful" class="resources-count">0 items</span>
+            </div>
+            <div class="action-bar-right">
+              <button id="btn-undo-useful" class="btn-secondary btn-sm btn-icon-action" title="Undo (Ctrl+Z)" disabled><i class="fas fa-undo"></i></button>
+              <button id="btn-redo-useful" class="btn-secondary btn-sm btn-icon-action" title="Redo (Ctrl+Y)" disabled><i class="fas fa-redo"></i></button>
+              <button id="btn-add-useful" class="btn-primary btn-sm"><i class="fas fa-plus"></i> Add Link</button>
+            </div>
+          </div>
+
+          <div class="table-toolbar">
+            <div class="table-toolbar-left">
+              <label class="bulk-check-wrap"><input type="checkbox" id="bulk-select-all-useful"> <span class="bulk-label">Select all</span></label>
+              <button id="btn-bulk-delete-useful" class="btn-danger btn-sm" hidden><i class="fas fa-trash"></i> Delete Selected</button>
+            </div>
+            <div class="table-toolbar-right">
+              <div class="table-search-wrap">
+                <i class="fas fa-search table-search-icon"></i>
+                <input type="text" id="table-search-useful" class="table-search" placeholder="Filter links...">
+              </div>
+            </div>
+          </div>
+
+          <div class="items-table-wrapper">
+            <table class="items-table" id="items-table-useful">
+              <thead>
+                <tr>
+                  <th class="col-check"><input type="checkbox" id="thead-check-useful"></th>
+                  <th class="col-order">#</th>
+                  <th class="col-title">Title</th>
+                  <th class="col-desc">Description</th>
+                  <th class="col-link">Link</th>
+                  <th class="col-actions">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="items-tbody-useful"></tbody>
+            </table>
+            <div id="empty-state-useful" class="empty-state" hidden>
+              <div class="empty-state-icon"><i class="fas fa-inbox"></i></div>
+              <p class="empty-state-text">No useful links yet</p>
+              <p class="empty-state-hint">Click <strong>"+ Add Link"</strong> to create one or <strong>Import JSON</strong> to load existing data.</p>
+            </div>
+          </div>
+
+          <!-- Preview Section -->
+          <div class="preview-section">
+            <div class="preview-header">
+              <h2 class="preview-title"><i class="fas fa-eye"></i> Live Preview</h2>
+              <span class="preview-hint">Updates in real-time as you make changes</span>
+            </div>
+            <div id="preview-area-useful" class="preview-area"></div>
           </div>
         </div>
-      </div>
 
-      <!-- Action Bar -->
-      <div class="action-bar">
-        <div class="action-bar-left">
-          <h1 class="admin-heading">Projects & Resources</h1>
-          <span id="admin-count" class="resources-count">0 items</span>
-        </div>
-        <div class="action-bar-right">
-          <button id="btn-undo" class="btn-secondary btn-sm btn-icon-action" title="Undo (Ctrl+Z)" disabled><i class="fas fa-undo"></i></button>
-          <button id="btn-redo" class="btn-secondary btn-sm btn-icon-action" title="Redo (Ctrl+Y)" disabled><i class="fas fa-redo"></i></button>
-          <button id="btn-add" class="btn-primary btn-sm"><i class="fas fa-plus"></i> Add Item</button>
-          <button id="btn-import" class="btn-secondary btn-sm"><i class="fas fa-file-import"></i> Import</button>
-          <button id="btn-export" class="btn-secondary btn-sm"><i class="fas fa-file-export"></i> Export</button>
-          <button id="btn-export-pdf" class="btn-secondary btn-sm"><i class="fas fa-file-pdf"></i> PDF</button>
-          <button id="btn-apply" class="btn-primary btn-sm"><i class="fas fa-check"></i> Apply</button>
-          <button id="btn-clear-local" class="btn-danger btn-sm"><i class="fas fa-trash"></i> Clear</button>
-        </div>
-      </div>
-
-      <!-- Category Tabs -->
-      <div class="tab-bar">
-        <button class="tab-btn active" data-category="projects">Projects</button>
-        <button class="tab-btn" data-category="useful">Useful Links</button>
-      </div>
-
-      <!-- Search & Bulk Actions -->
-      <div class="table-toolbar">
-        <div class="table-toolbar-left">
-          <label class="bulk-check-wrap"><input type="checkbox" id="bulk-select-all"> <span class="bulk-label">Select all</span></label>
-          <button id="btn-bulk-delete" class="btn-danger btn-sm" hidden><i class="fas fa-trash"></i> Delete Selected</button>
-        </div>
-        <div class="table-toolbar-right">
-          <div class="table-search-wrap">
-            <i class="fas fa-search table-search-icon"></i>
-            <input type="text" id="table-search" class="table-search" placeholder="Filter items...">
+        <!-- PAGE: Activity -->
+        <div id="page-activity" class="page">
+          <div class="activity-section">
+            <div class="activity-header">
+              <h1 class="page-title"><i class="fas fa-history"></i> Activity Log</h1>
+              <button id="btn-clear-log" class="btn-secondary btn-sm">Clear Log</button>
+            </div>
+            <div id="activity-log" class="activity-log activity-log-full">
+              <p class="activity-empty">No activity yet.</p>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Items Table -->
-      <div class="items-table-wrapper">
-        <table class="items-table" id="items-table">
-          <thead>
-            <tr>
-              <th class="col-check"><input type="checkbox" id="thead-check-all"></th>
-              <th class="col-order">#</th>
-              <th class="col-title">Title</th>
-              <th class="col-desc">Description</th>
-              <th class="col-link">Link</th>
-              <th class="col-actions">Actions</th>
-            </tr>
-          </thead>
-          <tbody id="items-tbody"></tbody>
-        </table>
-        <div id="empty-state" class="empty-state" hidden>
-          <div class="empty-state-icon"><i class="fas fa-inbox"></i></div>
-          <p class="empty-state-text">No items yet</p>
-          <p class="empty-state-hint">Click <strong>"+ Add Item"</strong> to create one or <strong>Import JSON</strong> to load existing data.</p>
-        </div>
-      </div>
+        <!-- PAGE: Settings -->
+        <div id="page-settings" class="page">
+          <h1 class="page-title">Settings</h1>
 
-      <!-- Activity Log -->
-      <div class="activity-section" id="activity-section">
-        <div class="activity-header">
-          <h2 class="activity-title"><i class="fas fa-history"></i> Activity Log</h2>
-          <button id="btn-clear-log" class="btn-secondary btn-sm">Clear</button>
-        </div>
-        <div id="activity-log" class="activity-log">
-          <p class="activity-empty">No activity yet.</p>
-        </div>
-      </div>
+          <div class="settings-grid">
+            <!-- Language -->
+            <div class="settings-card">
+              <h3 class="settings-card-title"><i class="fas fa-language"></i> Language</h3>
+              <p class="settings-card-desc">Choose the editing language for your content.</p>
+              <div id="settings-lang-dropdown" class="lang-dropdown" aria-label="Language">
+                <button id="settings-lang-trigger" class="lang-trigger" type="button">
+                  <svg id="settings-lang-flag" class="lang-flag-svg" viewBox="0 0 60 30" width="20" height="10"><clipPath id="ss"><path d="M0,0 v30 h60 v-30 z"/></clipPath><clipPath id="st"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><g clip-path="url(#ss)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#st)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g></svg>
+                  <span class="lang-label" id="settings-lang-label">EN</span>
+                  <i class="fas fa-chevron-down lang-chevron"></i>
+                </button>
+                <div id="settings-lang-menu" class="lang-menu">
+                  <button class="lang-option active" data-lang="en" type="button">
+                    <svg class="lang-flag-svg" viewBox="0 0 60 30" width="20" height="10"><clipPath id="ss2"><path d="M0,0 v30 h60 v-30 z"/></clipPath><clipPath id="st2"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><g clip-path="url(#ss2)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#st2)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g></svg>
+                    <span class="lang-option-label">English</span>
+                    <i class="fas fa-check lang-check"></i>
+                  </button>
+                  <button class="lang-option" data-lang="pt" type="button">
+                    <svg class="lang-flag-svg" viewBox="0 0 600 400" width="20" height="13"><rect width="600" height="400" fill="#DA291C"/><rect width="240" height="400" fill="#006600"/><circle cx="240" cy="200" r="70" fill="#FFCC00"/><circle cx="240" cy="200" r="55" fill="#DA291C"/><path d="M240,150 L240,250 M195,185 L285,185 M195,215 L285,215" stroke="#fff" stroke-width="4" fill="none"/></svg>
+                    <span class="lang-option-label">Portugu&ecirc;s</span>
+                    <i class="fas fa-check lang-check"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
 
-      <!-- Preview Section -->
-      <div class="preview-section">
-        <div class="preview-header">
-          <h2 class="preview-title"><i class="fas fa-eye"></i> Live Preview</h2>
-          <span class="preview-hint">Updates in real-time as you make changes</span>
-        </div>
-        <div id="preview-area" class="preview-area"></div>
-      </div>
+            <!-- Theme -->
+            <div class="settings-card">
+              <h3 class="settings-card-title"><i class="fas fa-palette"></i> Theme</h3>
+              <p class="settings-card-desc">Toggle between light and dark mode.</p>
+              <button id="settings-theme-toggle" class="btn-secondary btn-sm"><i class="fas fa-adjust"></i> Toggle Theme</button>
+            </div>
 
+            <!-- Export -->
+            <div class="settings-card">
+              <h3 class="settings-card-title"><i class="fas fa-file-export"></i> Export Data</h3>
+              <p class="settings-card-desc">Download all data as a JSON file.</p>
+              <div class="settings-btn-group">
+                <button id="btn-export" class="btn-secondary btn-sm"><i class="fas fa-file-export"></i> Export JSON</button>
+                <button id="btn-export-pdf" class="btn-secondary btn-sm"><i class="fas fa-file-pdf"></i> Export PDF</button>
+              </div>
+            </div>
+
+            <!-- Import -->
+            <div class="settings-card">
+              <h3 class="settings-card-title"><i class="fas fa-file-import"></i> Import Data</h3>
+              <p class="settings-card-desc">Load data from a JSON file.</p>
+              <button id="btn-import" class="btn-secondary btn-sm"><i class="fas fa-file-import"></i> Import JSON</button>
+            </div>
+
+            <!-- Apply -->
+            <div class="settings-card">
+              <h3 class="settings-card-title"><i class="fas fa-check-circle"></i> Apply to Site</h3>
+              <p class="settings-card-desc">Save current data to localStorage so the portfolio site uses it.</p>
+              <button id="btn-apply" class="btn-primary btn-sm"><i class="fas fa-check"></i> Apply Changes</button>
+            </div>
+
+            <!-- Clear -->
+            <div class="settings-card">
+              <h3 class="settings-card-title"><i class="fas fa-trash-alt"></i> Clear Data</h3>
+              <p class="settings-card-desc">Remove all locally saved data. The site will reload from the default JSON.</p>
+              <button id="btn-clear-local" class="btn-danger btn-sm"><i class="fas fa-trash"></i> Clear Local Data</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 
@@ -272,14 +489,6 @@
 
   <!-- Hidden file input for import -->
   <input type="file" id="file-import" accept=".json" hidden>
-
-  <!-- Keyboard Shortcuts Help -->
-  <div class="shortcuts-hint" id="shortcuts-hint">
-    <span class="shortcut-key">Ctrl+N</span> New
-    <span class="shortcut-key">Ctrl+S</span> Save
-    <span class="shortcut-key">Ctrl+Z</span> Undo
-    <span class="shortcut-key">Ctrl+Y</span> Redo
-  </div>
 
   <script src="admin.js"></script>
 </body>
