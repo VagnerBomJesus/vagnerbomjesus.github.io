@@ -253,9 +253,16 @@
 
     currentLanguage = lang;
     // Update language dropdown UI
-    var langFlags = { en: '🇬🇧', pt: '🇵🇹' };
+    var langSvgs = {
+      en: '<clipPath id="s"><path d="M0,0 v30 h60 v-30 z"/></clipPath><clipPath id="t"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><g clip-path="url(#s)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#t)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g>',
+      pt: '<rect width="600" height="400" fill="#DA291C"/><rect width="240" height="400" fill="#006600"/><circle cx="240" cy="200" r="70" fill="#FFCC00"/><circle cx="240" cy="200" r="55" fill="#DA291C"/><path d="M240,150 L240,250 M195,185 L285,185 M195,215 L285,215" stroke="#fff" stroke-width="4" fill="none"/>'
+    };
+    var langViewBoxes = { en: '0 0 60 30', pt: '0 0 600 400' };
     var langLabels = { en: 'EN', pt: 'PT' };
-    if (langFlagEl) langFlagEl.textContent = langFlags[lang] || langFlags.en;
+    if (langFlagEl) {
+      langFlagEl.setAttribute('viewBox', langViewBoxes[lang] || langViewBoxes.en);
+      langFlagEl.innerHTML = langSvgs[lang] || langSvgs.en;
+    }
     if (langLabelEl) langLabelEl.textContent = langLabels[lang] || langLabels.en;
     // Update active state in dropdown
     var langOptions = langMenu ? langMenu.querySelectorAll('.lang-option') : [];

@@ -1,4 +1,4 @@
-var CACHE_NAME = 'vbj-portfolio-v4';
+var CACHE_NAME = 'vbj-portfolio-v5';
 var ASSETS = [
   '/',
   '/index.html',
