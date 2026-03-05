@@ -112,6 +112,16 @@
     .error-actions a {
       flex: 1;
     }
+    .error-countdown {
+      margin-top: 16px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+    .error-countdown span {
+      color: var(--accent);
+      font-weight: 700;
+    }
     .error-hint {
       margin-top: 20px;
       padding-top: 16px;
@@ -192,6 +202,9 @@
           <a href="/" class="btn-primary">Back to Portfolio</a>
           <a href="https://www.linkedin.com/in/vagnerbomjesus" target="_blank" rel="noopener noreferrer" class="btn-secondary">Contact Me</a>
         </div>
+        <div class="error-countdown" id="error-countdown">
+          Redirecting to homepage in <span id="countdown-num">15</span>s...
+        </div>
         <div class="error-hint">
           Looking for something? Check out my <a href="/">projects and resources</a> or find me on <a href="https://github.com/VagnerBomJesus" target="_blank" rel="noopener noreferrer">GitHub</a>.
         </div>
@@ -230,6 +243,20 @@
     themeBtn.addEventListener('click', function () {
       setTheme(document.documentElement.getAttribute('data-theme') !== 'dark');
     });
+
+    // Countdown redirect
+    var countdownEl = document.getElementById('countdown-num');
+    var count = 15;
+    var countInterval = setInterval(function () {
+      count--;
+      if (countdownEl) countdownEl.textContent = count;
+      if (count <= 0) {
+        clearInterval(countInterval);
+        document.body.style.opacity = '0';
+        document.body.style.transition = 'opacity 0.5s ease';
+        setTimeout(function () { window.location.href = '/'; }, 500);
+      }
+    }, 1000);
   </script>
 </body>
 </html>
