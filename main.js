@@ -627,6 +627,15 @@
     }, { passive: true });
   }
 
+  /* --- Subtle parallax on mobile scroll --- */
+  var profileCol = document.querySelector('.profile-col');
+  if (mainContainer && profileCol) {
+    mainContainer.addEventListener('scroll', function () {
+      var scrollY = mainContainer.scrollTop;
+      profileCol.style.transform = 'translateY(' + (scrollY * 0.08) + 'px)';
+    }, { passive: true });
+  }
+
   /* --- Back to top (mobile) --- */
   var backToTopBtn = document.getElementById('back-to-top');
   var mainContainer = document.querySelector('.main-container');
