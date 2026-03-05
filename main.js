@@ -631,6 +631,29 @@
     navigator.serviceWorker.register('/sw.js').catch(function () {});
   }
 
+  /* --- Scroll reveal for resource cards --- */
+  if ('IntersectionObserver' in window) {
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, root: mainContainer || null });
+
+    // Observe after render
+    var origRender = renderResources;
+    renderResources = function (page) {
+      origRender(page);
+      var cards = document.querySelectorAll('.resource-link');
+      cards.forEach(function (card) {
+        card.classList.add('scroll-reveal');
+        revealObserver.observe(card);
+      });
+    };
+  }
+
   /* --- Swipe pagination on mobile --- */
   var touchStartX = 0;
   var touchEndX = 0;

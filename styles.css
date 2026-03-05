@@ -1318,6 +1318,18 @@ a:hover {
   animation: fade-in-up 0.4s ease-out 0.3s both;
 }
 
+/* === Scroll Reveal === */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* === Empty State === */
 .empty-state {
   text-align: center;
