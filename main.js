@@ -570,6 +570,23 @@
 
   loadData();
 
+  /* --- GitHub Stats --- */
+  (function () {
+    var statsEl = document.getElementById('github-stats');
+    if (!statsEl) return;
+    fetch('https://api.github.com/users/VagnerBomJesus')
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (!data || data.message) return;
+        statsEl.innerHTML =
+          '<div class="github-stat"><span class="github-stat-value">' + (data.public_repos || 0) + '</span><span class="github-stat-label">Repos</span></div>' +
+          '<div class="github-stat"><span class="github-stat-value">' + (data.followers || 0) + '</span><span class="github-stat-label">Followers</span></div>' +
+          '<div class="github-stat"><span class="github-stat-value">' + (data.following || 0) + '</span><span class="github-stat-label">Following</span></div>';
+        statsEl.classList.add('loaded');
+      })
+      .catch(function () {});
+  })();
+
   /* --- Cookie Consent --- */
   var cookieBanner = document.getElementById('cookie-banner');
   var cookieAccept = document.getElementById('cookie-accept');

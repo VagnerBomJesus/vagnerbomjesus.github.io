@@ -448,6 +448,39 @@ a:hover {
   padding: 0 4px;
 }
 
+/* GitHub Stats */
+.github-stats {
+  display: none;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 12px;
+  padding: 8px 0;
+}
+
+.github-stats.loaded {
+  display: flex;
+}
+
+.github-stat {
+  text-align: center;
+}
+
+.github-stat-value {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  display: block;
+  line-height: 1.2;
+}
+
+.github-stat-label {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
 /* Visitor Badge */
 .visitor-badge {
   display: none;
