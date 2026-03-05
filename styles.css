@@ -692,7 +692,9 @@ a:hover {
 
 .hover-btn {
   position: relative;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
   border-radius: 50px;
   padding: 9px 16px;
@@ -706,7 +708,6 @@ a:hover {
 
 .hover-btn-text {
   display: inline-block;
-  transform: translateX(2px);
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
