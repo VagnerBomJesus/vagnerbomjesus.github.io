@@ -778,6 +778,21 @@
     });
   }
 
+  /* --- Ripple on hover buttons --- */
+  document.querySelectorAll('.hover-btn').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      var rect = btn.getBoundingClientRect();
+      var ripple = document.createElement('span');
+      ripple.className = 'btn-ripple';
+      var size = Math.max(rect.width, rect.height);
+      ripple.style.width = ripple.style.height = size + 'px';
+      ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+      ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+      btn.appendChild(ripple);
+      ripple.addEventListener('animationend', function () { ripple.remove(); });
+    });
+  });
+
   /* --- Keyboard navigation --- */
   document.addEventListener('keydown', function (e) {
     // Skip if user is typing in search

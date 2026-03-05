@@ -819,6 +819,24 @@ a:hover {
 }
 
 /* Primary variant */
+/* Ripple on click */
+.hover-btn .btn-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transform: scale(0);
+  animation: btn-ripple-anim 0.5s ease-out forwards;
+  pointer-events: none;
+  z-index: 3;
+}
+
+@keyframes btn-ripple-anim {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
 .hover-btn-primary {
   background: var(--bg-secondary);
   color: var(--btn-primary-bg);
