@@ -47,15 +47,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/main.css?v=10">
+  <link rel="stylesheet" href="assets/css/main.css?v=11">
   <link rel="dns-prefetch" href="https://www.linkedin.com">
   <link rel="dns-prefetch" href="https://github.com">
   <link rel="dns-prefetch" href="https://thebiomimicrydb.vercel.app">
-  <!-- Google Analytics -->
+  <!-- Google Consent Mode v2: everything denied until the visitor accepts (see assets/js/main.js) -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('consent', 'default', {
+      ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied',
+      analytics_storage: 'denied', wait_for_update: 500
+    });
+  </script>
+  <!-- Google Analytics 4 (cookieless pings until consent is granted) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-0HBZ8G0W26"></script>
   <script src="assets/js/analytics.js"></script>
-  <!-- Google AdSense (Auto Ads) -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2308250412069180" crossorigin="anonymous"></script>
+  <!-- Google AdSense is injected by assets/js/main.js only after the visitor accepts cookies -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -174,8 +182,8 @@
           <li><a href="https://scholar.google.com/citations?user=K-IfdJoAAAAJ&amp;hl=pt-PT&amp;oi=ao" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Google Scholar" data-tooltip="Scholar"><i class="fas fa-graduation-cap" aria-hidden="true"></i></a></li>
         </ul>
         <div class="hero__actions">
-          <a href="#portfolio" class="btn btn--solid" data-i18n="hero.cta1">See my work</a>
-          <a href="https://www.linkedin.com/in/vagnerbomjesus/details/experience/" target="_blank" rel="noopener noreferrer" class="btn" data-i18n="hero.cta2">Experience</a>
+          <a href="#portfolio" class="btn btn--solid" data-track="cta" data-track-label="hero_see_work" data-i18n="hero.cta1">See my work</a>
+          <a href="https://www.linkedin.com/in/vagnerbomjesus/details/experience/" target="_blank" rel="noopener noreferrer" class="btn" data-track="cta" data-track-label="hero_experience" data-i18n="hero.cta2">Experience</a>
         </div>
       </div>
       <div class="hero__media" aria-hidden="true">
@@ -194,8 +202,8 @@
           <h2 class="featured__title" id="featured-title">The Biomimicry Database</h2>
           <p class="featured__desc" data-i18n="featured.desc">TBDB is a multimodal platform for biomimicry research: a web application, an Android app and the VITA chatbot that help researchers, students and designers explore biological strategies and turn them into innovation. Built with Flutter and Dart, documented in academic publications.</p>
           <div class="featured__actions">
-            <a href="https://thebiomimicrydb.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn--light" data-i18n="featured.cta">Read more</a>
-            <a href="https://play.google.com/store/apps/details?id=pt.tbdb.bjtech" target="_blank" rel="noopener noreferrer" class="featured__link"><i class="fab fa-android" aria-hidden="true"></i> <span data-i18n="featured.apk">Android app</span></a>
+            <a href="https://thebiomimicrydb.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn--light" data-track="cta" data-track-label="featured_tbdb_web" data-i18n="featured.cta">Read more</a>
+            <a href="https://play.google.com/store/apps/details?id=pt.tbdb.bjtech" target="_blank" rel="noopener noreferrer" class="featured__link" data-track="cta" data-track-label="featured_tbdb_android"><i class="fab fa-android" aria-hidden="true"></i> <span data-i18n="featured.apk">Android app</span></a>
           </div>
         </div>
         <div class="featured__badge" aria-hidden="true">TBDB</div>
@@ -209,7 +217,7 @@
         <p class="lead reveal" data-i18n="about.p1">My name is Vagner Bom Jesus. I am a Software Engineer from Portugal, graduate of the Instituto Polit&eacute;cnico da Guarda, working mainly with Flutter and Dart to build cross-platform mobile and web applications.</p>
         <p class="lead reveal" data-i18n="about.p2">I created The Biomimicry Database (TBDB) and I publish academic and technical writing on Medium and Google Scholar. I am passionate about information security, clean architecture and turning research into products people actually use.</p>
         <div class="reveal">
-          <a href="https://www.linkedin.com/in/vagnerbomjesus/details/education/" target="_blank" rel="noopener noreferrer" class="btn" data-i18n="about.cta">Explore</a>
+          <a href="https://www.linkedin.com/in/vagnerbomjesus/details/education/" target="_blank" rel="noopener noreferrer" class="btn" data-track="cta" data-track-label="about_explore" data-i18n="about.cta">Explore</a>
         </div>
         <div class="ornament reveal" aria-hidden="true">
           <span class="ornament__line"></span>
@@ -218,6 +226,11 @@
         </div>
       </div>
     </section>
+
+    <!-- Ad slot: set data-ad-slot to the unit ID from AdSense (Ads > By ad unit); left empty = nothing rendered -->
+    <aside class="ad-slot" data-ad-slot="" data-ad-name="after-about" aria-label="Advertisement" hidden>
+      <span class="ad-slot__label" data-i18n="ads.label">Advertisement</span>
+    </aside>
 
     <!-- ===== Process ===== -->
     <section class="section section--tight" id="process" aria-labelledby="process-title">
@@ -317,6 +330,11 @@
       </div>
     </section>
 
+    <!-- Ad slot: set data-ad-slot to the unit ID from AdSense (Ads > By ad unit); left empty = nothing rendered -->
+    <aside class="ad-slot" data-ad-slot="" data-ad-name="before-contact" aria-label="Advertisement" hidden>
+      <span class="ad-slot__label" data-i18n="ads.label">Advertisement</span>
+    </aside>
+
     <!-- ===== Contact ===== -->
     <section class="section" id="contact" aria-labelledby="contact-title">
       <div class="container container--narrow">
@@ -372,17 +390,25 @@
         <a href="privacy-policy.html" data-i18n="footer.privacy">Privacy Policy</a>
         <span aria-hidden="true">&middot;</span>
         <a href="terms.html" data-i18n="footer.terms">Terms of Service</a>
+        <span aria-hidden="true">&middot;</span>
+        <button type="button" id="cookie-settings" class="link-btn" data-i18n="footer.cookies">Cookie settings</button>
       </p>
     </div>
   </footer>
 
-  <div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie notice" hidden>
-    <span data-i18n="cookie.text">This site uses cookies for analytics and advertising. By continuing, you accept our <a href="privacy-policy.html">Privacy Policy</a>.</span>
-    <button type="button" id="cookie-accept" class="btn btn--light btn--small" data-i18n="cookie.accept">Accept</button>
+  <div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-labelledby="cookie-title" hidden>
+    <div class="cookie-banner__text">
+      <strong id="cookie-title" data-i18n="cookie.title">Cookies</strong>
+      <span data-i18n="cookie.text">This site uses cookies for analytics (Google Analytics) and advertising (Google AdSense). You can accept or reject them; essential settings such as language are always stored. See the <a href="privacy-policy.html">Privacy Policy</a>.</span>
+    </div>
+    <div class="cookie-banner__actions">
+      <button type="button" id="cookie-reject" class="btn btn--light btn--small" data-i18n="cookie.reject">Reject</button>
+      <button type="button" id="cookie-accept" class="btn btn--light btn--small btn--fill" data-i18n="cookie.accept">Accept all</button>
+    </div>
   </div>
 
   <button type="button" id="back-to-top" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
 
-  <script src="assets/js/main.js?v=10" defer></script>
+  <script src="assets/js/main.js?v=11" defer></script>
 </body>
 </html>
