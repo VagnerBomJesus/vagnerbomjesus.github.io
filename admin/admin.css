@@ -1,4 +1,4 @@
-/* Admin panel — extends admin/base.css (legacy design system kept only for the admin UI).
+/* Admin panel: extends admin/base.css (legacy design system kept only for the admin UI).
    Brand accent aligned with the public site (#9A01A2). */
 :root, [data-theme="dark"] {
   --accent: #9A01A2;

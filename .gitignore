@@ -92,7 +92,7 @@ logs/
 *.map
 
 # =========================
-# Design references (large exports stay local — see docs/design/README.md)
+# Design references (large exports stay local, see docs/design/README.md)
 # =========================
 docs/design/*.png
 docs/design/*.svg
@@ -102,3 +102,6 @@ docs/design/*.svg
 # Claude / tooling
 # =========================
 .claude/
+
+# Files delivered by the Claude desktop app (previews, not part of the site)
+Claude outputs/

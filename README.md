@@ -1,4 +1,4 @@
-# Vagner Bom Jesus — Portfolio
+# Vagner Bom Jesus | Portfolio
 
 Personal portfolio: projects, publications and curated resources.
 Static site, no build step, hosted on **GitHub Pages**.
@@ -14,8 +14,8 @@ Static site, no build step, hosted on **GitHub Pages**.
 | **Home page** | Single-page layout: Hero → Featured project (TBDB) → About → Process → Skills → Portfolio → Contact |
 | **Bilingual** | EN / PT switch in the header (`data-i18n` attributes + `translations` in `assets/js/main.js`); remembered in `localStorage` |
 | **Portfolio** | Cards rendered from `data/data.json`, filterable (All / Projects / Useful links) |
-| **Contact** | `mailto:` form — opens the visitor's email client with the message pre-filled |
-| **Admin panel** | `/admin` — password-protected CRUD UI for `data/data.json` (exports the JSON you commit) |
+| **Contact** | `mailto:` form: opens the visitor's email client with the message pre-filled |
+| **Admin panel** | `/admin`: password-protected CRUD UI for `data/data.json` (exports the JSON you commit) |
 | **PWA** | `manifest.json` + `sw.js` (network-first cache) |
 | **SEO** | Meta/OpenGraph/Twitter tags, JSON-LD (Person, WebSite, SoftwareApplication, Breadcrumb), `sitemap.xml`, `robots.txt` |
 | **Analytics / Ads** | Google Analytics 4 with Web Vitals (`assets/js/analytics.js`), Google AdSense Auto Ads |
@@ -40,7 +40,7 @@ Mockups live in [`docs/design/`](docs/design/README.md); the build process is de
 │   └── img/                  # favicon.svg, og-image.svg
 │
 ├── data/
-│   └── data.json             # Projects & useful links (EN + PT) — the only content file to edit
+│   └── data.json             # Projects & useful links (EN + PT), the only content file to edit
 │
 ├── admin/                    # Admin panel (not indexed)
 │   ├── index.html

@@ -2,7 +2,7 @@
 
 All notable changes to this site are documented here.
 
-## [2.0.0] — 2026-09-03
+## [2.0.0] - 2026-09-03
 
 ### Added
 - New single-page home following the design mockups: hero with photo, featured TBDB band,
@@ -11,7 +11,7 @@ All notable changes to this site are documented here.
 - Purple brand accent `#9A01A2` across the site and the admin panel.
 - `docs/PROCESS.md` describing design, structure, development, verification and deployment.
 - `docs/design/` with the mockups used as reference.
-- `.github/workflows/ci.yml` — validates HTML, JSON and local links on push/PR.
+- `.github/workflows/ci.yml`: validates HTML, JSON and local links on push/PR.
 - `CHANGELOG.md`.
 
 ### Changed
@@ -27,7 +27,7 @@ All notable changes to this site are documented here.
 - `main.min.js`, `styles.min.css` (single source files instead).
 - Legacy two-column layout, Ctrl+K command palette, GitHub stats/visitor counter widgets.
 
-## [1.x] — 2026-02 → 2026-03
+## [1.x] - 2026-02 to 2026-03
 
 Initial portfolio with profile card, tabbed resources, dark/light mode, EN/PT, admin panel,
 PWA, AdSense and Analytics.

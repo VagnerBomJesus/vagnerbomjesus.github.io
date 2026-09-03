@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Vagner Bom Jesus — Portfolio
+   Vagner Bom Jesus | Portfolio
    Main logic: navigation, i18n (EN/PT), portfolio (data/data.json),
    contact form (mailto), cookie banner, scroll effects, service worker.
    Vanilla JS, no build step.
@@ -35,11 +35,11 @@
       'about.p2': 'I created The Biomimicry Database (TBDB) and I publish academic and technical writing on Medium and Google Scholar. I am passionate about information security, clean architecture and turning research into products people actually use.',
       'about.cta': 'Explore',
       'process.title': 'How I work',
-      'process.intro': 'Every project follows the same three steps — from the first sketch to a product that stays secure and up to date.',
+      'process.intro': 'Every project follows the same three steps: from the first sketch to a product that stays secure and up to date.',
       'process.s1.title': 'Design',
       'process.s1.desc': 'I analyse the requirements, model the data and design the interface based on your needs and suggestions. I can also start from an existing design by consulting with you.',
       'process.s2.title': 'Development',
-      'process.s2.desc': 'Based on the approved design, I build the application with Flutter, Dart and modern web technologies — fully functional, responsive and version-controlled with Git.',
+      'process.s2.desc': 'Based on the approved design, I build the application with Flutter, Dart and modern web technologies, fully functional, responsive and version-controlled with Git.',
       'process.s3.title': 'Security & Maintenance',
       'process.s3.desc': 'In case of problems or the need for changes, I introduce new functionalities, review the code for security issues (OWASP) and keep dependencies up to date.',
       'skills.title': 'Skills',
@@ -65,7 +65,7 @@
       'type.pdf': 'Publication',
       'type.default': 'Link',
       'contact.title': 'Contact',
-      'contact.intro': 'Have a project in mind, a research collaboration or just want to say hello? Fill in the form and your email client will open with the message ready to send — or write directly to <a href="mailto:vagneripg@gmail.com">vagneripg@gmail.com</a>.',
+      'contact.intro': 'Have a project in mind, a research collaboration or just want to say hello? Fill in the form and your email client will open with the message ready to send, or write directly to <a href="mailto:vagneripg@gmail.com">vagneripg@gmail.com</a>.',
       'contact.name': 'Enter your name*',
       'contact.email': 'Enter your email*',
       'contact.subject': 'Subject',
@@ -101,11 +101,11 @@
       'about.p2': 'Criei a The Biomimicry Database (TBDB) e publico artigos académicos e técnicos no Medium e no Google Scholar. Sou apaixonado por segurança da informação, arquitetura limpa e por transformar investigação em produtos que as pessoas realmente usam.',
       'about.cta': 'Explorar',
       'process.title': 'Como trabalho',
-      'process.intro': 'Todos os projetos seguem os mesmos três passos — do primeiro esboço a um produto que se mantém seguro e atualizado.',
+      'process.intro': 'Todos os projetos seguem os mesmos três passos: do primeiro esboço a um produto que se mantém seguro e atualizado.',
       'process.s1.title': 'Design',
       'process.s1.desc': 'Analiso os requisitos, modelo os dados e desenho a interface com base nas tuas necessidades e sugestões. Também posso partir de um design existente, em conjunto contigo.',
       'process.s2.title': 'Desenvolvimento',
-      'process.s2.desc': 'Com o design aprovado, construo a aplicação com Flutter, Dart e tecnologias web modernas — totalmente funcional, responsiva e versionada com Git.',
+      'process.s2.desc': 'Com o design aprovado, construo a aplicação com Flutter, Dart e tecnologias web modernas, totalmente funcional, responsiva e versionada com Git.',
       'process.s3.title': 'Segurança & Manutenção',
       'process.s3.desc': 'Em caso de problemas ou necessidade de alterações, introduzo novas funcionalidades, revejo o código quanto a falhas de segurança (OWASP) e mantenho as dependências atualizadas.',
       'skills.title': 'Competências',
@@ -131,7 +131,7 @@
       'type.pdf': 'Publicação',
       'type.default': 'Link',
       'contact.title': 'Contacto',
-      'contact.intro': 'Tens um projeto em mente, uma colaboração de investigação ou só queres dizer olá? Preenche o formulário e o teu cliente de email abre com a mensagem pronta a enviar — ou escreve diretamente para <a href="mailto:vagneripg@gmail.com">vagneripg@gmail.com</a>.',
+      'contact.intro': 'Tens um projeto em mente, uma colaboração de investigação ou só queres dizer olá? Preenche o formulário e o teu cliente de email abre com a mensagem pronta a enviar, ou escreve diretamente para <a href="mailto:vagneripg@gmail.com">vagneripg@gmail.com</a>.',
       'contact.name': 'Introduz o teu nome*',
       'contact.email': 'Introduz o teu email*',
       'contact.subject': 'Assunto',
