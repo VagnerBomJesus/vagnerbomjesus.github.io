@@ -47,7 +47,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/main.css?v=15">
+  <link rel="stylesheet" href="assets/css/main.css?v=16">
   <link rel="dns-prefetch" href="https://www.linkedin.com">
   <link rel="dns-prefetch" href="https://github.com">
   <link rel="dns-prefetch" href="https://thebiomimicrydb.vercel.app">
@@ -214,10 +214,42 @@
     <section class="section" id="about" aria-labelledby="about-title">
       <div class="container container--narrow">
         <h2 class="section-title reveal" id="about-title" data-i18n="about.title">About me</h2>
-        <p class="lead reveal" data-i18n="about.p1">My name is Vagner Bom Jesus. I am a Software Engineer from Portugal, graduate of the Instituto Polit&eacute;cnico da Guarda, working mainly with Flutter and Dart to build cross-platform mobile and web applications.</p>
-        <p class="lead reveal" data-i18n="about.p2">I created The Biomimicry Database (TBDB) and I publish academic and technical writing on Medium and Google Scholar. I am passionate about information security, clean architecture and turning research into products people actually use.</p>
+        <p class="lead reveal" data-i18n="about.p1">My name is Vagner Bom Jesus and I am a Software Engineer based in Portugal, graduate of the Instituto Polit&eacute;cnico da Guarda (IPG). I work mainly with Flutter and Dart to design and build cross-platform applications that run from a single codebase on Android, iOS and the web, with a strong focus on clean architecture, maintainability and a careful user experience.</p>
+        <p class="lead reveal" data-i18n="about.p2">My path brings together software engineering and applied research. I am the creator of The Biomimicry Database (TBDB), a multimodal platform that helps researchers, students and designers explore biological strategies and translate them into real-world innovation. The project spans a web application, an Android app and the VITA chatbot, and its development is documented in an academic dissertation and in peer-reviewed and technical publications.</p>
+        <p class="lead reveal" data-i18n="about.p3">Alongside development, I care deeply about information security. I follow OWASP best practices, review code for common vulnerabilities and treat privacy and data protection as first-class requirements rather than afterthoughts. I believe software should be not only functional and beautiful, but also safe and trustworthy for the people who use it.</p>
+        <p class="lead reveal" data-i18n="about.p4">I also enjoy sharing what I learn. I write technical and scientific articles on Medium, publish academic work indexed on Google Scholar, and contribute to open knowledge whenever I can. When I take on a project, my goal is always the same: to turn ideas and research into products that people genuinely find useful.</p>
         <div class="reveal">
           <a href="https://www.linkedin.com/in/vagnerbomjesus/details/education/" target="_blank" rel="noopener noreferrer" class="btn" data-track="cta" data-track-label="about_explore" data-i18n="about.cta">Explore</a>
+        </div>
+        <div class="ornament reveal" aria-hidden="true">
+          <span class="ornament__line"></span>
+          <svg viewBox="0 0 60 12" width="60" height="12"><polyline points="0,10 7,2 14,10 21,2 28,10 35,2 42,10 49,2 56,10" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+          <span class="ornament__line"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Expertise / What I do ===== -->
+    <section class="section section--tight" id="expertise" aria-labelledby="expertise-title">
+      <div class="container">
+        <h2 class="section-title reveal" id="expertise-title" data-i18n="exp.title">What I do</h2>
+        <p class="section-intro reveal" data-i18n="exp.intro">Three areas where I focus my work, combining engineering discipline with research and a security-first mindset.</p>
+        <div class="prose-grid">
+          <article class="prose-block reveal">
+            <i class="fas fa-mobile-screen-button prose-block__icon" aria-hidden="true"></i>
+            <h3 class="prose-block__title" data-i18n="exp.a.title">Cross-platform development</h3>
+            <p class="prose-block__text" data-i18n="exp.a.text">Using Flutter and Dart I build mobile and web apps from one codebase, keeping performance, accessibility and a consistent design across devices. From data modelling and state management to release and store publishing, I follow clean-architecture principles so the code stays readable and easy to evolve. I also work with Firebase, REST APIs and Git-based workflows.</p>
+          </article>
+          <article class="prose-block reveal">
+            <i class="fas fa-shield-halved prose-block__icon" aria-hidden="true"></i>
+            <h3 class="prose-block__title" data-i18n="exp.b.title">Information security</h3>
+            <p class="prose-block__text" data-i18n="exp.b.text">Security is part of how I build, not a step at the end. I apply OWASP guidance, validate and sanitise input, protect against common web and mobile vulnerabilities, and design with privacy and GDPR in mind. My interest in cybersecurity also feeds my writing and continuous learning, from secure coding to threat awareness.</p>
+          </article>
+          <article class="prose-block reveal">
+            <i class="fas fa-leaf prose-block__icon" aria-hidden="true"></i>
+            <h3 class="prose-block__title" data-i18n="exp.c.title">Research &amp; biomimicry</h3>
+            <p class="prose-block__text" data-i18n="exp.c.text">Through The Biomimicry Database I connect software with nature-inspired innovation, helping people discover how biological strategies can solve human problems. This work sits at the intersection of academic research and product development, and it is documented in publications and a dissertation, with a multimodal platform and the VITA chatbot as tangible outcomes.</p>
+          </article>
         </div>
         <div class="ornament reveal" aria-hidden="true">
           <span class="ornament__line"></span>
@@ -409,6 +441,6 @@
 
   <button type="button" id="back-to-top" class="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
 
-  <script src="assets/js/main.js?v=15" defer></script>
+  <script src="assets/js/main.js?v=16" defer></script>
 </body>
 </html>

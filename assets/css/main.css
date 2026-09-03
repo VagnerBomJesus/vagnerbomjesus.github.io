@@ -304,6 +304,15 @@ button { font: inherit; cursor: pointer; }
 .process-step__title { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; margin-bottom: 12px; }
 .process-step__desc { font-size: 0.88rem; color: var(--text-soft); margin: 0; }
 
+/* Expertise / What I do */
+.prose-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px; text-align: left; }
+.prose-block { background: var(--bg-elev); border: 1px solid var(--line-soft); border-top: 3px solid var(--text); padding: 30px 26px; transition: transform 0.3s var(--ease), box-shadow 0.3s ease; }
+.prose-block:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+.prose-block__icon { font-size: 1.7rem; color: #000000; margin-bottom: 16px; display: block; }
+.prose-block__title { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 12px; }
+.prose-block__text { font-size: 0.9rem; color: var(--text-soft); margin: 0; line-height: 1.75; }
+@media (max-width: 860px) { .prose-grid { grid-template-columns: 1fr; } }
+
 /* Skills */
 .skills-group { margin-bottom: 44px; text-align: left; }
 .skills-group:last-child { margin-bottom: 0; }
