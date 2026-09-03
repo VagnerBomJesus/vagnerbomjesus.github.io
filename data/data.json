@@ -1,34 +1,34 @@
 {
   "en": {
     "projects": [
-      { "title": "TBDB - The Biomimicry Database (Android)", "desc": "Official APP for the biomimicry platform", "link": "https://play.google.com/store/apps/details?id=pt.tbdb.bjtech", "type": "apk", "featured": true },
-      { "title": "The Biomimicry Database", "desc": "Multimodal platform for biomimicry research", "link": "https://thebiomimicrydb.vercel.app/", "type": "website", "isNew": true },
-      { "title": "Blog on Medium", "desc": "Technical and scientific articles", "link": "https://vagnerbomjesus.medium.com/", "type": "article" },
-      { "title": "TBDB | VITA ChatBot", "desc": "Development documentation of a multimodal knowledge sharing platform", "link": "https://bdigital.ipg.pt/dspace/bitstream/10314/10107/1/CM%20-%20Vagner%20B%20Jesus.pdf", "type": "pdf" },
-      { "title": "Google Scholar", "desc": "Academic publications and citations", "link": "https://scholar.google.com/citations?user=K-IfdJoAAAAJ&hl=pt-PT&oi=ao", "type": "website" }
+      { "title": "TBDB — The Biomimicry Database (Android)", "desc": "The official Android app of The Biomimicry Database. It lets students, researchers and designers browse biological strategies on the go and turn nature's solutions into ideas for real problems. Built with Flutter and Dart, published on Google Play.", "link": "https://play.google.com/store/apps/details?id=pt.tbdb.bjtech", "type": "apk", "featured": true },
+      { "title": "The Biomimicry Database (Web)", "desc": "A multimodal web platform for biomimicry research: search and explore biological strategies, connect them to design challenges and share knowledge. The flagship project behind my dissertation, combining a structured database with the VITA assistant.", "link": "https://thebiomimicrydb.vercel.app/", "type": "website", "isNew": true },
+      { "title": "Articles on Medium", "desc": "My blog with technical and scientific articles on software engineering, Flutter and Dart, information security and biomimicry — written in an accessible way, with lessons learned from building real products.", "link": "https://vagnerbomjesus.medium.com/", "type": "article" },
+      { "title": "TBDB | VITA ChatBot — Dissertation", "desc": "My academic dissertation documenting the design and development of TBDB and the VITA chatbot: a multimodal knowledge-sharing platform. Covers the architecture, data model and research method behind the project (PDF, IPG digital repository).", "link": "https://bdigital.ipg.pt/dspace/bitstream/10314/10107/1/CM%20-%20Vagner%20B%20Jesus.pdf", "type": "pdf" },
+      { "title": "Google Scholar", "desc": "My academic profile with publications and citations in biomimicry, knowledge-sharing platforms and applied software research.", "link": "https://scholar.google.com/citations?user=K-IfdJoAAAAJ&hl=pt-PT&oi=ao", "type": "website" }
     ],
     "useful": [
-      { "title": "ENISA - EU Agency for Cybersecurity", "desc": "European Union Agency for Cybersecurity", "link": "https://www.enisa.europa.eu/", "type": "website" },
-      { "title": "OWASP Foundation", "desc": "Open Web Application Security Project - security best practices", "link": "https://owasp.org/", "type": "website" },
-      { "title": "Flutter Documentation", "desc": "Official Flutter framework documentation and guides", "link": "https://docs.flutter.dev/", "type": "website" },
-      { "title": "Dart Packages", "desc": "Official package repository for the Dart ecosystem", "link": "https://pub.dev/", "type": "website" },
-      { "title": "AskNature - Biomimicry Institute", "desc": "Biological strategies database for biomimicry innovation", "link": "https://asknature.org/", "type": "website" }
+      { "title": "ENISA — EU Agency for Cybersecurity", "desc": "The European Union Agency for Cybersecurity: guidance, reports and best practices I follow to keep projects secure and aligned with EU standards.", "link": "https://www.enisa.europa.eu/", "type": "website" },
+      { "title": "OWASP Foundation", "desc": "The Open Worldwide Application Security Project — the reference for web and mobile security best practices, including the OWASP Top 10 I apply when reviewing code.", "link": "https://owasp.org/", "type": "website" },
+      { "title": "Flutter Documentation", "desc": "Official documentation and guides for the Flutter framework, my main tool for building cross-platform apps.", "link": "https://docs.flutter.dev/", "type": "website" },
+      { "title": "Dart Packages (pub.dev)", "desc": "The official package repository for the Dart and Flutter ecosystem — where I find and publish reusable packages.", "link": "https://pub.dev/", "type": "website" },
+      { "title": "AskNature — Biomimicry Institute", "desc": "A curated database of biological strategies for biomimicry innovation, and a key reference for the research behind TBDB.", "link": "https://asknature.org/", "type": "website" }
     ]
   },
   "pt": {
     "projects": [
-      { "title": "TBDB - The Biomimicry Database (Android)", "desc": "APP oficial da plataforma de biomimetica", "link": "https://play.google.com/store/apps/details?id=pt.tbdb.bjtech", "type": "apk", "featured": true },
-      { "title": "The Biomimicry Database", "desc": "Plataforma multimodal para investigacao em biomimetica", "link": "https://thebiomimicrydb.vercel.app/", "type": "website", "isNew": true },
-      { "title": "Blog no Medium", "desc": "Artigos tecnicos e cientificos", "link": "https://vagnerbomjesus.medium.com/", "type": "article" },
-      { "title": "TBDB | ChatBot VITA", "desc": "Documentacao do desenvolvimento de uma plataforma multimodal para partilha de conhecimento", "link": "https://bdigital.ipg.pt/dspace/bitstream/10314/10107/1/CM%20-%20Vagner%20B%20Jesus.pdf", "type": "pdf" },
-      { "title": "Google Scholar", "desc": "Publicacoes academicas e citacoes", "link": "https://scholar.google.com/citations?user=K-IfdJoAAAAJ&hl=pt-PT&oi=ao", "type": "website" }
+      { "title": "TBDB — The Biomimicry Database (Android)", "desc": "A app Android oficial da The Biomimicry Database. Permite a estudantes, investigadores e designers explorar estratégias biológicas em qualquer lugar e transformar as soluções da natureza em ideias para problemas reais. Construída com Flutter e Dart, publicada no Google Play.", "link": "https://play.google.com/store/apps/details?id=pt.tbdb.bjtech", "type": "apk", "featured": true },
+      { "title": "The Biomimicry Database (Web)", "desc": "Uma plataforma web multimodal para investigação em biomimética: pesquisa e exploração de estratégias biológicas, ligação a desafios de design e partilha de conhecimento. O projeto principal por trás da minha dissertação, juntando uma base de dados estruturada ao assistente VITA.", "link": "https://thebiomimicrydb.vercel.app/", "type": "website", "isNew": true },
+      { "title": "Artigos no Medium", "desc": "O meu blog com artigos técnicos e científicos sobre engenharia de software, Flutter e Dart, segurança da informação e biomimética — escritos de forma acessível, com lições aprendidas ao construir produtos reais.", "link": "https://vagnerbomjesus.medium.com/", "type": "article" },
+      { "title": "TBDB | ChatBot VITA — Dissertação", "desc": "A minha dissertação académica que documenta o desenho e o desenvolvimento da TBDB e do chatbot VITA: uma plataforma multimodal de partilha de conhecimento. Aborda a arquitetura, o modelo de dados e o método de investigação do projeto (PDF, repositório digital do IPG).", "link": "https://bdigital.ipg.pt/dspace/bitstream/10314/10107/1/CM%20-%20Vagner%20B%20Jesus.pdf", "type": "pdf" },
+      { "title": "Google Scholar", "desc": "O meu perfil académico com publicações e citações em biomimética, plataformas de partilha de conhecimento e investigação aplicada em software.", "link": "https://scholar.google.com/citations?user=K-IfdJoAAAAJ&hl=pt-PT&oi=ao", "type": "website" }
     ],
     "useful": [
-      { "title": "ENISA - Agencia da UE para a Ciberseguranca", "desc": "Agencia da Uniao Europeia para a Ciberseguranca", "link": "https://www.enisa.europa.eu/", "type": "website" },
-      { "title": "OWASP Foundation", "desc": "Projeto aberto de seguranca em aplicacoes web - boas praticas", "link": "https://owasp.org/", "type": "website" },
-      { "title": "Documentacao Flutter", "desc": "Documentacao oficial e guias do framework Flutter", "link": "https://docs.flutter.dev/", "type": "website" },
-      { "title": "Dart Packages", "desc": "Repositorio oficial de pacotes do ecossistema Dart", "link": "https://pub.dev/", "type": "website" },
-      { "title": "AskNature - Biomimicry Institute", "desc": "Base de dados de estrategias biologicas para inovacao em biomimetica", "link": "https://asknature.org/", "type": "website" }
+      { "title": "ENISA — Agência da UE para a Cibersegurança", "desc": "A Agência da União Europeia para a Cibersegurança: orientações, relatórios e boas práticas que sigo para manter os projetos seguros e alinhados com as normas da UE.", "link": "https://www.enisa.europa.eu/", "type": "website" },
+      { "title": "OWASP Foundation", "desc": "O Open Worldwide Application Security Project — a referência em boas práticas de segurança web e mobile, incluindo o OWASP Top 10 que aplico ao rever código.", "link": "https://owasp.org/", "type": "website" },
+      { "title": "Documentação Flutter", "desc": "Documentação oficial e guias do framework Flutter, a minha principal ferramenta para construir apps multiplataforma.", "link": "https://docs.flutter.dev/", "type": "website" },
+      { "title": "Dart Packages (pub.dev)", "desc": "O repositório oficial de pacotes do ecossistema Dart e Flutter — onde encontro e publico pacotes reutilizáveis.", "link": "https://pub.dev/", "type": "website" },
+      { "title": "AskNature — Biomimicry Institute", "desc": "Uma base de dados curada de estratégias biológicas para inovação em biomimética, e uma referência-chave para a investigação por trás da TBDB.", "link": "https://asknature.org/", "type": "website" }
     ]
   }
 }
