@@ -7,7 +7,7 @@ if (typeof gtag !== 'function') { function gtag(){ dataLayer.push(arguments); } 
 
 gtag('js', new Date());
 // url_passthrough keeps campaign info working while ad_storage is denied.
-gtag('config', 'G-0HBZ8G0W26', { anonymize_ip: true, url_passthrough: true });
+gtag('config', 'G-3NGWSKZGTC', { anonymize_ip: true, url_passthrough: true });
 
 /* Web Vitals: LCP, FID, CLS via GA4 (non-blocking, best-effort) */
 if ('PerformanceObserver' in window) {
