@@ -1,6 +1,6 @@
 /* Service worker: network-first with cache fallback.
    Bump CACHE_NAME whenever assets change so clients pick up the new version. */
-var CACHE_NAME = 'vbj-portfolio-v16';
+var CACHE_NAME = 'vbj-portfolio-v17';
 var ASSETS = [
   '/',
   '/index.html',
