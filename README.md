@@ -20,7 +20,7 @@ Static site, no build step, hosted on **GitHub Pages**.
 | **SEO** | Meta/OpenGraph/Twitter tags, JSON-LD (Person, WebSite, SoftwareApplication, Breadcrumb), `sitemap.xml`, `robots.txt` |
 | **Analytics / Ads** | Google Analytics 4 with Web Vitals (`assets/js/analytics.js`), Google AdSense Auto Ads |
 
-Design language: light grey / near-black with a purple accent (`#9A01A2`), Montserrat headings, Inter body.
+Design language taken strictly from the mockups: light grey `#D7D7D7`, black `#000000`, white `#FFFFFF`, grey boxes `#C4C4C4` and muted grey `#909090`. Montserrat headings, Inter body. No other colours are used.
 Mockups live in [`docs/design/`](docs/design/README.md); the build process is described in [`docs/PROCESS.md`](docs/PROCESS.md).
 
 ## Project structure
@@ -53,6 +53,7 @@ Mockups live in [`docs/design/`](docs/design/README.md); the build process is de
 │   └── design/               # Mockups & references (large exports are git-ignored)
 │
 ├── .github/workflows/ci.yml  # Validates HTML / JSON / links on every push & PR
+├── .githooks/commit-msg      # Rejects AI attribution trailers in commit messages
 │
 ├── manifest.json  sw.js      # PWA
 ├── robots.txt  sitemap.xml   # SEO
@@ -101,7 +102,16 @@ The skill lists are plain HTML in the `#skills` section of `index.html`. Icons c
 [Devicon](https://devicon.dev) (`devicon-<name>-plain colored`) or Font Awesome.
 
 ### Colours / typography
-All tokens are CSS custom properties at the top of `assets/css/main.css` (`--accent`, `--bg`, `--bg-dark`, fonts…).
+All tokens are CSS custom properties at the top of `assets/css/main.css` (`--bg`, `--bg-dark`, `--box`, `--text-muted`, fonts). Keep to the five mock colours above.
+
+## Commit rules
+
+No `Co-Authored-By:` or `Claude-Session:` lines in commit messages. A `commit-msg` hook enforces it;
+enable it once per clone:
+
+```bash
+git config core.hooksPath .githooks
+```
 
 ## Deployment
 

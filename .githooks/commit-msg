@@ -1,0 +1,8 @@
+#!/bin/sh
+# Reject commit messages that carry AI attribution trailers.
+# Enable once per clone:  git config core.hooksPath .githooks
+if grep -qiE '^(Co-Authored-By|Claude-Session)[[:space:]]*:' "$1"; then
+  echo "commit-msg: 'Co-Authored-By:' / 'Claude-Session:' lines are not allowed in this repository. Remove them and commit again." >&2
+  exit 1
+fi
+exit 0

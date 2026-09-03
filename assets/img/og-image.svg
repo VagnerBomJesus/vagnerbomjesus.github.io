@@ -1,13 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <rect width="1200" height="630" fill="#ececec"/>
-  <polygon points="700,0 1200,0 1200,630 560,630" fill="#1b1b1b"/>
-  <rect width="1200" height="8" fill="#9A01A2"/>
-  <circle cx="900" cy="300" r="150" fill="#2a2a2a" stroke="#9A01A2" stroke-width="8"/>
-  <text x="900" y="335" text-anchor="middle" fill="#ffffff" font-family="Montserrat, Arial, sans-serif" font-weight="800" font-size="110">VBJ</text>
-  <text x="80" y="230" fill="#555555" font-family="Inter, Arial, sans-serif" font-weight="400" font-size="30">Hi, I am</text>
-  <text x="80" y="300" fill="#1b1b1b" font-family="Montserrat, Arial, sans-serif" font-weight="800" font-size="60">Vagner Bom Jesus</text>
-  <text x="80" y="350" fill="#9A01A2" font-family="Inter, Arial, sans-serif" font-weight="600" font-size="26">Software Engineer · Flutter Developer · InfoSec</text>
-  <text x="80" y="430" fill="#555555" font-family="Inter, Arial, sans-serif" font-size="20">Creator of The Biomimicry Database (TBDB)</text>
-  <text x="80" y="462" fill="#555555" font-family="Inter, Arial, sans-serif" font-size="20">Academic Researcher · Published Author · Portugal</text>
-  <text x="80" y="570" fill="#1b1b1b" font-family="monospace" font-size="20">vagnerbomjesus.github.io</text>
+  <rect width="1200" height="630" fill="#D7D7D7"/>
+  <polygon points="700,0 1200,0 1200,630 560,630" fill="#000000"/>
+  <circle cx="900" cy="300" r="150" fill="#000000" stroke="#C4C4C4" stroke-width="8"/>
+  <text x="900" y="335" text-anchor="middle" fill="#FFFFFF" font-family="Montserrat, Arial, sans-serif" font-weight="800" font-size="110">VBJ</text>
+  <text x="80" y="230" fill="#000000" font-family="Inter, Arial, sans-serif" font-weight="400" font-size="30">Hi, I am</text>
+  <text x="80" y="300" fill="#000000" font-family="Montserrat, Arial, sans-serif" font-weight="800" font-size="60">Vagner Bom Jesus</text>
+  <text x="80" y="350" fill="#909090" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="26">Software Engineer / Flutter Developer / InfoSec</text>
+  <text x="80" y="430" fill="#000000" font-family="Inter, Arial, sans-serif" font-size="20">Creator of The Biomimicry Database (TBDB)</text>
+  <text x="80" y="462" fill="#000000" font-family="Inter, Arial, sans-serif" font-size="20">Academic Researcher / Published Author / Portugal</text>
+  <text x="80" y="570" fill="#909090" font-family="monospace" font-size="20">vagnerbomjesus.github.io</text>
 </svg>

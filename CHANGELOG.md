@@ -8,7 +8,7 @@ All notable changes to this site are documented here.
 - New single-page home following the design mockups: hero with photo, featured TBDB band,
   About, **How I work** (Design → Development → Security & Maintenance), Skills with icons,
   filterable Portfolio, Contact form (`mailto:`), dark footer.
-- Purple brand accent `#9A01A2` across the site and the admin panel.
+- Palette restricted to the mock colours (#D7D7D7, #000000, #FFFFFF, #C4C4C4, #909090) across the site and the admin panel.
 - `docs/PROCESS.md` describing design, structure, development, verification and deployment.
 - `docs/design/` with the mockups used as reference.
 - `.github/workflows/ci.yml`: validates HTML, JSON and local links on push/PR.

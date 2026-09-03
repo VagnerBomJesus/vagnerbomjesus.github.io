@@ -12,9 +12,11 @@ process in its **"How I work"** section: *Design → Development → Security & 
    fixed dark navigation, split hero with photo, dark featured band, boxed uppercase section titles,
    icon-based skills, filterable portfolio grid, contact form, dark footer with "back to top".
    The files are in [`docs/design/`](design/README.md).
-2. **Palette**: light grey `#ececec` and near-black `#1b1b1b` from the mock, plus the purple accent
-   `#9A01A2` taken from `border-accent.svg`. The accent is used for underlines, hover states, icons,
-   badges and the progress bar, never as a large background, so the page stays calm.
+2. **Palette**: only the colours sampled from the mock are allowed: light grey `#D7D7D7` (page
+   background), black `#000000` (header, hero panel, dark sections, text), white `#FFFFFF`
+   (buttons, text on dark), `#C4C4C4` (icon boxes, borders, secondary text on dark) and `#909090`
+   (subtitle / muted text). On dark surfaces the "accent" flips from black to white via a CSS
+   custom-property scope. Brand icons in the Skills section keep their own colours, as in the mock.
 3. **Typography**: Montserrat (700/800, uppercase, wide letter-spacing) for titles and buttons;
    Inter for body text.
 4. **Content mapping**: the template's placeholders were replaced by real content:
@@ -90,3 +92,10 @@ checks that local links/assets referenced from the HTML exist.
   review them a couple of times a year.
 * Legal pages: update the "Last updated" line whenever the text changes.
 * Keep `CHANGELOG.md` up to date with user-visible changes.
+
+## 7. Commit rules
+
+* Commit messages must not contain attribution trailers such as `Co-Authored-By:` or `Claude-Session:`.
+  The `.githooks/commit-msg` hook rejects them; enable it once per clone with
+  `git config core.hooksPath .githooks`.
+* Keep messages short and imperative ("Add contact form", "Fix mobile menu").

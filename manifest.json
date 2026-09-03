@@ -5,8 +5,8 @@
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#ececec",
-  "theme_color": "#9A01A2",
+  "background_color": "#D7D7D7",
+  "theme_color": "#000000",
   "lang": "en",
   "categories": ["portfolio", "software", "education"],
   "icons": [
