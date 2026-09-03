@@ -1,14 +1,17 @@
-var CACHE_NAME = 'vbj-portfolio-v7';
+/* Service worker — network-first with cache fallback.
+   Bump CACHE_NAME whenever assets change so clients pick up the new version. */
+var CACHE_NAME = 'vbj-portfolio-v10';
 var ASSETS = [
   '/',
   '/index.html',
-  '/styles.css',
-  '/main.js',
-  '/data.json',
-  '/manifest.json',
   '/404.html',
-  '/ads-init.js',
-  '/analytics.js'
+  '/manifest.json',
+  '/assets/css/main.css',
+  '/assets/js/main.js',
+  '/assets/js/analytics.js',
+  '/assets/img/favicon.svg',
+  '/assets/img/og-image.svg',
+  '/data/data.json'
 ];
 
 self.addEventListener('install', function (e) {
@@ -33,18 +36,19 @@ self.addEventListener('activate', function (e) {
 });
 
 self.addEventListener('fetch', function (e) {
+  // Only handle same-origin GET requests; leave analytics/ads/CDNs alone.
+  if (e.request.method !== 'GET' || new URL(e.request.url).origin !== self.location.origin) return;
   e.respondWith(
     fetch(e.request).then(function (res) {
-      // Update cache with fresh response
-      if (res.ok && e.request.method === 'GET') {
+      if (res.ok) {
         var clone = res.clone();
-        caches.open(CACHE_NAME).then(function (cache) {
-          cache.put(e.request, clone);
-        });
+        caches.open(CACHE_NAME).then(function (cache) { cache.put(e.request, clone); });
       }
       return res;
     }).catch(function () {
-      return caches.match(e.request);
+      return caches.match(e.request).then(function (hit) {
+        return hit || caches.match('/404.html');
+      });
     })
   );
 });

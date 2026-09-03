@@ -3,12 +3,19 @@
   "short_name": "VBJ Portfolio",
   "description": "Professional portfolio of Vagner Bom Jesus - Software Engineer, Flutter Developer and Information Security Enthusiast based in Portugal. Projects, publications, and resources.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#f5f6f8",
-  "theme_color": "#1e3a5f",
+  "background_color": "#ececec",
+  "theme_color": "#9A01A2",
   "lang": "en",
   "categories": ["portfolio", "software", "education"],
   "icons": [
+    {
+      "src": "/assets/img/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
     {
       "src": "https://avatars.githubusercontent.com/u/48354097?v=4&s=192",
       "sizes": "192x192",

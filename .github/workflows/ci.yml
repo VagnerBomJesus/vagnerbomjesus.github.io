@@ -1,0 +1,59 @@
+name: Validate site
+
+# Deployment itself is handled by GitHub Pages (Settings → Pages → branch main / root).
+# This workflow only checks that what we push is well-formed.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate JSON files
+        run: |
+          set -e
+          for f in data/data.json manifest.json; do
+            python3 -c "import json,sys; json.load(open('$f')); print('OK', '$f')"
+          done
+
+      - name: Validate XML (sitemap)
+        run: python3 -c "import xml.dom.minidom as m; m.parse('sitemap.xml'); print('OK sitemap.xml')"
+
+      - name: Check local links and assets referenced from HTML
+        run: |
+          python3 - <<'PY'
+          import re, os, sys, glob
+          missing = []
+          for page in glob.glob('*.html') + glob.glob('admin/*.html'):
+              html = open(page, encoding='utf-8').read()
+              base = os.path.dirname(page)
+              for ref in re.findall(r'(?:href|src)="([^"#?]+)', html):
+                  if ref.startswith(('http', 'mailto:', 'data:', '//')):
+                      continue
+                  path = ref.lstrip('/') if ref.startswith('/') else os.path.normpath(os.path.join(base, ref))
+                  if path in ('', '.'):
+                      path = 'index.html'
+                  if not os.path.exists(path):
+                      missing.append(f'{page}: {ref}')
+          if missing:
+              print('\n'.join(missing)); sys.exit(1)
+          print('All local references resolve.')
+          PY
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Validate HTML (report only)
+        # Not blocking: html-validate's default preset is stricter than what
+        # third-party snippets (AdSense, GA) allow.
+        run: npx --yes html-validate@8 "index.html" "404.html" "privacy-policy.html" "terms.html" "admin/index.html" || true

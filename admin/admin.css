@@ -1,3 +1,19 @@
+/* Admin panel — extends admin/base.css (legacy design system kept only for the admin UI).
+   Brand accent aligned with the public site (#9A01A2). */
+:root, [data-theme="dark"] {
+  --accent: #9A01A2;
+  --accent-hover: #6f0175;
+  --border-accent: #9A01A2;
+  --btn-primary-bg: #9A01A2;
+  --btn-primary-hover: #6f0175;
+  --avatar-ring: #9A01A2;
+  --social-hover-color: #9A01A2;
+  --resource-border-left-hover: #9A01A2;
+  --tag-accent-color: #9A01A2;
+}
+:root { --accent-light: #f6e4f7; --accent-subtle: #efd2f1; --tag-accent-bg: #f6e4f7; --tag-accent-border: #e3b3e6; --text-link: #9A01A2; }
+[data-theme="dark"] { --accent-light: #2a1230; --accent-subtle: #3a1a40; --tag-accent-bg: #2a1230; --tag-accent-border: #5a2a60; --text-link: #d98bde; }
+
 /* === Admin Panel Styles === */
 
 [hidden] { display: none !important; }

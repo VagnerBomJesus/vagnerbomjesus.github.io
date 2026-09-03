@@ -1,124 +1,124 @@
 # Vagner Bom Jesus — Portfolio
 
-Personal portfolio website showcasing projects, publications, and curated resources.
+Personal portfolio: projects, publications and curated resources.
+Static site, no build step, hosted on **GitHub Pages**.
 
 **Live:** [vagnerbomjesus.github.io](https://vagnerbomjesus.github.io)
 
 ---
 
-## Features
+## Overview
 
-| Feature | Description |
-|---------|-------------|
-| **Tabbed Navigation** | Projects and Useful Links separated by tabs |
-| **Dark / Light Mode** | Theme toggle with localStorage persistence |
-| **Bilingual (EN / PT)** | Language selector with full translation support |
-| **Responsive Layout** | Two-column desktop, single-column mobile |
-| **Paginated Resources** | Custom pagination per category |
-| **Admin Panel** | CRUD interface at `/admin` to manage content |
-| **Interactive Animations** | Cursor-reactive effects across the page |
-| **Google AdSense** | Integrated ad placements |
+| Area | What it is |
+|------|------------|
+| **Home page** | Single-page layout: Hero → Featured project (TBDB) → About → Process → Skills → Portfolio → Contact |
+| **Bilingual** | EN / PT switch in the header (`data-i18n` attributes + `translations` in `assets/js/main.js`); remembered in `localStorage` |
+| **Portfolio** | Cards rendered from `data/data.json`, filterable (All / Projects / Useful links) |
+| **Contact** | `mailto:` form — opens the visitor's email client with the message pre-filled |
+| **Admin panel** | `/admin` — password-protected CRUD UI for `data/data.json` (exports the JSON you commit) |
+| **PWA** | `manifest.json` + `sw.js` (network-first cache) |
+| **SEO** | Meta/OpenGraph/Twitter tags, JSON-LD (Person, WebSite, SoftwareApplication, Breadcrumb), `sitemap.xml`, `robots.txt` |
+| **Analytics / Ads** | Google Analytics 4 with Web Vitals (`assets/js/analytics.js`), Google AdSense Auto Ads |
 
-## Project Structure
+Design language: light grey / near-black with a purple accent (`#9A01A2`), Montserrat headings, Inter body.
+Mockups live in [`docs/design/`](docs/design/README.md); the build process is described in [`docs/PROCESS.md`](docs/PROCESS.md).
+
+## Project structure
 
 ```
 .
-├── index.html           # Main page
-├── main.js              # App logic (tabs, language, theme, pagination)
-├── styles.css           # Design system (light/dark themes, layout)
-├── data.json            # Projects & resources data (EN + PT)
-├── ads.txt              # AdSense verification
-├── admin/
-│   ├── index.html       # Admin panel UI
-│   ├── admin.js         # Admin CRUD logic
-│   └── admin.css        # Admin styles
-└── README.md
+├── index.html                # Home page (all sections)
+├── 404.html                  # Not-found page (auto-redirects to /)
+├── privacy-policy.html       # Legal
+├── terms.html                # Legal
+│
+├── assets/
+│   ├── css/main.css          # Design system + layout (tokens in :root)
+│   ├── js/main.js            # Nav, i18n, portfolio rendering, contact form, cookie banner
+│   ├── js/analytics.js       # GA4 + Web Vitals
+│   ├── js/ads-init.js        # AdSense helper (kept for manual ad units)
+│   └── img/                  # favicon.svg, og-image.svg
+│
+├── data/
+│   └── data.json             # Projects & useful links (EN + PT) — the only content file to edit
+│
+├── admin/                    # Admin panel (not indexed)
+│   ├── index.html
+│   ├── admin.js
+│   ├── admin.css             # Admin-specific styles (purple accent overrides)
+│   └── base.css              # Legacy design system used only by the admin UI
+│
+├── docs/
+│   ├── PROCESS.md            # How the site was designed, built and is deployed
+│   └── design/               # Mockups & references (large exports are git-ignored)
+│
+├── .github/workflows/ci.yml  # Validates HTML / JSON / links on every push & PR
+│
+├── manifest.json  sw.js      # PWA
+├── robots.txt  sitemap.xml   # SEO
+├── ads.txt                   # AdSense verification
+├── googlefcb97ae6900f3a92.html  # Google Search Console verification
+├── CHANGELOG.md  LICENSE  README.md
+└── .gitignore
 ```
 
-## Tech Stack
+Files that **must stay in the repository root** because GitHub Pages / Google look for them there:
+`index.html`, `404.html`, `manifest.json`, `sw.js`, `robots.txt`, `sitemap.xml`, `ads.txt`, `googlefcb97ae6900f3a92.html`.
 
-- **HTML5 / CSS3 / Vanilla JS** — No frameworks, no build step
-- **CSS Custom Properties** — Full theming via CSS variables
-- **Inter + Font Awesome** — Typography and icons via CDN
-- **GitHub Pages** — Hosting and deployment
-- **Google AdSense** — Monetisation
-
-## Quick Start
+## Quick start
 
 ```bash
 git clone https://github.com/VagnerBomJesus/vagnerbomjesus.github.io.git
 cd vagnerbomjesus.github.io
+python -m http.server 8000     # → http://localhost:8000
 ```
 
-Open `index.html` in a browser, or serve locally:
+Serve over HTTP (not `file://`) so `fetch('data/data.json')` works.
 
-```bash
-python -m http.server 8000
-# → http://localhost:8000
-```
+## Editing content
 
-## Content Management
-
-Resources are stored in `data.json` with the following structure:
+### Projects & links
+Edit `data/data.json` directly, or open `/admin`, log in, make the changes and **Export** the JSON; then commit it.
 
 ```json
 {
   "en": {
-    "projects": [{ "title": "...", "desc": "...", "link": "..." }],
-    "useful":   [{ "title": "...", "desc": "...", "link": "..." }]
+    "projects": [{ "title": "...", "desc": "...", "link": "https://...", "type": "website", "featured": true, "isNew": false }],
+    "useful":   [{ "title": "...", "desc": "...", "link": "https://...", "type": "website" }]
   },
-  "pt": { ... }
+  "pt": { "projects": [...], "useful": [...] }
 }
 ```
 
-Edit directly or use the **Admin Panel** at `/admin` for a visual CRUD interface.
+`type` controls the card icon: `apk`, `website`, `article`, `pdf`. Only `http(s)` links are rendered.
 
-## Animations
+### Texts (EN / PT)
+Static copy lives in `index.html` (English) and in the `translations` object in `assets/js/main.js` (both languages).
+Add a `data-i18n="key"` attribute to an element and a matching key in both `en` and `pt`.
 
-The portfolio includes interactive animations that respond to cursor movement, implemented in pure CSS and vanilla JS.
+### Skills
+The skill lists are plain HTML in the `#skills` section of `index.html`. Icons come from
+[Devicon](https://devicon.dev) (`devicon-<name>-plain colored`) or Font Awesome.
 
-### Ripple Effect
+### Colours / typography
+All tokens are CSS custom properties at the top of `assets/css/main.css` (`--accent`, `--bg`, `--bg-dark`, fonts…).
 
-Concentric rings expand from the cursor position as it moves across the page. The effect adapts to cursor speed — faster movement produces larger rings with a secondary outer ripple for depth.
+## Deployment
 
-- **Where:** Entire page except the profile card, toolbar and footer
-- **How:** `mousemove` listener creates `.ripple` elements with CSS `@keyframes ripple-expand`. Each ripple is removed on `animationend` to keep the DOM clean
-- **Files:** `main.js` (ripple creation logic) · `styles.css` (`.ripple`, `.ripple-inner`, `.ripple-outer` classes)
+GitHub Pages serves the `main` branch from the repository root. Every push to `main` triggers the
+built-in **pages build and deployment** workflow; the site is live within a minute or two.
 
-### Profile Card — Flee from Cursor
+After changing CSS/JS, bump the cache-busting query (`?v=10`) in `index.html` and `CACHE_NAME` in `sw.js`
+so returning visitors get the new files.
 
-The avatar, name (`Vagner Bom Jesus`), username (`@VagnerBomJesus`) and role text flee away from the cursor when it enters the profile card. Each element calculates its distance and angle from the cursor and moves in the opposite direction.
+## Tech stack
 
-- **Where:** Profile card — avatar, name, username and role only. Social icons and action buttons are not affected
-- **How:** `mousemove` on `.profile-card` calculates repulsion force per element based on proximity (< 150px radius). Movement is clamped within card bounds to prevent overflow
-- **Return:** 1.5 seconds after the cursor leaves the card, elements return to their original position with a bounce easing (`cubic-bezier(0.34, 1.56, 0.64, 1)`)
-- **Files:** `main.js` (`profileCard` mousemove/mouseleave listeners)
-
-### Glitch / Scramble Text
-
-When profile elements return to place, the text (name, username, role) displays a glitch effect — characters are temporarily replaced with random symbols (`@#$%&*!?`) and progressively resolve back to the original text from left to right.
-
-- **Where:** Profile name, username and role text
-- **Trigger:** Fires automatically when elements return after fleeing
-- **How:** `scrambleText()` replaces each character via `setInterval` at 30ms. Characters resolve sequentially (index `i` resolves when `iterations / 2 > i`)
-- **Files:** `main.js` (`scrambleText` function)
-
-## Customisation
-
-- **Theme colours:** Edit CSS variables in `:root` and `[data-theme="dark"]` in `styles.css`
-- **Profile info:** Update the profile card section in `index.html`
-- **Translations:** Modify the `translations` object in `main.js`
-
-## Testing
-
-```bash
-npm install
-npm test
-```
+HTML5 · CSS3 (custom properties, grid, clip-path) · Vanilla JavaScript (ES5-compatible) ·
+Google Fonts (Montserrat, Inter) · Font Awesome · Devicon · GitHub Pages · GitHub Actions (validation only).
 
 ## License
 
-See [LICENSE](LICENSE) for details.
+See [LICENSE](LICENSE).
 
 ---
 

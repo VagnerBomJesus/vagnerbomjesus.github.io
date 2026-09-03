@@ -3,271 +3,83 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'unsafe-inline'; font-src https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' https://avatars.githubusercontent.com data:; connect-src 'self';">
   <meta name="robots" content="noindex, follow">
-  <meta name="description" content="Page not found - Return to Vagner Bom Jesus portfolio to explore software engineering projects, Flutter development, and information security resources.">
-  <title>404 - Page Not Found | Vagner Bom Jesus - Software Engineer</title>
-  <link rel="icon" type="image/x-icon" href="https://avatars.githubusercontent.com/u/48354097?v=4">
-  <link rel="canonical" href="https://vagnerbomjesus.github.io/">
+  <meta name="description" content="Page not found - return to the portfolio of Vagner Bom Jesus, Software Engineer and Flutter Developer.">
+  <meta name="author" content="Vagner Bom Jesus">
+  <meta name="theme-color" content="#9A01A2">
+  <title>404 - Page not found | Vagner Bom Jesus</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
+  <link rel="canonical" href="https://vagnerbomjesus.github.io/404.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    /* 404 Layout - mirrors main page two-column style */
-    .error-col {
-      flex: 0 0 300px;
-      min-width: 0;
-      animation: fade-in-up 0.5s ease-out both;
-    }
-    .error-info-col {
-      flex: 1;
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      animation: fade-in-up 0.5s ease-out 0.15s both;
-    }
-
-    /* Profile card on 404 */
-    .error-profile {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      padding: 28px 24px 24px;
-      text-align: center;
-      transition: background-color 0.25s ease, border-color 0.25s ease;
-    }
-    .error-avatar {
-      width: 96px;
-      height: 96px;
-      border-radius: 50%;
-      border: 3px solid var(--avatar-border);
-      margin-bottom: 14px;
-      transition: border-color 0.25s ease;
-    }
-    .error-name {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 2px;
-      letter-spacing: -0.01em;
-    }
-    .error-username {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      font-family: var(--font-mono);
-      margin-bottom: 16px;
-    }
-    .error-social {
-      display: flex;
-      justify-content: center;
-      gap: 6px;
-    }
-
-    /* Error info panel */
-    .error-panel {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      padding: 40px 32px;
-      transition: background-color 0.25s ease, border-color 0.25s ease;
-    }
-    .error-code {
-      font-size: 5rem;
-      font-weight: 700;
-      color: var(--accent);
-      font-family: var(--font-mono);
-      line-height: 1;
-      margin-bottom: 4px;
-      letter-spacing: 6px;
-    }
-    .error-title {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 12px;
-    }
-    .error-desc {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-      margin-bottom: 8px;
-    }
-    .error-path {
-      font-size: 0.78rem;
-      font-family: var(--font-mono);
-      color: var(--text-muted);
-      background: var(--bg-tag);
-      padding: 6px 12px;
-      border-radius: var(--radius);
-      margin-bottom: 24px;
-      word-break: break-all;
-      display: inline-block;
-    }
-    .error-actions {
-      display: flex;
-      gap: 8px;
-    }
-    .error-actions a {
-      flex: 1;
-    }
-    .error-countdown {
-      margin-top: 16px;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      font-family: var(--font-mono);
-    }
-    .error-countdown span {
-      color: var(--accent);
-      font-weight: 700;
-    }
-    .error-hint {
-      margin-top: 20px;
-      padding-top: 16px;
-      border-top: 1px solid var(--border-color);
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-    .error-hint a {
-      color: var(--accent);
-      font-weight: 500;
-    }
-
-    /* Glitch animation on 404 code */
-    .error-code {
-      position: relative;
-    }
-    @keyframes glitch-shift {
-      0%, 100% { transform: translate(0); }
-      20% { transform: translate(-2px, 2px); }
-      40% { transform: translate(2px, -1px); }
-      60% { transform: translate(-1px, -2px); }
-      80% { transform: translate(1px, 1px); }
-    }
-    .error-code:hover {
-      animation: glitch-shift 0.3s ease-in-out;
-      text-shadow: 2px 0 var(--accent-hover), -2px 0 var(--accent);
-    }
-
-    /* Responsive */
-    @media (max-width: 820px) {
-      .error-col { flex: none; width: 100%; }
-      .error-info-col { width: 100%; }
-      .error-panel { padding: 28px 20px; }
-      .error-code { font-size: 3.5rem; }
-    }
-  </style>
+  <link rel="stylesheet" href="/assets/css/main.css?v=10">
 </head>
 <body>
-
-  <header class="toolbar" role="banner">
-    <a href="/" class="toolbar-brand" style="text-decoration:none;color:var(--accent);">VBJ</a>
-    <nav class="toolbar-controls" aria-label="Site controls">
-      <div id="toggle-theme" class="theme-toggle-slider" title="Toggle theme" role="button" tabindex="0" aria-label="Toggle dark or light mode">
-          <div class="toggle-thumb">
-            <i class="fas fa-moon toggle-icon"></i>
-          </div>
-          <div class="toggle-bg-icon">
-            <i class="fas fa-sun toggle-icon"></i>
-          </div>
-        </div>
-    </nav>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a href="/" class="brand" aria-label="Vagner Bom Jesus - home">
+        <svg class="brand__mark" viewBox="0 0 48 48" width="34" height="34" aria-hidden="true">
+          <rect x="2" y="2" width="44" height="44" rx="6" fill="none" stroke="currentColor" stroke-width="3"/>
+          <path d="M12 14l8 20 8-20" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M30 14v20" fill="none" stroke="#9A01A2" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M30 14h4a4 4 0 0 1 0 8h-4M30 22h5a4 4 0 0 1 0 8h-5" fill="none" stroke="#9A01A2" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="brand__text">VBJ</span>
+      </a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <ul class="site-nav__list">
+          <li><a href="/#about" class="site-nav__link">About me</a></li>
+          <li><a href="/#skills" class="site-nav__link">Skills</a></li>
+          <li><a href="/#portfolio" class="site-nav__link">Portfolio</a></li>
+          <li><a href="/#contact" class="site-nav__cta">Contact me</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <main class="main-container">
-    <section class="error-col">
-      <div class="error-profile">
-        <img src="https://avatars.githubusercontent.com/u/48354097?v=4" alt="Vagner Bom Jesus - Software Engineer and Flutter Developer" class="error-avatar">
-        <div class="error-name">Vagner Bom Jesus</div>
-        <div class="error-username">@VagnerBomJesus</div>
-        <div class="error-social">
-          <a href="https://www.linkedin.com/in/vagnerbomjesus" target="_blank" rel="noopener noreferrer" class="social-btn" title="LinkedIn" aria-label="LinkedIn">
-            <i class="fab fa-linkedin-in"></i>
-          </a>
-          <a href="https://github.com/VagnerBomJesus" target="_blank" rel="noopener noreferrer" class="social-btn" title="GitHub" aria-label="GitHub">
-            <i class="fab fa-github"></i>
-          </a>
-          <a href="https://vagnerbomjesus.medium.com/" target="_blank" rel="noopener noreferrer" class="social-btn" title="Medium" aria-label="Medium">
-            <i class="fab fa-medium"></i>
-          </a>
-          <a href="https://scholar.google.com/citations?user=K-IfdJoAAAAJ&hl=pt-PT&oi=ao" target="_blank" rel="noopener noreferrer" class="social-btn" title="Google Scholar" aria-label="Google Scholar">
-            <i class="fas fa-graduation-cap"></i>
-          </a>
-        </div>
+  <main class="error-page">
+    <div>
+      <div class="error-code">4<span>0</span>4</div>
+      <h1 class="error-title">Page not found</h1>
+      <p class="error-desc">The page you are looking for does not exist or has been moved.</p>
+      <span class="error-path" id="error-path"></span>
+      <div class="error-actions">
+        <a href="/" class="btn btn--solid">Back to portfolio</a>
+        <a href="/#contact" class="btn">Contact me</a>
       </div>
-    </section>
-
-    <section class="error-info-col">
-      <div class="error-panel">
-        <div class="error-code">404</div>
-        <div class="error-title">Page Not Found</div>
-        <p class="error-desc">The page you are looking for does not exist or has been moved.</p>
-        <span class="error-path" id="error-path"></span>
-        <div class="error-actions">
-          <a href="/" class="btn-primary">Back to Portfolio</a>
-          <a href="https://www.linkedin.com/in/vagnerbomjesus" target="_blank" rel="noopener noreferrer" class="btn-secondary">Contact Me</a>
-        </div>
-        <div class="error-countdown" id="error-countdown">
-          Redirecting to homepage in <span id="countdown-num">15</span>s...
-        </div>
-        <div class="error-hint">
-          Looking for something? Check out my <a href="/">projects and resources</a> or find me on <a href="https://github.com/VagnerBomJesus" target="_blank" rel="noopener noreferrer">GitHub</a>.
-        </div>
-      </div>
-    </section>
+      <p class="error-countdown">Redirecting to the homepage in <strong id="countdown-num">15</strong>s&hellip;</p>
+    </div>
   </main>
-
-  <footer class="site-footer">
-    <span>&copy; 2026 Vagner Bom Jesus &middot; All rights reserved.</span>
-  </footer>
-
   <script>
-    // Show requested path
-    var pathEl = document.getElementById('error-path');
-    if (pathEl && window.location.pathname !== '/') {
-      pathEl.textContent = window.location.pathname;
-    }
-
-    // Theme
-    var saved = localStorage.getItem('theme');
-    var themeBtn = document.getElementById('toggle-theme');
-    function setTheme(dark) {
-      var thumbIcon = themeBtn.querySelector('.toggle-thumb .toggle-icon');
-      var bgIcon = themeBtn.querySelector('.toggle-bg-icon .toggle-icon');
-      if (dark) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        if (thumbIcon) { thumbIcon.className = 'fas fa-moon toggle-icon'; }
-        if (bgIcon) { bgIcon.className = 'fas fa-sun toggle-icon'; }
-        localStorage.setItem('theme', 'dark');
-      } else {
-        document.documentElement.removeAttribute('data-theme');
-        if (thumbIcon) { thumbIcon.className = 'fas fa-sun toggle-icon'; }
-        if (bgIcon) { bgIcon.className = 'fas fa-moon toggle-icon'; }
-        localStorage.setItem('theme', 'light');
-      }
-    }
-    if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      setTheme(true);
-    }
-    themeBtn.addEventListener('click', function () {
-      setTheme(document.documentElement.getAttribute('data-theme') !== 'dark');
-    });
-
-    // Countdown redirect
-    var countdownEl = document.getElementById('countdown-num');
-    var count = 15;
-    var countInterval = setInterval(function () {
-      count--;
-      if (countdownEl) countdownEl.textContent = count;
-      if (count <= 0) {
-        clearInterval(countInterval);
-        document.body.style.opacity = '0';
-        document.body.style.transition = 'opacity 0.5s ease';
-        setTimeout(function () { window.location.href = '/'; }, 500);
-      }
-    }, 1000);
+    (function () {
+      var p = document.getElementById('error-path');
+      if (p) p.textContent = location.pathname + location.search;
+      var n = 15, el = document.getElementById('countdown-num');
+      var timer = setInterval(function () {
+        n -= 1; if (el) el.textContent = String(n);
+        if (n <= 0) { clearInterval(timer); location.href = '/'; }
+      }, 1000);
+    })();
   </script>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container site-footer__inner">
+      <ul class="social-list social-list--light" aria-label="Social profiles">
+        <li><a href="https://www.linkedin.com/in/vagnerbomjesus" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a></li>
+        <li><a href="https://github.com/VagnerBomJesus" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a></li>
+        <li><a href="https://vagnerbomjesus.medium.com/" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Medium"><i class="fab fa-medium" aria-hidden="true"></i></a></li>
+        <li><a href="mailto:vagneripg@gmail.com" class="social-btn" aria-label="Email"><i class="fas fa-envelope" aria-hidden="true"></i></a></li>
+      </ul>
+      <p class="site-footer__copy">&copy; 2026 <strong>Vagner Bom Jesus</strong> All rights reserved.</p>
+      <p class="site-footer__links">
+        <a href="/privacy-policy.html">Privacy Policy</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="/terms.html">Terms of Service</a>
+      </p>
+    </div>
+  </footer>
 </body>
 </html>

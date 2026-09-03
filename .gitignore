@@ -90,3 +90,15 @@ logs/
 *.patch
 .sass-cache/
 *.map
+
+# =========================
+# Design references (large exports stay local — see docs/design/README.md)
+# =========================
+docs/design/*.png
+docs/design/*.svg
+!docs/design/border-accent.svg
+
+# =========================
+# Claude / tooling
+# =========================
+.claude/

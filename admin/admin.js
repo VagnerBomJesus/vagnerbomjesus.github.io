@@ -659,7 +659,7 @@
       } catch (e) { localStorage.removeItem('portfolioData'); }
     }
 
-    fetch('../data.json')
+    fetch('../data/data.json')
       .then(function (res) { return res.json(); })
       .then(function (json) {
         var clean = sanitizeData(json);
