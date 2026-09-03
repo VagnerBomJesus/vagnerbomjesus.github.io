@@ -497,18 +497,22 @@ button { font: inherit; cursor: pointer; }
   .nav-toggle { display: flex; }
   /* Full-screen menu overlay with the CTA as a white bar at the bottom (matches the mock) */
   .site-nav {
-    position: fixed; inset: var(--header-h) 0 0 0;
+    position: fixed; top: var(--header-h); left: 0; right: 0; bottom: 0;
+    height: calc(100vh - var(--header-h)); height: calc(100dvh - var(--header-h));
+    z-index: 890;
     display: flex; flex-direction: column; align-items: center;
-    background: rgba(0, 0, 0, 0.98);
+    background: #000000;
     transform: translateX(100%); transition: transform 0.35s var(--ease);
   }
   .site-nav.is-open { transform: none; }
-  .site-nav__list { position: relative; flex: 1; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 40px; padding-bottom: 40px; }
+  .site-nav__list { flex: 1; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 38px; }
   .site-nav__link { font-size: 1.2rem; letter-spacing: 0.18em; text-transform: uppercase; font-family: var(--font-head); font-weight: 600; }
   .site-nav__list li:last-child { position: absolute; left: 0; right: 0; bottom: 0; }
   .site-nav__cta { display: block; width: 100%; border-radius: 0; background: #FFFFFF; color: #000000; padding: 24px; font-size: 0.9rem; letter-spacing: 0.22em; }
   .site-nav__cta:hover { background: #C4C4C4; color: #000000; transform: none; }
-  .lang-switch { font-size: 0.95rem; margin-bottom: 92px; }
+  .lang-switch { position: absolute; left: 0; right: 0; bottom: 84px; justify-content: center; font-size: 0.95rem; }
+
+  .nav-open .cookie-banner { display: none; }
 
   /* Hero: full-bleed photo with a diagonal translucent band and vertical social icons */
   .hero {
